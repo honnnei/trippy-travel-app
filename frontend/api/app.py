@@ -152,30 +152,34 @@ def delete_trip(id):
     except:
         return 'There was a problem deleting that task'
 
-# @app.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
-# def update(id):
-#     user_to_update = User.query.get_or_404(id)
-#     if request.method == 'POST':
-#         if request.form['bio'] != '':
-#             user_to_update.bio = request.form['bio']
-#         if request.form['display_name'] != '':
-#             user_to_update.display_name = request.form['display_name']
-#         print(request.form)
-#         try:
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'There was an issue updating your task'
-                
-#     else:
-#         return 'Could not update'
 
-#     try:
-#         db.session.put(user_to_update)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return 'There was a problem deleting that task'
+@app.route('/trip/update/<int:id>', methods=['GET', 'POST'])
+def update_trip(id):
+    trip_to_update = Trip.query.get_or_404(id)
+    if request.method == 'POST':
+        #probably don't need these: 
+        if request.form['trip_country'] != '':
+            trip_to_update.trip_country = request.form['trip_country']
+        # if request.form['trip_bio'] != '':
+        #     trip_to_update.trip_bio = request.form['trip_bio']
+        # if request.form['trip_length'] != '':
+        #     trip_to_update.trip_length = request.form['trip_length']
+        print(request.form)
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue updating your task'
+                
+    else:
+        return 'Could not update'
+
+    try:
+        db.session.put(trip_to_update)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem updating that task'
 
 # @app.route('/update-account/<int:id>', methods=['GET', 'POST'])
 # def update_account(id):
