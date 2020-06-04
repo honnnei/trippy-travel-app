@@ -70,7 +70,7 @@ def delete(id):
     except:
         return 'There was a problem deleting that task'
 
-@app.route('/editprofile/<int:id>', methods=['GET', 'POST'])
+@app.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
 def update(id):
     user_to_update = User.query.get_or_404(id)
     if request.method == 'POST':
@@ -95,31 +95,32 @@ def update(id):
     except:
         return 'There was a problem deleting that task'
 
-# if request.form['display_name']:
-#             user_to_update.display_name = request.form['display_name']
-# @app.route('/editaccinfo/<int:id>', methods=['GET', 'PUT'])
-# def update(id):
-#     user_to_update = User.query.get_or_404(id)
-#     if request.method == 'POST':
-#             user_to_update.email = request.form['email']
-#             user_to_update.password = request.form['password']
-        
-#         try:
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'There was an issue updating your task'
-            
-#     else:
-#         return 'Did not update email/password.'
+@app.route('/update-account/<int:id>', methods=['GET', 'POST'])
+def update_account(id):
+    user_to_update = User.query.get_or_404(id)
+    if request.method == 'POST':
+        if request.form['email'] != '':
+            user_to_update.email = request.form['email']
+        if request.form['password'] != '':
+            user_to_update.password = request.form['password']
+        print(request.form)
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue updating your task'
+                
+    else:
+        return 'Could not update'
+
+    try:
+        db.session.put(user_to_update)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that task'
 
 
-#     try:
-#         db.session.put(task_to_update)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return 'There was a problem deleting that task'
 
 
 if __name__ == "__main__":
