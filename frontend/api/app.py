@@ -1,8 +1,10 @@
 from flask import (Flask, render_template, url_for, request, redirect, session, jsonify)
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy_utils import EmailType
+# from sqlalchemy_utils import EmailType
 from sqlalchemy import ForeignKey
 from datetime import datetime
+# from flask_jwt_extended import JWTManager
+# from flask_jwt_extended import (create_access_token)
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trippy.db'
@@ -10,7 +12,7 @@ db = SQLAlchemy(app)
 
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(EmailType, nullable=False)
+    user_email = db.Column(db.String(200), nullable=False)
     password = db.Column(db.String(200), nullable=False)
     display_name = db.Column(db.String(200), nullable=False)
     bio = db.Column(db.String(255), default="Hi, I'm new to Trippy!")
@@ -21,7 +23,8 @@ class User(db.Model):
     #     return '<User %r>' % self.id
     
     def __init__(self, name):
-        self.email = email,
+        self.id = id,
+        self.user_email = user_email,
         self.password = password, 
         self.display_name = display_name, 
         self.bio = bio,
@@ -29,7 +32,7 @@ class User(db.Model):
 
     def serialize(self):
         return {"id": self.id,
-                "email": self.email,
+                "user_email": self.user_email,
                 "password": self.password,
                 "display_name":self.display_name,
                 "bio": self.bio,
@@ -56,15 +59,16 @@ class Feed(db.Model):
 
 #LOGIN ROUTE
 
-@app.route('/login', methods=['POST', 'GET'])
-def login():
-    form = UserForm(request.form)
-    if request.method == "POST" and form.validate():
-        user = User.authenticate(form.data['email'], form.data['password'])
-        if user:
-            session['user_id'] = user.id
-            return redirect(url_for('users.welcome'))
-    return 'You are logged in'
+# @app.route('/login', methods=['POST', 'GET'])
+# def login():
+#     if request.method == "POST":
+#         user_email = request.get_json()['user_email']
+#         password = request.get_json()['password']
+        
+#         if user:
+#             session['user_id'] = user.id
+#             return redirect(url_for('users.welcome'))
+#     return 'You are logged in'
 
 
 
@@ -73,10 +77,10 @@ def login():
 @app.route('/', methods=['POST', 'GET'])
 def index():
     if request.method == 'POST':
-        user_email = request.form['email']
+        user_email = request.form['user_email']
         user_password = request.form['password']
         user_display_name = request.form['display_name']
-        new_user = User(email = user_email, password = user_password, display_name = user_display_name)
+        new_user = User(user_email = user_email, password = user_password, display_name = user_display_name)
 
         try:
             db.session.add(new_user)
@@ -128,8 +132,8 @@ def update(id):
 def update_account(id):
     user_to_update = User.query.get_or_404(id)
     if request.method == 'POST':
-        if request.form['email'] != '':
-            user_to_update.email = request.form['email']
+        if request.form['user_email'] != '':
+            user_to_update.user_email = request.form['user_email']
         if request.form['password'] != '':
             user_to_update.password = request.form['password']
         print(request.form)
