@@ -1,4 +1,4 @@
-from flask import (Flask, render_template, url_for, request, redirect)
+from flask import (Flask, render_template, url_for, request, redirect, session, jsonify)
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_utils import EmailType
 from sqlalchemy import ForeignKey
@@ -17,8 +17,23 @@ class User(db.Model):
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     Trip = db.relationship('Trip', backref='User', lazy=True)
 
-    def __repr__(self):
-        return '<User %r>' % self.id
+    # def __repr__(self):
+    #     return '<User %r>' % self.id
+    
+    def __init__(self, name):
+        self.email = email,
+        self.password = password, 
+        self.display_name = display_name, 
+        self.bio = bio,
+        self.date_created = date_created
+
+    def serialize(self):
+        return {"id": self.id,
+                "email": self.email,
+                "password": self.password,
+                "display_name":self.display_name,
+                "bio": self.bio,
+                "date_created": self.date_created}
 
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -39,13 +54,25 @@ class Feed(db.Model):
     def __repr__(self):
         return '<Feed %r>' % self.id
 
+#LOGIN ROUTE
+
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    form = UserForm(request.form)
+    if request.method == "POST" and form.validate():
+        user = User.authenticate(form.data['email'], form.data['password'])
+        if user:
+            session['user_id'] = user.id
+            return redirect(url_for('users.welcome'))
+    return 'You are logged in'
+
+
+
 #USER TABLE ROUTES
 
 @app.route('/', methods=['POST', 'GET'])
 def index():
-    if request.method == 'GET':
-        return "Hello World"
-    elif request.method == 'POST':
+    if request.method == 'POST':
         user_email = request.form['email']
         user_password = request.form['password']
         user_display_name = request.form['display_name']
@@ -57,8 +84,9 @@ def index():
             return redirect('/')
         except:
             return 'There was an issue adding user'
-    else:
-        return 'Post did not work'
+    elif request.method == 'GET':
+        return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
+        # return jsonify({'user': User.query.get_or_404(2).serialize()})
 
 @app.route('/delete/<int:id>', methods=['DELETE', 'GET'])
 def delete(id):
@@ -139,6 +167,7 @@ def create_trip(user_id):
         except:
             return 'There was an issue adding trip'
     else:
+        # tasks = Todo.query.order_by(Todo.date_created).all()
         return 'Post did not work'
 
 @app.route('/trip/delete/<int:id>', methods=['DELETE', 'GET'])
