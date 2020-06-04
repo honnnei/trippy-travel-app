@@ -59,22 +59,50 @@ def index():
     else:
         return 'Post did not work'
 
-# @app.route('/delete/<int:id>')
-# def delete(id):
-#     task_to_delete = Todo.query.get_or_404(id)
+@app.route('/delete/<int:id>', methods=['DELETE', 'GET'])
+def delete(id):
+    user_to_delete = User.query.get_or_404(id)
 
-#     try:
-#         db.session.delete(task_to_delete)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return 'There was a problem deleting that task'
+    try:
+        db.session.delete(user_to_delete)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that task'
 
-# @app.route('/update/<int:id>', methods=['GET', 'POST'])
+@app.route('/editprofile/<int:id>', methods=['GET', 'POST'])
+def update(id):
+    user_to_update = User.query.get_or_404(id)
+    if request.method == 'POST':
+        if request.form['bio'] != '':
+            user_to_update.bio = request.form['bio']
+        if request.form['display_name'] != '':
+            user_to_update.display_name = request.form['display_name']
+        print(request.form)
+        try:
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue updating your task'
+                
+    else:
+        return 'Could not update'
+
+    try:
+        db.session.put(user_to_update)
+        db.session.commit()
+        return redirect('/')
+    except:
+        return 'There was a problem deleting that task'
+
+# if request.form['display_name']:
+#             user_to_update.display_name = request.form['display_name']
+# @app.route('/editaccinfo/<int:id>', methods=['GET', 'PUT'])
 # def update(id):
-#     task = Todo.query.get_or_404(id)
+#     user_to_update = User.query.get_or_404(id)
 #     if request.method == 'POST':
-#         task.content = request.form['content']
+#             user_to_update.email = request.form['email']
+#             user_to_update.password = request.form['password']
         
 #         try:
 #             db.session.commit()
@@ -83,7 +111,7 @@ def index():
 #             return 'There was an issue updating your task'
             
 #     else:
-#         return render_template('update.html', task=task)
+#         return 'Did not update email/password.'
 
 
 #     try:
@@ -92,7 +120,6 @@ def index():
 #         return redirect('/')
 #     except:
 #         return 'There was a problem deleting that task'
-
 
 
 if __name__ == "__main__":
