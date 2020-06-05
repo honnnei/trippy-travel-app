@@ -30,7 +30,7 @@ class User(db.Model):
     display_name = db.Column(db.String(200), nullable=False)
     bio = db.Column(db.String(255), default="Hi, I'm new to Trippy!")
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-    # Trip = db.relationship('Trip', backref='User', lazy=True)
+    Trip = db.relationship('Trip', backref='User', lazy=True)
     
     def __init__(self, user_email, password, display_name):
         self.user_email = user_email
@@ -99,65 +99,18 @@ def delete_user(id):
     db.session.commit()
     return user_schema.jsonify(user)
 
+# LOGIN ROUTE & changing password:
 
-# elif request.method == 'GET':
-#     return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
-    # return jsonify({'user': User.query.get_or_404(2).serialize()})
-
-# @app.route('/', methods=['POST', 'GET'])
-# def create_user():
-#     if request.method == 'POST':
-#         user_email = request.form['user_email']
-#         user_password = request.form['password']
-#         user_display_name = request.form['display_name']
-#         new_user = User(user_email = user_email, password = user_password, display_name = user_display_name)
-
-#         try:
-#             db.session.add(new_user)
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'There was an issue adding user'
-#     elif request.method == 'GET':
-#         return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
-#         # return jsonify({'user': User.query.get_or_404(2).serialize()})
-
-
-# @app.route('/delete/<int:id>', methods=['DELETE', 'GET'])
-# def delete(id):
-#     user_to_delete = User.query.get_or_404(id)
-
-#     try:
-#         db.session.delete(user_to_delete)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return 'There was a problem deleting that task'
-
-# @app.route('/edit-profile/<int:id>', methods=['GET', 'POST'])
-# def update(id):
-#     user_to_update = User.query.get_or_404(id)
-#     if request.method == 'POST':
-#         if request.form['bio'] != '':
-#             user_to_update.bio = request.form['bio']
-#         if request.form['display_name'] != '':
-#             user_to_update.display_name = request.form['display_name']
-#         print(request.form)
-#         try:
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'There was an issue updating your task'
-                
-#     else:
-#         return 'Could not update'
-
-#     try:
-#         db.session.put(user_to_update)
-#         db.session.commit()
-#         return redirect('/')
-#     except:
-#         return 'There was a problem deleting that task'
+# @app.route('/login', methods=['POST', 'GET'])
+# def login():
+#     if request.method == "POST":
+#         user_email = request.get_json()['user_email']
+#         password = request.get_json()['password']
+        
+#         if user:
+#             session['user_id'] = user.id
+#             return redirect(url_for('users.welcome'))
+#     return 'You are logged in'
 
 # @app.route('/update-account/<int:id>', methods=['GET', 'POST'])
 # def update_account(id):
@@ -189,46 +142,97 @@ def delete_user(id):
 
 
 
-# class Trip(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-#     trip_country = db.Column(db.String(200), nullable=False)
-#     trip_bio = db.Column(db.String(200), nullable=True)
-#     trip_length = db.Column(db.Integer)
-#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+class Trip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    trip_country = db.Column(db.String(200), nullable=False)
+    trip_bio = db.Column(db.String(200), nullable=True)
+    trip_length = db.Column(db.Integer)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-#     def __repr__(self):
-#         return '<Trip %r>' % self.id
+    def __init__(self, user_id, trip_country, trip_bio, trip_length):
+        self.user_id = user_id
+        self.trip_country = trip_country
+        self.trip_bio = trip_bio
+        self.trip_length = trip_length
 
-# class Feed(db.Model):
-#     id = db.Column(db.Integer, primary_key=True)
-#     trip_id = db.Column(db.Integer, ForeignKey('trip.id'))
-#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+class TripSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'user_id','user_email', 'trip_country', 'trip_bio', 'trip_length', 'date_created')
 
-#     def __repr__(self):
-#         return '<Feed %r>' % self.id
-
-# #LOGIN ROUTE
-
-# # @app.route('/login', methods=['POST', 'GET'])
-# # def login():
-# #     if request.method == "POST":
-# #         user_email = request.get_json()['user_email']
-# #         password = request.get_json()['password']
-        
-# #         if user:
-# #             session['user_id'] = user.id
-# #             return redirect(url_for('users.welcome'))
-# #     return 'You are logged in'
-
-
-
-
+#Init schema
+trip_schema = TripSchema()
+# strict=True
+trips_schema = TripSchema(many=True)
 
 
 # #TRIP TABLE ROUTES
 
-# @app.route('/trip/<int:user_id>', methods=['POST', 'GET'])
+@app.route('/trip/<int:user_id>', methods=['POST'])
+def create_trip(user_id):
+    trip_country = request.json['trip_country']
+    trip_bio = request.json['trip_bio']
+    trip_length = request.json['trip_length']
+    new_trip = Trip(user_id, trip_country, trip_bio, trip_length)
+
+    try:
+        db.session.add(new_trip)
+        db.session.commit()
+        return trip_schema.jsonify(new_trip)
+    except:
+        return 'There was an issue creating trip'
+
+@app.route('/trip/user', methods=['GET'])
+def get_trips_of_all_users():
+    all_trips = Trip.query.all()
+    result = trips_schema.dump(all_trips)
+    return jsonify(result)
+
+#get single trip by id
+@app.route('/trip/<int:trip_id>', methods=['GET'])
+def get_trip_by_trip_id(trip_id):
+    trip = Trip.query.get(trip_id)
+    return trip_schema.jsonify(trip)
+
+#get all trips of a user:
+@app.route('/trip/user/<int:user_id>', methods=['GET'])
+def get_trips_of_single_user(user_id):
+    user_trips = Trip.query.filter(Trip.user_id == user_id).all()
+    result = trips_schema.dump(user_trips)
+    return jsonify(result)
+
+@app.route('/trip/<int:trip_id>', methods=['DELETE'])
+def delete_trip(trip_id):
+    trip = Trip.query.get(trip_id)
+    db.session.delete(trip)
+    db.session.commit()
+    return trip_schema.jsonify(trip)
+
+#     existing = Users.query.filter((Users.username == form.username.data) | (Users.email == form.email.data)).all()
+#  if existing:
+#      error = 'User or email taken'
+    # user_trips = Trip.query().get(id)
+    # result = trip_schema.dump(user_trips)
+    # return jsonify(result)
+
+
+
+
+
+
+#     trip_country = request.json['trip_country']
+#     trip_bio = request.json['trip_bio']
+#     trip_length = request.json['trip_length']
+#     new_trip = Trip(user_id, trip_country, trip_bio, trip_length)
+
+#     try:
+#         db.session.add(new_trip)
+#         db.session.commit()
+#         return trip_schema.jsonify(new_trip)
+#     except:
+#         return 'There was an issue creating trip'
+
+# # @app.route('/trip/<int:user_id>', methods=['POST', 'GET'])
 # def create_trip(user_id):
 #     if request.method == 'POST':
 #         trip_country = request.form['trip_country']
@@ -310,6 +314,26 @@ def delete_user(id):
 # #         return redirect('/')
 # #     except:
 # #         return 'There was a problem deleting that task'
+
+
+
+
+# class Feed(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     trip_id = db.Column(db.Integer, ForeignKey('trip.id'))
+#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+#     def __repr__(self):
+#         return '<Feed %r>' % self.id
+
+
+
+
+
+
+
+
+
 
 
 
