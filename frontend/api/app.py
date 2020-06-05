@@ -31,22 +31,12 @@ class User(db.Model):
     bio = db.Column(db.String(255), default="Hi, I'm new to Trippy!")
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     # Trip = db.relationship('Trip', backref='User', lazy=True)
-
-    # def __repr__(self):
-    #     return '<User %r>' % self.id
     
     def __init__(self, user_email, password, display_name):
         self.user_email = user_email
         self.password = password 
         self.display_name = display_name
 
-    # def serialize(self):
-    #     return {"id": self.id,
-    #             "user_email": self.user_email,
-    #             "password": self.password,
-    #             "display_name":self.display_name,
-    #             "bio": self.bio,
-    #             "date_created": self.date_created}
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'user_email', 'password', 'display_name', 'bio', 'date_created')
@@ -58,18 +48,19 @@ users_schema = UserSchema(many=True)
 
 #USER TABLE ROUTES
 
-@app.route('/', methods=['POST'])
+@app.route('/user', methods=['POST'])
 def create_user():
     user_email = request.json['user_email']
     password = request.json['password']
     display_name = request.json['display_name']
     
     new_user = User(user_email, password, display_name)
-   
-    db.session.add(new_user)
-    db.session.commit()
-    
-    return user_schema.jsonify(new_user)
+    try:
+        db.session.add(new_user)
+        db.session.commit()
+        return user_schema.jsonify(new_user)
+    except:
+        return 'Could not create a user'
 
 #get all users
 @app.route('/user', methods=['GET'])
@@ -85,6 +76,7 @@ def get_user(id):
     return user_schema.jsonify(user)
 
 #update a user (either bio or display_name!)
+# you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
 @app.route('/user/<int:id>', methods=['PUT'])
 def update_user_profile(id):
     user = User.query.get(id)
@@ -92,10 +84,12 @@ def update_user_profile(id):
         user.bio = request.json['bio']
     if request.json['display_name'] != '':
         user.display_name = request.json['display_name']
-    
-    db.session.commit()
-    
-    return user_schema.jsonify(user)
+    try:
+        db.session.commit()
+        
+        return user_schema.jsonify(user)
+    except:
+        return 'Could not update user'
 
 #delete user
 @app.route('/user/<int:id>', methods=['DELETE'])
@@ -103,7 +97,6 @@ def delete_user(id):
     user = User.query.get(id)
     db.session.delete(user)
     db.session.commit()
-
     return user_schema.jsonify(user)
 
 
