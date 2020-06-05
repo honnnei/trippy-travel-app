@@ -1,6 +1,6 @@
 
 import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import { Form, Button, Alert } from 'react-bootstrap';
 import Axios from 'axios';
 
@@ -11,9 +11,8 @@ export default function SignUpForm() {
     const [userPasswordAgain, setUserPasswordAgain] = useState("");
     const [show, setShow] = useState(false);
     const [visible, setVisible] = useState(false);
-   
     const createUser = (e) => {
-        e.preventDefault();
+        //e.preventDefault();
         console.log('create user function')
         if (userPassword === userPasswordAgain) {
             setShow(false);
@@ -27,7 +26,7 @@ export default function SignUpForm() {
                   password: userPassword,
                   display_name: displayName,
                 };
-                fetch("/", {
+                fetch("/user", {
                   method: "POST",
                   headers: {
                     "Content-Type": "application/json",
@@ -48,7 +47,7 @@ export default function SignUpForm() {
             console.log("password not match");
         };
     }
-    return (            
+    return (
       <Form>
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Display Name</Form.Label>
@@ -95,15 +94,18 @@ export default function SignUpForm() {
             onChange={(e) => setUserPasswordAgain(e.target.value)}
           />
         </Form.Group>
-
-        <Button variant="primary" type="submit" onClick={createUser}>
-          Create Account
-        </Button>
+        <Link to="/profile">
+          <Button variant="primary" type="submit" onClick={createUser}>
+            Create Account
+          </Button>
+        </Link>
         <Alert show={show} variant="danger">
           <Alert.Heading>Sorry the password does not match !!</Alert.Heading>
         </Alert>
         <Alert show={visible} variant="danger">
-          <Alert.Heading>Password must be between 6 -15 characters long</Alert.Heading>
+          <Alert.Heading>
+            Password must be between 6 -15 characters long
+          </Alert.Heading>
         </Alert>
       </Form>
     );}
