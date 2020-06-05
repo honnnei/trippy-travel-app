@@ -128,23 +128,23 @@ def delete_user(id):
 
 #USER TABLE ROUTES
 
-@app.route('/', methods=['POST', 'GET'])
-def index():
-    if request.method == 'POST':
-        user_email = request.form['user_email']
-        user_password = request.form['password']
-        user_display_name = request.form['display_name']
-        new_user = User(user_email = user_email, password = generate_password_hash(user_password), display_name = user_display_name)
+# @app.route('/', methods=['POST', 'GET'])
+# def index():
+#     if request.method == 'POST':
+#         user_email = request.form['user_email']
+#         user_password = request.form['password']
+#         user_display_name = request.form['display_name']
+#         new_user = User(user_email = user_email, password = generate_password_hash(user_password), display_name = user_display_name)
 
-        try:
-            db.session.add(new_user)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding user'
-    elif request.method == 'GET':
-        return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
-        # return jsonify({'user': User.query.get_or_404(2).serialize()})
+#         try:
+#             db.session.add(new_user)
+#             db.session.commit()
+#             return redirect('/')
+#         except:
+#             return 'There was an issue adding user'
+#     elif request.method == 'GET':
+#         return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
+#         # return jsonify({'user': User.query.get_or_404(2).serialize()})
 
 # @app.route('/delete/<int:id>', methods=['DELETE', 'GET'])
 # def delete(id):
