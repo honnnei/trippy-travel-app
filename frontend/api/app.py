@@ -6,6 +6,8 @@ from datetime import datetime
 # from flask_jwt_extended import JWTManager
 # from flask_jwt_extended import (create_access_token)
 
+from werkzeug.security import check_password_hash, generate_password_hash
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///trippy.db'
 db = SQLAlchemy(app)
@@ -57,18 +59,29 @@ class Feed(db.Model):
     def __repr__(self):
         return '<Feed %r>' % self.id
 
-#LOGIN ROUTE
+# LOGIN ROUTE
 
-# @app.route('/login', methods=['POST', 'GET'])
-# def login():
-#     if request.method == "POST":
-#         user_email = request.get_json()['user_email']
-#         password = request.get_json()['password']
-        
-#         if user:
-#             session['user_id'] = user.id
-#             return redirect(url_for('users.welcome'))
-#     return 'You are logged in'
+@app.route('/login', methods=['POST', 'GET'])
+def login():
+    if request.method == "POST":
+        user_email = request.form['user_email']
+        password = request.form['password']
+        error = None
+        user = db.session.execute('SELECT * FROM user WHERE user_email = ?', (user_email,)).fetchone()
+
+        if user is None:
+            error = 'Incorrect username.'
+        elif not check_password_hash(user['password'], password):
+            error = 'Incorrect password.'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user.id
+            return redirect(url_for('users.welcome'))
+
+        flash(error)
+
+    return 'You are logged in'
 
 
 
@@ -80,7 +93,7 @@ def index():
         user_email = request.form['user_email']
         user_password = request.form['password']
         user_display_name = request.form['display_name']
-        new_user = User(user_email = user_email, password = user_password, display_name = user_display_name)
+        new_user = User(user_email = user_email, password = generate_password_hash(user_password), display_name = user_display_name)
 
         try:
             db.session.add(new_user)

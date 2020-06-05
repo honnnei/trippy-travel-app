@@ -18,7 +18,7 @@ export default function SignUpForm() {
         // if (userPassword === userPasswordAgain) {
         //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
             Axios.post('/', {
-                email : "email@gmail.com",
+                user_email : "email@gmail.com",
                 password : "passwordUser",
                 display_name : "user display name",
               }).then(response => console.log(response))
@@ -59,7 +59,7 @@ export default function SignUpForm() {
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
-                type="text" 
+                type="password" 
                 name="password"
                 placeholder="Password" 
                 value = {userPassword} 
