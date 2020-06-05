@@ -6,10 +6,10 @@ import * as am4maps from "@amcharts/amcharts4/maps";
 import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
 
 
-{/* <script src="https://www.amcharts.com/lib/4/core.js"></script>
-<script src="https://www.amcharts.com/lib/4/maps.js"></script>
-<script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
-        */}
+//  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+// <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+// <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+        
 function UserMap() {
     
    let myCountries = ["GB", "FR", "ES", "IT", "GR", "TR", "BA", "HR", "US", "CA"]
