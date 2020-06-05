@@ -5,6 +5,7 @@ import SignUpPage from './Containers/SignUpPage';
 import GlobalFeed from './Containers/GlobalFeed';
 import UserProfile from './Containers/UserProfile';
 import AccountSettings from './Containers/AccountSettings';
+import AddTripForm from './Components/AddTripForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 
@@ -33,6 +34,12 @@ function App() {
                       path='/user-settings'
                       exact 
                       component={AccountSettings}
+
+                  />
+                   <Route 
+                      path='/trip'
+                      exact 
+                      component={AddTripForm}
 
                   />
                </Switch>
