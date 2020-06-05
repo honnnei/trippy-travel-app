@@ -17,17 +17,30 @@ export default function SignUpForm() {
         console.log('create user function')
         // if (userPassword === userPasswordAgain) {
         //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
-            Axios.post('/', {
-                email : "email@gmail.com",
-                password : "passwordUser",
-                display_name : "user display name",
-              }).then(response => console.log(response))
-              .catch(error => {
-                console.log("this is error", error.message);
-              });
-              console.log('creating user')
-        // }
-    }
+        const data = {
+            email: userEmail,
+            password: userPassword,
+            display_name: displayName,
+        };
+        //  Axios.post('/', {data}).then(response => console.log(response))
+        //   .catch(error => {
+        //     console.log("this is error", error.message);
+        //   });
+        fetch("/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (!response.ok) throw new Error(response.status);
+            else return response.json();
+          })
+          .catch((error) => {
+            console.log("Error:", error);
+          });
+    };
     
     return(
         <Form>
