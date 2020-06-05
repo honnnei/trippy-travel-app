@@ -1,4 +1,3 @@
-
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
@@ -17,10 +16,10 @@ export default function SignUpForm() {
         console.log('create user function')
         // if (userPassword === userPasswordAgain) {
         //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
-            Axios.post('/', {
-                email : "email@gmail.com",
-                password : "passwordUser",
-                display_name : "user display name",
+            Axios.post('/auth/register', {
+                user_email : userEmail,
+                password : userPassword,
+                display_name : displayName,
               }).then(response => console.log(response))
               .catch(error => {
                 console.log("this is error", error.message);

@@ -8,18 +8,19 @@ export default function LogInForm() {
     const [userPassword, setUserPassword] = useState("");
   
   
-    const loginUser = () => {
-    //   Axios.post('/login', {
-    //     email: userEmail,
-    //     password: userPassword
-    //   }).then(response => console.log(response))
-    //   .catch(error => {
-    //     console.log("this is error", error.message);
-    //   });
-    console.log('logging in' + userEmail + userPassword)
+    const loginUser = (e) => {
+        e.preventDefault()
+        Axios.post('/auth/login', {
+            user_email: userEmail,
+            password: userPassword
+      }).then(response => console.log(response))
+      .catch(error => {
+        console.log("this is error: ", error.message);
+      });
+    console.log('logging in: ' + userEmail + userPassword)
     }
-
     console.log(userEmail, userPassword)
+
     return(
 
         <Form>
@@ -41,7 +42,7 @@ export default function LogInForm() {
                 onChange={(e) => setUserPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" onSubmit={loginUser}>
+            <Button variant="primary" type="submit" onClick={loginUser}>
                 Login
             </Button>
         </Form>
