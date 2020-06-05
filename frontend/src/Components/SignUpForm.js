@@ -13,7 +13,6 @@ export default function SignUpForm() {
   
     const createUser = (e) => {
         e.preventDefault();
-        // e.persist();
         console.log('create user function')
         // if (userPassword === userPasswordAgain) {
         //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
@@ -33,7 +32,8 @@ export default function SignUpForm() {
           },
           body: JSON.stringify(data),
         })
-          .then((response) => {
+            .then((response) => {
+                console.log(data);
             if (!response.ok) throw new Error(response.status);
             else return response.json();
           })

@@ -1,8 +1,6 @@
 from flask import Flask, request, redirect, session, jsonify, json
-#render_template, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
-import marshmallow_sqlalchemy
 import os
 from sqlalchemy import ForeignKey
 from datetime import datetime
@@ -60,7 +58,7 @@ users_schema = UserSchema(many=True)
 
 @app.route('/', methods=['POST'])
 def create_user():
-    user_email = request.json['user_email']
+    user_email = request.json['email']
     password = request.json['password']
     display_name = request.json['display_name']
     
