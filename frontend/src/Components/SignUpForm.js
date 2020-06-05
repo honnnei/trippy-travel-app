@@ -10,38 +10,32 @@ export default function SignUpForm() {
     const [userPassword, setUserPassword] = useState("");
     const [userPasswordAgain, setUserPasswordAgain] = useState("");
   
-  
     const createUser = (e) => {
         e.preventDefault();
         console.log('create user function')
-        // if (userPassword === userPasswordAgain) {
-        //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
-        const data = {
-            email: userEmail,
-            password: userPassword,
-            display_name: displayName,
+        if (userPassword === userPasswordAgain) {
+            const data = {
+                email: userEmail,
+                password: userPassword,
+                display_name: displayName,
+            };
+            fetch("/", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(data),
+            })
+                .then((response) => {
+                    console.log(data);
+                    if (!response.ok) throw new Error(response.status);
+                    else return response.json();
+                })
+                .catch((error) => {
+                    console.log("Error:", error);
+                });
         };
-        //  Axios.post('/', {data}).then(response => console.log(response))
-        //   .catch(error => {
-        //     console.log("this is error", error.message);
-        //   });
-        fetch("/", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(data),
-        })
-            .then((response) => {
-                console.log(data);
-            if (!response.ok) throw new Error(response.status);
-            else return response.json();
-          })
-          .catch((error) => {
-            console.log("Error:", error);
-          });
-    };
-    
+    }
     return(
         <Form>
             <Form.Group controlId="formBasicEmail">
@@ -72,7 +66,7 @@ export default function SignUpForm() {
             <Form.Group controlId="formBasicPassword">
                 <Form.Label>Password</Form.Label>
                 <Form.Control 
-                type="text" 
+                type="password" 
                 name="password"
                 placeholder="Password" 
                 value = {userPassword} 
