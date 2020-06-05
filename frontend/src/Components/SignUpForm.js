@@ -46,7 +46,7 @@ export default function SignUpForm() {
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
                     type="email"
-                    name="email"
+                    name="user_email"
                   placeholder="Enter email"
                   value={userEmail}
                   onChange={(e) => setUserEmail(e.target.value)}
