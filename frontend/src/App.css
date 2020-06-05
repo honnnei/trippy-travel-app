@@ -36,3 +36,11 @@
     transform: rotate(360deg);
   }
 }
+
+p#signup, p#signin{
+    color:blue;
+}
+
+p#signup:hover ,p#signin:hover {
+    cursor: pointer;
+}

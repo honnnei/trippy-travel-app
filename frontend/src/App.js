@@ -1,6 +1,12 @@
 import React from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import './App.css';
+import SignUpPage from './Containers/SignUpPage';
+import GlobalFeed from './Containers/GlobalFeed';
+import UserProfile from './Containers/UserProfile';
+import AccountSettings from './Containers/AccountSettings';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   return (
@@ -19,25 +25,15 @@ function App() {
 
                   />
                   <Route
-                      path='/user-info'
+                      path='/profile'
                       exact 
-                      component={UserInfo}
-                  />
-                   <Route 
-                      path='/user-map'
-                      exact 
-                      component={UserMap}
+                      component={UserProfile}
                   />
                   <Route 
                       path='/user-settings'
                       exact 
                       component={AccountSettings}
 
-                  />
-                  <Route
-                      path='/user'
-                      exact 
-                      component={UserProfile}
                   />
                </Switch>
       </Router>
