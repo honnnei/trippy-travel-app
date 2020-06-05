@@ -82,6 +82,28 @@ def get_user(id):
     user = User.query.get(id)
     return user_schema.jsonify(user)
 
+#update a user (either bio or display_name!)
+@app.route('/user/<int:id>', methods=['PUT'])
+def update_user_profile(id):
+    user = User.query.get(id)
+    if request.json['bio'] != '':
+        user.bio = request.json['bio']
+    if request.json['display_name'] != '':
+        user.display_name = request.json['display_name']
+    
+    db.session.commit()
+    
+    return user_schema.jsonify(user)
+
+#delete user
+@app.route('/user/<int:id>', methods=['DELETE'])
+def delete_user(id):
+    user = User.query.get(id)
+    db.session.delete(user)
+    db.session.commit()
+
+    return user_schema.jsonify(user)
+
 
 # elif request.method == 'GET':
 #     return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
