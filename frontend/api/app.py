@@ -66,8 +66,8 @@ def create_user():
    
     db.session.add(new_user)
     db.session.commit()
-    
     return user_schema.jsonify(new_user)
+
 
 #get all users
 @app.route('/user', methods=['GET'])
