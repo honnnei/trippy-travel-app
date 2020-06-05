@@ -46,6 +46,18 @@ export default function SignUpForm() {
             setShow(true);
             console.log("password not match");
         };
+        // // if (userPassword === userPasswordAgain) {
+        // //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
+        //     Axios.post('/', {
+        //         user_email : "email@gmail.com",
+        //         password : "passwordUser",
+        //         display_name : "user display name",
+        //       }).then(response => console.log(response))
+        //       .catch(error => {
+        //         console.log("this is error", error.message);
+        //       });
+        //       console.log('creating user')
+        // // }
     }
     return (
       <Form>
@@ -109,3 +121,30 @@ export default function SignUpForm() {
         </Alert>
       </Form>
     );}
+        //     <Form.Group controlId="formBasicPassword">
+        //         <Form.Label>Password</Form.Label>
+        //         <Form.Control 
+        //         type="password" 
+        //         name="password"
+        //         placeholder="Password" 
+        //         value = {userPassword} 
+        //         onChange = {(e) => setUserPassword(e.target.value)}/>
+        //     </Form.Group>
+
+        //     <Form.Group controlId="formBasicPassword">
+        //         <Form.Label>Please re-enter your password</Form.Label>
+        //         <Form.Control 
+        //             type="password"
+        //             name="re-password"
+        //         placeholder="Password"
+        //         value={userPasswordAgain}
+        //         onChange = {(e) => setUserPasswordAgain(e.target.value)}
+        //         />
+        //     </Form.Group>
+
+        //     <Button variant="primary" type="submit" onClick={createUser}>
+        //         Create Account
+        //     </Button>
+        // </Form>
+
+// )}

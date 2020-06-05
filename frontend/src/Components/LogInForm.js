@@ -9,13 +9,13 @@ export default function LogInForm() {
   
   
     const loginUser = () => {
-    //   Axios.post('/login', {
-    //     email: userEmail,
-    //     password: userPassword
-    //   }).then(response => console.log(response))
-    //   .catch(error => {
-    //     console.log("this is error", error.message);
-    //   });
+      Axios.post('/login', {
+        user_email: userEmail,
+        password: userPassword
+      }).then(response => console.log(response))
+      .catch(error => {
+        console.log("this is error", error.message);
+      });
     console.log('logging in' + userEmail + userPassword)
     }
 

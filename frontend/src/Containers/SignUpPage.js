@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react';
-import LogInForm from '../Components/LogInForm'
-import SignUpForm from '../Components/SignUpForm'
+import LogInForm from '../Components/LogInForm';
+import SignUpForm from '../Components/SignUpForm';
 
 function SignUpPage() {
   const [showSignUp, setShowSignUp] = useState(true);
@@ -13,7 +13,7 @@ function SignUpPage() {
           <LogInForm />
           <br />
           <p id="signup" className="signup" onClick={toggle}>
-            Need and account? Register here!
+            Need an account? Register here!
           </p>
         </div>
       ) : (
