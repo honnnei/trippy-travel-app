@@ -1,12 +1,12 @@
 import React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 
-function AccountSettings() {
+function UserProfile() {
     return (
       <div className="user-profile">
-          <h1>AccountSettings</h1>
+          <h1>UserProfile</h1>
       </div>
     );
 }
 
-export default AccountSettings;
+export default UserProfile;
