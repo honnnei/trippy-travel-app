@@ -20,7 +20,8 @@ export default function SignUpForm() {
                 user_email : userEmail,
                 password : userPassword,
                 display_name : displayName,
-              }).then(response => console.log(response))
+              })
+              .then(response => console.log(response))
               .catch(error => {
                 console.log("this is error", error.message);
               });

@@ -6,11 +6,13 @@ import GlobalFeed from './Containers/GlobalFeed';
 import UserProfile from './Containers/UserProfile';
 import AccountSettings from './Containers/AccountSettings';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from './Components/Navbar';
 
 
 function App() {
   return (
     <div className="App">
+      <NavbarComponent />
       <Router>
         <Switch>
                   <Route 

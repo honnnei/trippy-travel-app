@@ -1,11 +1,15 @@
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
+import { useHistory } from "react-router"
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
+import jwt_decode from 'jwt-decode'
+
 
 export default function LogInForm() { 
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    let history = useHistory()
   
   
     const loginUser = (e) => {
@@ -13,14 +17,23 @@ export default function LogInForm() {
         Axios.post('/auth/login', {
             user_email: userEmail,
             password: userPassword
-      }).then(response => console.log(response))
+      })
+      .then(response => {
+          localStorage.setItem('usertoken', response.data);
+          console.log(localStorage.usertoken);
+          const token = localStorage.usertoken;
+          const decoded = jwt_decode(token);
+          console.log(decoded);
+          history.push("/user");
+          return response.data
+      })
       .catch(error => {
         console.log("this is error: ", error.message);
       });
     console.log('logging in: ' + userEmail + userPassword)
-    }
+   
     console.log(userEmail, userPassword)
-
+    }
     return(
 
         <Form>

@@ -1,8 +1,9 @@
-from flask import Flask, jsonify, request, json
+from flask import Flask, jsonify, request, json, redirect
 from datetime import datetime
 from flask_cors import CORS
 from flask_bcrypt import Bcrypt
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import ForeignKey
 from flask_jwt_extended import JWTManager
 from flask_jwt_extended import (create_access_token)
 from flask_marshmallow import Marshmallow
@@ -47,7 +48,7 @@ user_schema = UserSchema()
 # strict=True
 users_schema = UserSchema(many=True)
 
-#register route
+#REGISTER ROUTE
 
 @app.route('/auth/register', methods=['POST'])
 def register():
@@ -56,7 +57,9 @@ def register():
     user_email = request.get_json()['user_email']
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     display_name = request.get_json()['display_name']
-    db.execute("INSERT INTO user (user_email, password, display_name) VALUES (?, ?, ?)", (user_email, password, display_name))
+    bio = "Hi, I've just joined Trippy!"
+    date_created = datetime.utcnow()
+    db.execute("INSERT INTO user (user_email, password, display_name, bio, date_created) VALUES (?, ?, ?, ?, ?)", (user_email, password, display_name, bio, date_created))
 
     db.commit()
 
@@ -66,9 +69,9 @@ def register():
 		'password' : password,
 	}
 
-    return jsonify({'result' : result})
+    return result
 
-#login route
+#LOGIN ROUTE
 
 @app.route('/auth/login', methods=['POST'])
 def login():
@@ -80,12 +83,10 @@ def login():
     result = ""
 	
     rv = db.execute("SELECT password FROM user where user_email = ?", (user_email,)).fetchone()[0]
-    print(rv)
-    # rv = c.execute("SELECT * FROM user where user_email = 'banana@test.com'")
-    # rv = c.fetchone()[0]
 	
     if bcrypt.check_password_hash(rv, password):
-        access_token = create_access_token(identity={'user_email': user_email})
+        id = db.execute("SELECT id FROM user where user_email = ?", (user_email,)).fetchone()[0]
+        access_token = create_access_token(identity={'user_id': id})
         result = access_token
     else:
         result = jsonify({"error":"Invalid username and password"})
@@ -142,5 +143,95 @@ def delete_user(id):
 
     return user_schema.jsonify(user)
 
+
+class Trip(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    trip_country = db.Column(db.String(200), nullable=False)
+    trip_bio = db.Column(db.String(200), nullable=True)
+    trip_length = db.Column(db.Integer)
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, user_id, trip_country, trip_bio, trip_length):
+        self.user_id = user_id
+        self.trip_country = trip_country
+        self.trip_bio = trip_bio
+        self.trip_length = trip_length
+
+class TripSchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'user_id','user_email', 'trip_country', 'trip_bio', 'trip_length', 'date_created')
+
+#Init schema
+trip_schema = TripSchema()
+# strict=True
+trips_schema = TripSchema(many=True)
+
+
+#TRIP TABLE ROUTES
+
+@app.route('/trip/<int:user_id>', methods=['POST'])
+def create_trip(user_id):
+    trip_country = request.json['trip_country']
+    trip_bio = request.json['trip_bio']
+    trip_length = request.json['trip_length']
+    new_trip = Trip(user_id, trip_country, trip_bio, trip_length)
+
+    try:
+        db.session.add(new_trip)
+        db.session.commit()
+        return trip_schema.jsonify(new_trip)
+    except:
+        return 'There was an issue creating trip'
+
+@app.route('/trip/user', methods=['GET'])
+def get_trips_of_all_users():
+    all_trips = Trip.query.all()
+    result = trips_schema.dump(all_trips)
+    return jsonify(result)
+
+#get single trip by id
+@app.route('/trip/<int:trip_id>', methods=['GET'])
+def get_trip_by_trip_id(trip_id):
+    trip = Trip.query.get(trip_id)
+    return trip_schema.jsonify(trip)
+
+#get all trips of a user:
+@app.route('/trip/user/<int:user_id>', methods=['GET'])
+def get_trips_of_single_user(user_id):
+    user_trips = Trip.query.filter(Trip.user_id == user_id).order_by(Trip.date_created).all()
+    result = trips_schema.dump(user_trips)
+    return jsonify(result)
+
+@app.route('/trip/<int:trip_id>', methods=['DELETE'])
+def delete_trip(trip_id):
+    trip = Trip.query.get(trip_id)
+    db.session.delete(trip)
+    db.session.commit()
+    return trip_schema.jsonify(trip)
+
+@app.route('/trip/<int:trip_id>', methods=['PUT'])
+def update_trip(trip_id):
+    trip = Trip.query.get(trip_id)
+    if request.json['trip_country'] != '':
+        trip.trip_country = request.json['trip_country']
+    if request.json['trip_bio'] != '':
+        trip.trip_bio = request.json['trip_bio']
+    if request.json['trip_length'] != 0:
+        trip.trip_length = request.json['trip_length']
+    try:
+        db.session.commit()
+        
+        return trip_schema.jsonify(trip)
+    except:
+        return 'Could not update trip'
+
+
+# class Feed(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     trip_id = db.Column(db.Integer, ForeignKey('trip.id'))
+#     date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
 if __name__ == '__main__':
     app.run(debug=True)
+
