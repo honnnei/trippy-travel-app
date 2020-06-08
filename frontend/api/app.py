@@ -227,6 +227,10 @@ def update_trip(trip_id):
         return 'Could not update trip'
 
 
+def calc(a, b):
+    return a + b
+
+
 # class Feed(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     trip_id = db.Column(db.Integer, ForeignKey('trip.id'))
