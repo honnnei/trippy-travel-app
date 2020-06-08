@@ -15,13 +15,17 @@ const NavbarComponent = () => {
 
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            <Navbar.Brand href="#home">Trippy</Navbar.Brand>
+            <Navbar.Brand href="/feed">Trippy</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto"> </Nav>
                 <Nav>
-                    <Nav.Link href="#profile"> Profile </Nav.Link>
+                    <Nav.Link href="/user"> Profile </Nav.Link>
 
+<<<<<<< HEAD
+                    {localStorage.usertoken ? 
+                    <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
+=======
                 <div className="navitem">
                     <ul className="nav justify-content-end">
                     <li className="nav-item">
@@ -50,8 +54,9 @@ const NavbarComponent = () => {
         </div>
                     {/* {localStorage.usertoken ? 
                     <Nav.Link href="#logout" onClick={logout}> Log Out </Nav.Link>
+>>>>>>> origin/dev-new
                     :
-                    <Nav.Link href="#login" onClick={login}> Log In </Nav.Link>
+                    <Nav.Link href="/" onClick={login}> Log In </Nav.Link>
                     }               
                 </Nav>
             </Navbar.Collapse>
