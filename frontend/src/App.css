@@ -37,9 +37,28 @@ p#signup:hover ,p#signin:hover {
  
 }
 
+/* User Profile Page */
 
+.user-profile-page-container {
+  width: 100%;
+  display: flex;
+}
 
+.user-info-sidebar-container {
+  width: 30%
+}
 
+.timeline-gallery-map-container {
+  width: 70%
+}
+
+.t-g-m-navbar {
+
+}
+
+.t-g-m-container {
+
+}
 
  
 .App {

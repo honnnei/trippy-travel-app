@@ -5,44 +5,62 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 function UserInfo() {
 
-  const [userData, setUserData] = useState();
+  const [userData, setUserData] = useState({});
   const [userBio, setUserBio] = useState();
-  const [bioUpdate, setBioUpdate] = useState();
+  const [userDisplayName, setUserDisplayName] = useState({});
   const [modal, setModal] = useState(false);
+ 
+  
 
   const toggle = () => {
     setModal(!modal)
   };
 
-  const updateBio = () => {
-    console.log('put request')
-  }
-  
   const getUserData = () => {
-    console.log('get request')
+    Axios('/user/1')
+    .then(response => {
+     setUserData(response.data);
+    });
   }
 
+  const updateUserInfo = () => {
+    console.log('put request', userBio)
+    Axios.put(`/user/1`, {
+      bio: userBio,
+      display_name: userDisplayName
+    })
+      .then(response => response)
+      .then(
+        getUserData()
+      )
+      .catch(error => {
+        console.log("this is error", error.message);
+      });
+  }
+  
+
   useEffect(() => {
-    Axios('/user/1')
-     .then(response => {
-      setUserData(response.data);
-      console.log(userData)
-      console.log(response.data)
-     });
+    getUserData();
     }, []);
 
     useEffect(() => {
-      // setUserBio(userData.bio)
-      console.log(userData)
+      setUserBio(userData.bio);
+      setUserDisplayName(userData.display_name)
       }, [userData]);
 
-  const handleBioUpdate = e => {
+  const handleUpdate = e => {
     e.persist();
-    setBioUpdate(e.target.value);
+    if (e.target.name == 'userDisplayName') {
+      setUserDisplayName(e.target.value);
+    }
+    else {
+      setUserBio(e.target.value);
+    }
+
   };
       
 
-  console.log(bioUpdate)
+  console.log(userBio, userDisplayName )
 
 
   return (
@@ -57,19 +75,28 @@ function UserInfo() {
             <ModalBody>
             <div className="habit-container">
                 <form>
-                    <label id="label-in-modal" htmlFor="habitName">What are you about?</label>
+                  <label id="label-in-modal" htmlFor="userDisplayName">What do you want your name to be?</label>
+                          <input
+                          id="userDisplayName" 
+                          name="userDisplayName" 
+                          type="text"
+                          value={userDisplayName}
+                          onChange={handleUpdate}
+                          ></input>
+                    <label id="label-in-modal" htmlFor="userBio">What are you about?</label>
                         <input
-                        id="habitName" 
-                        name="habitName" 
+                        id="userBio" 
+                        name="userBio" 
                         type="textarea"
-                        value={bioUpdate}
-                        onChange={handleBioUpdate}
+                        value={userBio}
+                        onChange={handleUpdate}
                         ></input>
+
                   </form>
                 </div>
             </ModalBody>
             <ModalFooter>
-              <Button className="modalBtn" onClick={() => {toggle(); updateBio(); getUserData();}}>Create</Button>
+              <Button className="modalBtn" onClick={() => {toggle(); updateUserInfo(); getUserData();}}>Create</Button>
               <Button className="modalBtn2" onClick={toggle} id="cancel" >Cancel</Button>
             </ModalFooter>
           </Modal>

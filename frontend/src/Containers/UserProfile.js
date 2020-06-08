@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
-import { Button } from 'react-bootstrap'
-
+import { Button } from 'react-bootstrap';
+import Gallery from '../Components/Gallery';
+import Timeline from '../Components/Timeline';
 
 function UserProfile() {
   const [mapShow, setMapShow] = useState(true);
@@ -37,25 +38,21 @@ function UserProfile() {
   }
 
     return (
-      <div className="user-profile">
-        <h1>UserProfile</h1>
-        <div className="tab-buttons">
-          <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
-          <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
-          <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
-          <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '}
-        </div>
-        <div>
-          <div>
+      <div className="user-profile-page-container">
+        <div className="user-info-sidebar-container" >
             <UserInfo />
+        </div>
+        <div className="timeline-gallery-map-container">
+          <div className="t-g-m-navbar">
+            <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
+            <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
+            <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
+            <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '}
           </div>
-          <div>
-            {followersShow ? <p>Followers</p> : ""}
-            {timelineShow ? <p>Timeline</p> : ""}
-            {galleryShow ? <p>Gallery</p> : ""}
+          <div className="t-g-m-container">
+            {timelineShow ? <Timeline /> : ""}
+            {galleryShow ? <Gallery /> : ""}
             {mapShow ? <UserMap /> : ""}
-            {/* <UserInfo />
-            <UserMap /> */}
           </div>
         </div>
       </div>
