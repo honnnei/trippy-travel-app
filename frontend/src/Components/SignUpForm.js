@@ -44,12 +44,12 @@ export default function SignUpForm() {
         Axios.post('/auth/register', { user_email : userEmail, password : userPassword, display_name : displayName })
         .then( data => {
             console.log(data);
-            if(data.data.error_essage){
-                setAlertMessage(data.data.error_essage)
+            if(data.data.error_message){
+                setAlertMessage(data.data.error_message)
                 setAlertVariant('danger')
                 setAlertShow(true)
-            } else if(data.data.success_essage){
-                setAlertMessage(data.data.success_essage)
+            } else if(data.data.success_message){
+                setAlertMessage(data.data.success_message)
                 setAlertVariant('success')
                 setAlertShow(true)
                 setTimeout(() => {
