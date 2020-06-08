@@ -10,6 +10,7 @@ from flask_marshmallow import Marshmallow
 import os
 import sqlite3
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 
@@ -23,6 +24,11 @@ db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
+#image folder 
+foldername ="C:\\Users\\Amita\\Desktop\\fyp\\trippy-travel-app\\frontend\\api\\uploads"
+app.config["IMAGE_UPLOADS"] = foldername
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG","JPG", "PNG", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
 
 CORS(app)
 
@@ -155,32 +161,6 @@ def delete_user(id):
     db.session.commit()
     return user_schema.jsonify(user)
 
-# LOGIN ROUTE & changing password:
-# LOGIN ROUTE
-
-# @app.route('/login', methods=['POST', 'GET'])
-# def login():
-#     if request.method == "POST":
-#         user_email = request.form['user_email']
-#         password = request.form['password']
-#         error = None
-#         user = db.session.execute('SELECT * FROM user WHERE user_email = ?', (user_email,)).fetchone()
-
-#         if user is None:
-#             error = 'Incorrect username.'
-#         elif not check_password_hash(user['password'], password):
-#             error = 'Incorrect password.'
-
-#         if error is None:
-#             session.clear()
-#             session['user_id'] = user.id
-#             return redirect(url_for('users.welcome'))
-
-#         flash(error)
-
-#     return 'You are logged in'
-
-
 
 
 class Trip(db.Model):
@@ -189,22 +169,100 @@ class Trip(db.Model):
     trip_country = db.Column(db.String(200), nullable=False)
     trip_bio = db.Column(db.String(200), nullable=True)
     trip_length = db.Column(db.Integer)
+    trip_image = db.Column(db.String(200), nullable=True)
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
-    def __init__(self, user_id, trip_country, trip_bio, trip_length):
+    def __init__(self, user_id, trip_country, trip_bio, trip_length,trip_image):
         self.user_id = user_id
         self.trip_country = trip_country
         self.trip_bio = trip_bio
         self.trip_length = trip_length
+        self.trip_image = trip_image
+        
 
 class TripSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'user_id','user_email', 'trip_country', 'trip_bio', 'trip_length', 'date_created')
+        fields = ('id', 'user_id','user_email', 'trip_country', 'trip_bio', 'trip_length', 'trip_image','date_created')
 
 #Init schema
 trip_schema = TripSchema()
 # strict=True
 trips_schema = TripSchema(many=True)
+# def allowed_image(filename):
+    
+#     # We only want files with a . in the filename
+#     if not "." in filename:
+#         return False
+
+#     # Split the extension from the filename
+#     ext = filename.rsplit(".", 1)[1]
+
+#     # Check if the extension is in ALLOWED_IMAGE_EXTENSIONS
+#     if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
+#         return True
+#     else:
+#         return False
+
+
+@app.route("/image", methods=["POST"])
+def upload_image():
+    print(request, request.files, request.cookies)
+    if request.files:
+        files = request.files.getlist("image")
+        images = []
+        s = ', '
+        for file in files:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            images.append(filename)
+        a = ','.join(images)
+        trip_image = a
+        print("Image saved")
+        trip_country = request.form['trip_country']
+        trip_bio = request.form['trip_bio']
+        trip_length = request.form['trip_length']
+        trip_image = filename
+        new_trip = Trip(
+            user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
+        try:
+            db.session.add(new_trip)
+            db.session.commit()
+            return trip_schema.jsonify(new_trip)
+        except:
+            return 'Could not create a user'
+        return redirect(request.url)
+    else:
+        print("That file extension is not allowed")
+        return redirect(request.url)
+    return "could not upload image"
+
+
+# this addes only 1 image 
+# @app.route("/image", methods=["POST"])
+# def upload_image():
+#     print(request, request.files, request.cookies)
+#     if request.files:
+#         image = request.files["image"]
+#         filename = secure_filename(image.filename)
+#         image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+#         print("Image saved")
+#         trip_country = request.form['trip_country']
+#         trip_bio = request.form['trip_bio']
+#         trip_length = request.form['trip_length']
+#         trip_image = filename
+#         new_trip = Trip(
+#                user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=filename)
+#         try:
+#             db.session.add(new_trip)
+#             db.session.commit()
+#             return trip_schema.jsonify(new_trip)
+#         except:
+#             return 'Could not create a user'
+#         return redirect(request.url)
+#     else:
+#         print("That file extension is not allowed")
+#         return redirect(request.url)
+#     return "could not upload image"
 
 
 #TRIP TABLE ROUTES
