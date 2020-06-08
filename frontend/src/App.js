@@ -8,11 +8,14 @@ import AccountSettings from './Containers/AccountSettings';
 import AddTripForm from './Components/AddTripForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Navbar from './Components/Navbar';
+import NavbarComponent from './Components/Navbar';
 
 
 function App() {
   return (
     <div className="app-container">
+    <div className="App">
+      <NavbarComponent />
       <Router>
       <Navbar />
         <Switch>

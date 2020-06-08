@@ -1,13 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
+import { Navbar, Nav } from 'react-bootstrap';
 
-const Navbar = () => {
+const NavbarComponent = () => {
+
+    const logout = (e) => {
+        e.preventDefault();
+        localStorage.removeItem('usertoken');
+    }
+
+    const login = (e) => {
+        e.preventDefault();
+    }
+
     return (
-        <div className="navigation">
-            <nav className="navbar navbar-expand-lg navbar-light bg-light" id="navigation">
-                <div className="logo">
-                    <span class="navbar-brand mb-0 h1">Navbar</span>
-                </div>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
+            <Navbar.Brand href="#home">Trippy</Navbar.Brand>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto"> </Nav>
+                <Nav>
+                    <Nav.Link href="#profile"> Profile </Nav.Link>
 
                 <div className="navitem">
                     <ul className="nav justify-content-end">
@@ -35,7 +48,15 @@ const Navbar = () => {
                 </div>
             </nav>
         </div>
+                    {/* {localStorage.usertoken ? 
+                    <Nav.Link href="#logout" onClick={logout}> Log Out </Nav.Link>
+                    :
+                    <Nav.Link href="#login" onClick={login}> Log In </Nav.Link>
+                    }               
+                </Nav>
+            </Navbar.Collapse>
+        </Navbar> */}
     );
 };
 
-export default Navbar;
+export default NavbarComponent;

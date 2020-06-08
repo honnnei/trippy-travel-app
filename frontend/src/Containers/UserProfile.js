@@ -2,11 +2,16 @@ import React, {useState} from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
+<<<<<<< HEAD
 import { Button } from 'react-bootstrap';
 import Gallery from '../Components/Gallery';
 import Timeline from '../Components/Timeline';
 import AddTripForm from '../Components/AddTripForm';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+=======
+import { Button, Nav } from 'react-bootstrap'
+
+>>>>>>> dev-new
 
 function UserProfile() {
   const [mapShow, setMapShow] = useState(true);
@@ -44,10 +49,44 @@ function UserProfile() {
     setTimelineShow(false)
     setGalleryShow(false)
     setMapShow(false)
+    console.log(localStorage.usertoken);
   }
 
     return (
+<<<<<<< HEAD
       <div className="user-profile-page-container">
+=======
+      <div className="user-profile">
+        <h1>UserProfile</h1>
+        <div className="tab-buttons">
+          {/* <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
+          <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
+          <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
+          <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '} */}
+
+          <Nav justify variant="tabs" defaultActiveKey="maps">
+            <Nav.Item>
+              <Nav.Link eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+            </Nav.Item>
+            <Nav.Item>
+              <Nav.Link eventKey="followers" onClick={toggleFollowers} > Followers </Nav.Link>
+            </Nav.Item>
+          </Nav>
+
+          <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
+          <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
+          <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
+          <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '}
+        </div>
+        <div>
+          <div>
+>>>>>>> dev-new
             <UserInfo />
         <div className="timeline-gallery-map-container">
           <div className="t-g-m-navbar">
