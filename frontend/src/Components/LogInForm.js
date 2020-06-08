@@ -1,11 +1,8 @@
-<<<<<<< HEAD
 import React, {  useState } from 'react';
 //import { Redirect } from "react-router-dom";
-=======
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router"
->>>>>>> dev-new
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import jwt_decode from 'jwt-decode'
