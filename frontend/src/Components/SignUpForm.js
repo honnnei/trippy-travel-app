@@ -1,8 +1,8 @@
 
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect, Link } from "react-router-dom";
+import React, {useState} from 'react';
+import { Link } from "react-router-dom";
 import { Form, Button, Alert } from 'react-bootstrap';
-import Axios from 'axios';
+//import Axios from 'axios';
 
 export default function SignUpForm() {
     const [displayName, setDisplayName] = useState("");

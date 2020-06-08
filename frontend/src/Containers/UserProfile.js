@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+//import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
 import { Button } from 'react-bootstrap'

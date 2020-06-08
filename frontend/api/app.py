@@ -9,6 +9,7 @@ from datetime import datetime
 # from flask_jwt_extended import (create_access_token)
 
 from werkzeug.security import check_password_hash, generate_password_hash
+from werkzeug.utils import secure_filename
 
 app = Flask(__name__)
 basedir = os.path.abspath(os.path.dirname(__file__))
@@ -21,7 +22,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 # Init marshmallow
 ma = Marshmallow(app)
-
+#image folder 
+foldername ="C:\\Users\\Amita\\Desktop\\fyp\\trippy-travel-app\\frontend\\api\\uploads"
+app.config["IMAGE_UPLOADS"] = foldername
+app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG","jpeg" ,"JPG", "jpg","PNG","png", "GIF"]
+app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_email = db.Column(db.String(200), nullable=False)
@@ -128,23 +133,23 @@ def delete_user(id):
 
 #USER TABLE ROUTES
 
-# @app.route('/', methods=['POST', 'GET'])
-# def index():
-#     if request.method == 'POST':
-#         user_email = request.form['user_email']
-#         user_password = request.form['password']
-#         user_display_name = request.form['display_name']
-#         new_user = User(user_email = user_email, password = generate_password_hash(user_password), display_name = user_display_name)
+@app.route('/', methods=['POST', 'GET'])
+def index():
+    if request.method == 'POST':
+        user_email = request.form['user_email']
+        user_password = request.form['password']
+        user_display_name = request.form['display_name']
+        new_user = User(user_email = user_email, password = generate_password_hash(user_password), display_name = user_display_name)
 
-#         try:
-#             db.session.add(new_user)
-#             db.session.commit()
-#             return redirect('/')
-#         except:
-#             return 'There was an issue adding user'
-#     elif request.method == 'GET':
-#         return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
-#         # return jsonify({'user': User.query.get_or_404(2).serialize()})
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            return redirect('/')
+        except:
+            return 'There was an issue adding user'
+    elif request.method == 'GET':
+        return jsonify({'users': list(map(lambda user: user.serialize(), User.query.all()))})
+        # return jsonify({'user': User.query.get_or_404(2).serialize()})
 
 # @app.route('/delete/<int:id>', methods=['DELETE', 'GET'])
 # def delete(id):
@@ -210,63 +215,63 @@ def update_account(id):
 
 #TRIP TABLE ROUTES
 
-@app.route('/trip/<int:user_id>', methods=['POST', 'GET'])
-def create_trip(user_id):
-    if request.method == 'POST':
-        trip_country = request.form['trip_country']
-        trip_bio = request.form['trip_bio']
-        trip_length = request.form['trip_length']
-        new_trip = Trip(user_id = user_id, trip_country = trip_country, trip_bio = trip_bio, trip_length = trip_length)
+# @app.route('/trip/<int:user_id>', methods=['POST', 'GET'])
+# def create_trip(user_id):
+#     if request.method == 'POST':
+#         trip_country = request.form['trip_country']
+#         trip_bio = request.form['trip_bio']
+#         trip_length = request.form['trip_length']
+#         new_trip = Trip(user_id = user_id, trip_country = trip_country, trip_bio = trip_bio, trip_length = trip_length)
 
-        try:
-            db.session.add(new_trip)
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue adding trip'
-    else:
-        # tasks = Todo.query.order_by(Todo.date_created).all()
-        return 'Post did not work'
+#         try:
+#             db.session.add(new_trip)
+#             db.session.commit()
+#             return redirect('/')
+#         except:
+#             return 'There was an issue adding trip'
+#     else:
+#         # tasks = Todo.query.order_by(Todo.date_created).all()
+#         return 'Post did not work'
 
-@app.route('/trip/delete/<int:id>', methods=['DELETE', 'GET'])
-def delete_trip(id):
-    trip_to_delete = Trip.query.get_or_404(id)
+# @app.route('/trip/delete/<int:id>', methods=['DELETE', 'GET'])
+# def delete_trip(id):
+#     trip_to_delete = Trip.query.get_or_404(id)
 
-    try:
-        db.session.delete(trip_to_delete)
-        db.session.commit()
-        return redirect('/')
-    except:
-        return 'There was a problem deleting that task'
+#     try:
+#         db.session.delete(trip_to_delete)
+#         db.session.commit()
+#         return redirect('/')
+#     except:
+#         return 'There was a problem deleting that task'
 
 
-@app.route('/trip/update/<int:id>', methods=['GET', 'POST'])
-def update_trip(id):
-    trip_to_update = Trip.query.get_or_404(id)
-    if request.method == 'POST':
-        #probably don't need these: 
-        if request.form['trip_country'] != '':
-            trip_to_update.trip_country = request.form['trip_country']
-        # if request.form['trip_bio'] != '':
-        #     trip_to_update.trip_bio = request.form['trip_bio']
-        # if request.form['trip_length'] != '':
-        #     trip_to_update.trip_length = request.form['trip_length']
-        print(request.form)
-        try:
-            db.session.commit()
-            return redirect('/')
-        except:
-            return 'There was an issue updating your task'
+# @app.route('/trip/update/<int:id>', methods=['GET', 'POST'])
+# def update_trip(id):
+#     trip_to_update = Trip.query.get_or_404(id)
+#     if request.method == 'POST':
+#         #probably don't need these: 
+#         if request.form['trip_country'] != '':
+#             trip_to_update.trip_country = request.form['trip_country']
+#         # if request.form['trip_bio'] != '':
+#         #     trip_to_update.trip_bio = request.form['trip_bio']
+#         # if request.form['trip_length'] != '':
+#         #     trip_to_update.trip_length = request.form['trip_length']
+#         print(request.form)
+#         try:
+#             db.session.commit()
+#             return redirect('/')
+#         except:
+#             return 'There was an issue updating your task'
                 
-    else:
-        return 'Could not update'
+#     else:
+#         return 'Could not update'
 
-    try:
-        db.session.put(trip_to_update)
-        db.session.commit()
-        return redirect('/')
-    except:
-        return 'There was a problem updating that task'
+#     try:
+#         db.session.put(trip_to_update)
+#         db.session.commit()
+#         return redirect('/')
+#     except:
+#         return 'There was a problem updating that task'
 
 # @app.route('/update-account/<int:id>', methods=['GET', 'POST'])
 # def update_account(id):
@@ -322,7 +327,23 @@ trip_schema = TripSchema()
 trips_schema = TripSchema(many=True)
 
 
-# #TRIP TABLE ROUTES
+@app.route("/image", methods=["POST"])
+def upload_image():
+    print(request, request.files, request.cookies)
+    if request.files:
+        image = request.files["image"]
+        filename = secure_filename(image.filename)
+        image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+        print("Image saved")
+        return redirect(request.url)
+    else:
+        print("That file extension is not allowed")
+        return redirect(request.url)
+    return "could not upload image"
+
+@app.route("/image", methods=["GET"])
+def display_image():
+    return "Image added"
 
 @app.route('/trip/<int:user_id>', methods=['POST'])
 def create_trip(user_id):
