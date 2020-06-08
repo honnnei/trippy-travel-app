@@ -60,91 +60,67 @@ export default function SignUpForm() {
         // // }
     }
     return (
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Display Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="display_name"
-            placeholder="Enter display name"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            name="user_email"
-            placeholder="Enter email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
+      <div className="signup-form-container">
+        <Form className="sign-up-form">
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Display Name</Form.Label>
+            <Form.Control
+              type="text"
+              name="display_name"
+              placeholder="Enter display name"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+            />
+          </Form.Group>
+          <Form.Group controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              name="user_email"
+              placeholder="Enter email"
+              value={userEmail}
+              onChange={(e) => setUserEmail(e.target.value)}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-          />
-        </Form.Group>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={userPassword}
+              onChange={(e) => setUserPassword(e.target.value)}
+            />
+          </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Please re-enter your password</Form.Label>
-          <Form.Control
-            type="password"
-            name="re-password"
-            placeholder="Password"
-            value={userPasswordAgain}
-            onChange={(e) => setUserPasswordAgain(e.target.value)}
-          />
-        </Form.Group>
-        <Link to="/profile">
-          <Button variant="primary" type="submit" onClick={createUser}>
-            Create Account
-          </Button>
-        </Link>
-        <Alert show={show} variant="danger">
-          <Alert.Heading>Sorry the password does not match !!</Alert.Heading>
-        </Alert>
-        <Alert show={visible} variant="danger">
-          <Alert.Heading>
-            Password must be between 6 -15 characters long
-          </Alert.Heading>
-        </Alert>
-      </Form>
+          <Form.Group controlId="formBasicPassword">
+            <Form.Label>Please re-enter your password</Form.Label>
+            <Form.Control
+              type="password"
+              name="re-password"
+              placeholder="Password"
+              value={userPasswordAgain}
+              onChange={(e) => setUserPasswordAgain(e.target.value)}
+            />
+          </Form.Group>
+          <Link to="/profile">
+            <Button variant="primary" type="submit" onClick={createUser}>
+              Create Account
+            </Button>
+          </Link>
+          <Alert show={show} variant="danger">
+            <Alert.Heading>Sorry the password does not match !!</Alert.Heading>
+          </Alert>
+          <Alert show={visible} variant="danger">
+            <Alert.Heading>
+              Password must be between 6 -15 characters long
+            </Alert.Heading>
+          </Alert>
+        </Form>
+      </div>
     );}
-        //     <Form.Group controlId="formBasicPassword">
-        //         <Form.Label>Password</Form.Label>
-        //         <Form.Control 
-        //         type="password" 
-        //         name="password"
-        //         placeholder="Password" 
-        //         value = {userPassword} 
-        //         onChange = {(e) => setUserPassword(e.target.value)}/>
-        //     </Form.Group>
 
-        //     <Form.Group controlId="formBasicPassword">
-        //         <Form.Label>Please re-enter your password</Form.Label>
-        //         <Form.Control 
-        //             type="password"
-        //             name="re-password"
-        //         placeholder="Password"
-        //         value={userPasswordAgain}
-        //         onChange = {(e) => setUserPasswordAgain(e.target.value)}
-        //         />
-        //     </Form.Group>
-
-        //     <Button variant="primary" type="submit" onClick={createUser}>
-        //         Create Account
-        //     </Button>
-        // </Form>
-
-// )}
