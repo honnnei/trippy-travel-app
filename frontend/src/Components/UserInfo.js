@@ -64,12 +64,22 @@ function UserInfo() {
 
 
   return (
-    <div className="user-info">
+    <div className="user-info-container">
+      <div className="user-info-name-container">
         <h1>{userData ? userData.display_name : "default name"}</h1>
+        <Button onClick={toggle} className="edit-profile-button">Edit Name</Button>
+      </div>
+      <div className="user-info-image-container">
         <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="profile picture" width="200" height="170" />
+      </div>
+      <div className="user-info-bio-container">
         <p>{userData ? userData.bio : "hi my bio"}</p>
-        <p>I've visited (db) countries and counting!</p>
-        <Button onClick={toggle}>Edit Bio</Button>
+        <Button onClick={toggle} className="edit-profile-button">Edit Name</Button>
+      </div>
+      <div className="user-info-country-counter">
+      <p>I've visited (db) countries and counting!</p>
+      </div>
+        <div className="modal">
         <Modal isOpen={modal} toggle={toggle}> 
             <ModalHeader toggle={toggle}>Tell others on Trippy about Yourself:</ModalHeader>
             <ModalBody>
@@ -100,7 +110,7 @@ function UserInfo() {
               <Button className="modalBtn2" onClick={toggle} id="cancel" >Cancel</Button>
             </ModalFooter>
           </Modal>
-        
+        </div>
     </div>
   );
 }

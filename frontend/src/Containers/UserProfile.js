@@ -48,9 +48,7 @@ function UserProfile() {
 
     return (
       <div className="user-profile-page-container">
-        <div className="user-info-sidebar-container" >
             <UserInfo />
-        </div>
         <div className="timeline-gallery-map-container">
           <div className="t-g-m-navbar">
             <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}

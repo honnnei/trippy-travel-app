@@ -9,6 +9,10 @@
   height: 100%;
 }
 
+.App {
+  text-align: center;
+}
+
 /* Sign Up Page */
 .signup-page-container {
   display: flex;
@@ -41,6 +45,7 @@ p#signup:hover ,p#signin:hover {
 
 .user-profile-page-container {
   width: 100%;
+  height: 100%;
   display: flex;
 }
 
@@ -60,10 +65,34 @@ p#signup:hover ,p#signin:hover {
 
 }
 
- 
-.App {
-  text-align: center;
+/* User Info */
+
+.edit-profile-button {
+  height: 40px;
+  width: 60px;
 }
+
+.user-info-container {
+ height: 100%;
+}
+
+.user-info-name-container {
+  display: flex;
+}
+
+.user-info-image-container {
+  
+}
+
+.user-info-bio-container {
+  display: flex;
+}
+
+.user-info-country-counter {
+  
+}
+ 
+
 /*
 .App-logo {
   height: 40vmin;
