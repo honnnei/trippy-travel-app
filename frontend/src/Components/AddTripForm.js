@@ -1,42 +1,67 @@
 
-import React, {  useState } from 'react';
-import {  Link } from "react-router-dom";
-import { Form, Button} from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
+import { Form, Button } from 'react-bootstrap';
 //import Axios from 'axios';
 
 export default function AddTripForm() {
   const [tripCountry, setTripCountry] = useState("");
   const [tripBio, setTripBio] = useState("");
-  // const [tripLength, setTripLength] = useState("");
+  const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
-  // const [show, setShow] = useState(false);
-  // const [visible, setVisible] = useState(false);
 
-  const createTrip = (ev) => {
-    ev.preventDefault();
-    const data = new FormData();
-    data.append('file', tripPhoto[0]);
-    console.log(data)
-  }
   return (
-    <div className="container">
-      <div className="row">
-        <div className="col">
-          <h1>Upload an image</h1>
-          <hr/>
-            <form action="/image" method="POST" enctype="multipart/form-data">
-              <div className="form-group">
-                <label>Select image</label>
-                <div className="custom-file">
-                  <input type="file" class="custom-file-input" name="image" id="image"/>
-                  <label class="custom-file-label" for="image">Select image...</label>
-                </div>
-              </div>
-              <button type="submit" className="btn btn-primary">Upload</button>
-            </form>
-        </div>
-      </div>
-    </div>
-  );
+    <Form action="/image" method="POST" encType="multipart/form-data">
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Trip Country</Form.Label>
+        <Form.Control
+          type="text"
+          name="trip_country"
+          placeholder="Enter country name"
+          value={tripCountry}
+          onChange={(e) => setTripCountry(e.target.value)}
+        />
+      </Form.Group>
+      <Form.Group controlId="formBasicEmail">
+        <Form.Label>Trip Bio</Form.Label>
+        <Form.Control
+          type="text"
+          name="trip_bio"
+          placeholder="Enter trip bio"
+          value={tripBio}
+          onChange={(e) => setTripBio(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Trip duration</Form.Label>
+        <Form.Control
+          type="text"
+          name="trip_length"
+          placeholder="trip duration"
+          value={tripLength}
+          onChange={(e) => setTripLength(e.target.value)}
+        />
+      </Form.Group>
+
+      <Form.Group controlId="formBasicPassword">
+        <Form.Label>Select the trip photo</Form.Label>
+        <Form.Control
+          type="file"
+          name="image"
+          multiple="true" autocomplete="off" 
+          placeholder="enter image"
+          value={tripPhoto}
+          onChange={(e) => setTripPhoto(e.target.value)}
+          
+        />
+      </Form.Group>
+
+      <Button variant="primary" type="submit" >
+        Create Trip
+          </Button>
+
+    </Form>
+);
 }
- 
+
