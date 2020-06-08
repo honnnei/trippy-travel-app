@@ -3,7 +3,6 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
 import { Button, Nav } from 'react-bootstrap'
-import { Button } from 'react-bootstrap'
 
 
 function UserProfile() {
