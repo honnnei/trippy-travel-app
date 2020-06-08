@@ -13,6 +13,13 @@
 // function UserMap() {
     
 //     let myCountries = ["GB", "FR", "ES", "IT", "GR", "TR", "BA", "HR", "US", "CA"]
+// //  <script src="https://www.amcharts.com/lib/4/core.js"></script>
+// // <script src="https://www.amcharts.com/lib/4/maps.js"></script>
+// // <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
+        
+// function UserMap() {
+    
+//    let myCountries = ["GB", "FR", "ES", "IT", "GR", "TR", "BA", "HR", "US", "CA"]
 
 //   // Create map instance
 //   var chart = am4core.create("chartdiv", am4maps.MapChart);

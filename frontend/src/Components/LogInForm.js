@@ -32,8 +32,19 @@ export default function LogInForm() {
       });
     console.log('logging in: ' + userEmail + userPassword)
    
-    console.log(userEmail, userPassword)
-    }
+    // const loginUser = () => {
+    //   Axios.post('/login', {
+    //     user_email: userEmail,
+    //     password: userPassword
+    //   }).then(response => console.log(response))
+    //   .catch(error => {
+    //     console.log("this is error", error.message);
+    //   });
+    // console.log('logging in' + userEmail + userPassword)
+    // }
+
+    // console.log(userEmail, userPassword)
+    // }
     return(
 
         <Form>

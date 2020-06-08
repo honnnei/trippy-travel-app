@@ -27,7 +27,7 @@ function App() {
 
                   />
                   <Route
-                      path='/user'
+                      path='/profile'
                       exact 
                       component={UserProfile}
                   />

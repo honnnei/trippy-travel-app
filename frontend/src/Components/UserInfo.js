@@ -2,7 +2,20 @@ import React from 'react';
 import { Button } from 'react-bootstrap'
 
 function UserInfo() {
-    
+
+    // componentDidMount() {
+    //     fetch('/user')
+    //         .then(response => response.json())
+    //         .then(data => JSON.stringify(data));
+    //         .then(data => {
+    //          this.setState({ apiInfo: data });
+    //            console.log(data);
+    // });
+    //    
+    // }
+
+
+
     return (
       <div className="user-info">
           <h1>Default Name</h1>

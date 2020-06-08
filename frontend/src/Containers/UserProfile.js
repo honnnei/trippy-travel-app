@@ -3,6 +3,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
 import { Button, Nav } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 
 
 function UserProfile() {
@@ -61,6 +62,10 @@ function UserProfile() {
             </Nav.Item>
           </Nav>
 
+          <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
+          <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
+          <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
+          <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '}
         </div>
         <div>
           <div>
