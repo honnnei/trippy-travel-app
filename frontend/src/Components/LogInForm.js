@@ -2,6 +2,7 @@ import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router"
 import { Form, Button } from 'react-bootstrap';
+import AlertMessage from './Alert'
 import Axios from 'axios';
 import jwt_decode from 'jwt-decode'
 
@@ -9,11 +10,25 @@ import jwt_decode from 'jwt-decode'
 export default function LogInForm() { 
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [alertShow, setAlertShow] = useState(false);
     let history = useHistory()
-  
-  
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setErrorMessage(errorMessage => "")
+
+        if(userEmail === "" || userPassword === "") {
+            console.log('ping')
+            setErrorMessage(errorMessage => errorMessage + "Please fill out all inputs.")
+            setAlertShow(true)
+        } else {
+            loginUser();
+        }
+    }
+
+
     const loginUser = (e) => {
-        e.preventDefault()
         Axios.post('/auth/login', {
             user_email: userEmail,
             password: userPassword
@@ -24,18 +39,24 @@ export default function LogInForm() {
           const token = localStorage.usertoken;
           const decoded = jwt_decode(token);
           console.log(decoded);
-          history.push("/user");
+          setAlertShow(false)
+          setTimeout(() => {
+            history.push("/user");
+          }, 2000);
+    
           return response.data
       })
       .catch(error => {
         console.log("this is error: ", error.message);
+        setErrorMessage("The email address or password is incorrect. Please try again.");
+        setAlertShow(true);
       });
-    console.log('logging in: ' + userEmail + userPassword)
-   
-    console.log(userEmail, userPassword)
+ 
+    
+    
     }
     return(
-
+        <div>
         <Form>
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
@@ -55,9 +76,16 @@ export default function LogInForm() {
                 onChange={(e) => setUserPassword(e.target.value)}
                 />
             </Form.Group>
-            <Button variant="primary" type="submit" onClick={loginUser}>
+            <Button variant="primary" type="submit" onClick={handleSubmit}>
                 Login
             </Button>
         </Form>
+
+        {errorMessage !== "" ? 
+        (<AlertMessage show={alertShow} variant="danger" message={errorMessage}/>)
+        : <div></div>
+        }
+
+        </div>
         )
     }

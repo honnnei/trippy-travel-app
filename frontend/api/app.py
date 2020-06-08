@@ -54,6 +54,11 @@ users_schema = UserSchema(many=True)
 def register():
     db = sqlite3.connect('trippy.db')
 
+    checkEmail = get_user_email()
+
+    if checkEmail is True:
+        return jsonify({"error_message":"There is already an account registered with that email."})
+
     user_email = request.get_json()['user_email']
     password = bcrypt.generate_password_hash(request.get_json()['password']).decode('utf-8')
     display_name = request.get_json()['display_name']
@@ -64,9 +69,7 @@ def register():
     db.commit()
 
     result = {
-		'user_email' : user_email,
-		'display_name' : display_name,
-		'password' : password,
+        'success_message' : 'Created account successfully',
 	}
 
     return result
@@ -89,9 +92,24 @@ def login():
         access_token = create_access_token(identity={'user_id': id})
         result = access_token
     else:
-        result = jsonify({"error":"Invalid username and password"})
+        result = jsonify({"error":"Invalid username and password",})
     
     return result
+
+#checks user email
+def get_user_email():
+
+    db = sqlite3.connect('trippy.db')
+    print(request.get_json())
+    user_email = request.get_json()['user_email']
+    rv = db.execute("SELECT id FROM user where user_email = ?", (user_email,)).fetchone()
+    print('THIS IS RV')
+    print(rv)
+    response = False
+    if rv is not None:
+        response = True
+
+    return response
 
 #USER TABLE ROUTES
 
@@ -121,21 +139,7 @@ def get_user(id):
     user = User.query.get(id)
     return user_schema.jsonify(user)
 
-#checks user email
-@app.route('/check/user', methods=['POST'])
-def get_user_email():
 
-    db = sqlite3.connect('trippy.db')
-    print(request.get_json())
-    user_email = request.get_json()['user_email']
-    rv = db.execute("SELECT id FROM user where user_email = ?", (user_email,)).fetchone()
-    print('THIS IS RV')
-    print(rv)
-    response = False
-    if rv is not None:
-        response = True
-
-    return jsonify({"exists": response})
 
 #update a user (either bio or display_name!)
 @app.route('/user/<int:id>', methods=['PUT'])
