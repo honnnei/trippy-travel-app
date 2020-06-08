@@ -6,7 +6,7 @@ import { Button } from 'react-bootstrap'
 
 
 function UserProfile() {
-  const [mapShow, setMapShow] = useState(false);
+  const [mapShow, setMapShow] = useState(true);
   const [timelineShow, setTimelineShow] = useState(false);
   const [galleryShow, setGalleryShow] = useState(false);
   const [followersShow, setFollowersShow] = useState(false);
@@ -50,7 +50,10 @@ function UserProfile() {
             <UserInfo />
           </div>
           <div>
-            {followersShow ? <p>Followers</p> : timelineShow ? <p>Timeline</p> : galleryShow ? <p>Gallery</p> : <UserMap />}
+            {followersShow ? <p>Followers</p> : ""}
+            {timelineShow ? <p>Timeline</p> : ""}
+            {galleryShow ? <p>Gallery</p> : ""}
+            {mapShow ? <UserMap /> : ""}
             {/* <UserInfo />
             <UserMap /> */}
           </div>
