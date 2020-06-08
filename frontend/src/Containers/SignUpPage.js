@@ -20,7 +20,7 @@ function SignUpPage() {
         </div>
       ) : (
         <div className="register_form" id="second">
-          <SignUpForm />
+          <SignUpForm toggle = {toggle}/>
           <p id="signin" className="signin" onClick={toggle}>
             Already have an account? Sign in here!
           </p>
