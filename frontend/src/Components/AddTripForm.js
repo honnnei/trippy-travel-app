@@ -49,9 +49,11 @@ export default function AddTripForm() {
         <Form.Control
           type="file"
           name="image"
+          multiple="true" autocomplete="off" 
           placeholder="enter image"
           value={tripPhoto}
           onChange={(e) => setTripPhoto(e.target.value)}
+          
         />
       </Form.Group>
 

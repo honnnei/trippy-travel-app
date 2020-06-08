@@ -306,20 +306,27 @@ trips_schema = TripSchema(many=True)
 #     else:
 #         return False
 
+
 @app.route("/image", methods=["POST"])
 def upload_image():
     print(request, request.files, request.cookies)
     if request.files:
-        image = request.files["image"]
-        filename = secure_filename(image.filename)
-        image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+        files = request.files.getlist("image")
+        images = []
+        s = ', '
+        for file in files:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            images.append(filename)
+        a = ','.join(images)
+        trip_image = a
         print("Image saved")
         trip_country = request.form['trip_country']
         trip_bio = request.form['trip_bio']
         trip_length = request.form['trip_length']
         trip_image = filename
         new_trip = Trip(
-               user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=filename)
+            user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
         try:
             db.session.add(new_trip)
             db.session.commit()
@@ -331,6 +338,34 @@ def upload_image():
         print("That file extension is not allowed")
         return redirect(request.url)
     return "could not upload image"
+
+
+# this addes only 1 image 
+# @app.route("/image", methods=["POST"])
+# def upload_image():
+#     print(request, request.files, request.cookies)
+#     if request.files:
+#         image = request.files["image"]
+#         filename = secure_filename(image.filename)
+#         image.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+#         print("Image saved")
+#         trip_country = request.form['trip_country']
+#         trip_bio = request.form['trip_bio']
+#         trip_length = request.form['trip_length']
+#         trip_image = filename
+#         new_trip = Trip(
+#                user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=filename)
+#         try:
+#             db.session.add(new_trip)
+#             db.session.commit()
+#             return trip_schema.jsonify(new_trip)
+#         except:
+#             return 'Could not create a user'
+#         return redirect(request.url)
+#     else:
+#         print("That file extension is not allowed")
+#         return redirect(request.url)
+#     return "could not upload image"
 
 
 @app.route("/image", methods=["GET"])
