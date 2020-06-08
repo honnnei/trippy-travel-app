@@ -1,0 +1,25 @@
+{
+  "name": "trippy-travel-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/honnnei/trippy-travel-app.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/honnnei/trippy-travel-app/issues"
+  },
+  "homepage": "https://github.com/honnnei/trippy-travel-app#readme",
+  "devDependencies": {
+    "concurrently": "^5.2.0"
+  },
+  "dependencies": {
+    "jwt-decode": "^2.2.0"
+  }
+}

@@ -7,11 +7,13 @@ import UserProfile from './Containers/UserProfile';
 import AccountSettings from './Containers/AccountSettings';
 import AddTripForm from './Components/AddTripForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import NavbarComponent from './Components/Navbar';
 
 
 function App() {
   return (
     <div className="App">
+      <NavbarComponent />
       <Router>
         <Switch>
                   <Route 

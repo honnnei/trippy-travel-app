@@ -1,6 +1,5 @@
-
-import React, {useState} from 'react';
-import { Link } from "react-router-dom";
+import React, { Component, Fragment, useState, useEffect } from 'react';
+import { Redirect, Link } from "react-router-dom";
 import { Form, Button, Alert } from 'react-bootstrap';
 //import Axios from 'axios';
 
@@ -14,6 +13,19 @@ export default function SignUpForm() {
     const createUser = (e) => {
         //e.preventDefault();
         console.log('create user function')
+        // if (userPassword === userPasswordAgain) {
+        //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
+            Axios.post('/auth/register', {
+                user_email : userEmail,
+                password : userPassword,
+                display_name : displayName,
+              })
+              .then(response => console.log(response))
+              .catch(error => {
+                console.log("this is error", error.message);
+              });
+              console.log('creating user')
+        // }
         if (userPassword === userPasswordAgain) {
             setShow(false);
             if (userPassword.length < 6 || userPassword.length > 15) {
