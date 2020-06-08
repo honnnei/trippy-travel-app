@@ -1,6 +1,7 @@
-import React, {useState, useEffect} from 'react';
-import LogInForm from '../Components/LogInForm'
-import SignUpForm from '../Components/SignUpForm'
+import React, {useState} from 'react';
+import LogInForm from '../Components/LogInForm';
+import SignUpForm from '../Components/SignUpForm';
+import AboutUs from '../Components/AboutUs';
 
 function SignUpPage() {
   const [showSignUp, setShowSignUp] = useState(true);
@@ -8,6 +9,7 @@ function SignUpPage() {
 
   return (
     <div className="signup-page-container">
+      <AboutUs />
       {showSignUp ? (
         <div className="login_form" id="first">
           <LogInForm />

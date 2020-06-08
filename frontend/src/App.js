@@ -5,15 +5,19 @@ import SignUpPage from './Containers/SignUpPage';
 import GlobalFeed from './Containers/GlobalFeed';
 import UserProfile from './Containers/UserProfile';
 import AccountSettings from './Containers/AccountSettings';
+import AddTripForm from './Components/AddTripForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './Components/Navbar';
 import NavbarComponent from './Components/Navbar';
 
 
 function App() {
   return (
+    <div className="app-container">
     <div className="App">
       <NavbarComponent />
       <Router>
+      <Navbar />
         <Switch>
                   <Route 
                       path='/'
@@ -27,7 +31,7 @@ function App() {
 
                   />
                   <Route
-                      path='/user'
+                      path='/profile'
                       exact 
                       component={UserProfile}
                   />
@@ -35,6 +39,12 @@ function App() {
                       path='/user-settings'
                       exact 
                       component={AccountSettings}
+
+                  />
+                   <Route 
+                      path='/trip'
+                      exact 
+                      component={AddTripForm}
 
                   />
                </Switch>

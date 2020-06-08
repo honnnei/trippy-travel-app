@@ -56,8 +56,8 @@ export default function LogInForm() {
     
     }
     return(
-        <div>
-        <Form>
+        <div className="login-form-container">
+            <Form className="login-form">
             <Form.Group controlId="formBasicEmail">
                 <Form.Label>Email address</Form.Label>
                 <Form.Control
