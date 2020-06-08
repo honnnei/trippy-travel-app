@@ -1,4 +1,4 @@
-// import React from 'react';
+import React from 'react';
 // import { Button } from 'react-bootstrap'
 
 // import * as am4core from "@amcharts/amcharts4/core";
@@ -17,7 +17,7 @@
 // // <script src="https://www.amcharts.com/lib/4/maps.js"></script>
 // // <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
         
-// function UserMap() {
+function UserMap() {
     
 //    let myCountries = ["GB", "FR", "ES", "IT", "GR", "TR", "BA", "HR", "US", "CA"]
 
@@ -73,11 +73,13 @@
 //   // Add zoom control
 //   chart.zoomControl = new am4maps.ZoomControl();
 
-//     return (
-//       <div className="user-map">
-//            <div id="chartdiv"></div>
-//       </div>
-//     );
-// }
+    return (
+      <div className="user-map">
+           <div id="chartdiv">
+               <h1>this is map</h1>
+           </div>
+      </div>
+    );
+}
 
-// export default UserMap;
+export default UserMap;
