@@ -13,12 +13,12 @@ function SignUpPage() {
           <LogInForm />
           <br />
           <p id="signup" className="signup" onClick={toggle}>
-            Need and account? Register here!
+            Need an account? Register here!
           </p>
         </div>
       ) : (
         <div className="register_form" id="second">
-          <SignUpForm />
+          <SignUpForm toggle = {toggle}/>
           <p id="signin" className="signin" onClick={toggle}>
             Already have an account? Sign in here!
           </p>
