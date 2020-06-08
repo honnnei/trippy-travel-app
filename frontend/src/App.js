@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <NavbarComponent />
       <Router>
-      <Navbar />
+      {/* <Navbar /> */}
         <Switch>
                   <Route 
                       path='/'

@@ -1,17 +1,10 @@
-<<<<<<< HEAD
 import React, { Component, Fragment, useState, useEffect } from 'react';
 import { Redirect, Link } from "react-router-dom";
-import { Form, Button, Alert } from 'react-bootstrap';
-import Axios from 'axios';
-=======
-import React, { useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-import { useHistory } from "react-router";
 import Axios from 'axios';
+import { useHistory } from "react-router";
 import Alert from 'react-bootstrap/Alert';
 import AlertMessage from './Alert'
->>>>>>> b92dc6466f8c302c2ce7705d4a976c4360c43cfa
 
 export default function SignUpForm() {
     const [displayName, setDisplayName] = useState("");

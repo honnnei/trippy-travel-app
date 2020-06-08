@@ -41,7 +41,7 @@ export default function LogInForm() {
           console.log(decoded);
           setAlertShow(false)
           setTimeout(() => {
-            history.push("/user");
+            history.push("/profile");
           }, 2000);
     
           return response.data
