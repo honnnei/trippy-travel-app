@@ -18,5 +18,8 @@
   "homepage": "https://github.com/honnnei/trippy-travel-app#readme",
   "devDependencies": {
     "concurrently": "^5.2.0"
+  },
+  "dependencies": {
+    "jwt-decode": "^2.2.0"
   }
 }
