@@ -1,7 +1,11 @@
 import React, {useState, useEffect} from 'react';
 import { Button } from 'react-bootstrap'
 import Axios from 'axios';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Modal from 'react-bootstrap/Modal'
+import ModalHeader from 'react-bootstrap/ModalHeader'
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
+import jwt_decode from 'jwt-decode'
 
 function UserInfo() {
 
@@ -9,15 +13,22 @@ function UserInfo() {
   const [userBio, setUserBio] = useState();
   const [userDisplayName, setUserDisplayName] = useState({});
   const [modal, setModal] = useState(false);
+  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
  
-  
+//   const getUserId = () => {
+//     // console.log(localStorage.usertoken);
+//     const token = localStorage.usertoken;
+//     const decoded = jwt_decode(token);
+//     setUserId(decoded.identity.user_id)
+//     console.log(decoded.identity.user_id)
+// }
 
   const toggle = () => {
     setModal(!modal)
   };
 
   const getUserData = () => {
-    Axios('/user/1')
+    Axios('/user/' + userId)
     .then(response => {
      setUserData(response.data);
     });
@@ -25,7 +36,7 @@ function UserInfo() {
 
   const updateUserInfo = () => {
     console.log('put request', userBio)
-    Axios.put(`/user/1`, {
+    Axios.put(`/user/` + userId, {
       bio: userBio,
       display_name: userDisplayName
     })
@@ -50,7 +61,7 @@ function UserInfo() {
 
   const handleUpdate = e => {
     e.persist();
-    if (e.target.name == 'userDisplayName') {
+    if (e.target.name === 'userDisplayName') {
       setUserDisplayName(e.target.value);
     }
     else {
@@ -107,7 +118,7 @@ function UserInfo() {
             </ModalBody>
             <ModalFooter>
               <Button className="modalBtn" onClick={() => {toggle(); updateUserInfo(); getUserData();}}>Create</Button>
-              <Button className="modalBtn2" onClick={toggle} id="cancel" >Cancel</Button>
+              <Button classsName="modalBtn2" onClick={toggle} id="cancel" >Cancel</Button>
             </ModalFooter>
           </Modal>
         </div>

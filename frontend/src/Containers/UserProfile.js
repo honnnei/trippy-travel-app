@@ -6,7 +6,10 @@ import { Button } from 'react-bootstrap';
 import Gallery from '../Components/Gallery';
 import Timeline from '../Components/Timeline';
 import AddTripForm from '../Components/AddTripForm';
-import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import Modal from 'react-bootstrap/Modal'
+import ModalHeader from 'react-bootstrap/ModalHeader'
+import ModalBody from 'react-bootstrap/ModalBody'
+import ModalFooter from 'react-bootstrap/ModalFooter'
 import jwt_decode from 'jwt-decode'
 
 function UserProfile() {
@@ -24,25 +27,25 @@ function UserProfile() {
   };
 
   const toggleMap = () => {
-    setMapShow(!mapShow)
+    setMapShow(true)
     setTimelineShow(false)
     setGalleryShow(false)
     setFollowersShow(false)
   }
   const toggleTimeline = () => {
-    setTimelineShow(!timelineShow)
+    setTimelineShow(true)
     setMapShow(false)
     setGalleryShow(false)
     setFollowersShow(false)
   }
   const toggleGallery = () => {
-    setGalleryShow(!galleryShow)
+    setGalleryShow(true)
     setTimelineShow(false)
     setMapShow(false)
     setFollowersShow(false)
   }
   const toggleFollowers = () => {
-    setFollowersShow(!followersShow)
+    setFollowersShow(true)
     setTimelineShow(false)
     setGalleryShow(false)
     setMapShow(false)

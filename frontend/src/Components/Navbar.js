@@ -1,16 +1,21 @@
 import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import { Navbar, Nav } from 'react-bootstrap';
+import { useHistory } from "react-router"
 
 const NavbarComponent = () => {
+
+    let history = useHistory()
 
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem('usertoken');
+        history.push("/");
     }
 
     const login = (e) => {
         e.preventDefault();
+        history.push("/");
     }
 
     return (
@@ -21,11 +26,8 @@ const NavbarComponent = () => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto"></Nav>
                 <Nav>
-                    <Nav.Link href="#profile"> Profile </Nav.Link>
-                </Nav>
-                <Nav>
-
-                    {localStorage.usertoken ? 
+                <Nav.Link href="/profile"> Profile </Nav.Link>
+                    {localStorage.usertoken ?
                     <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
                     :
                     <Nav.Link href="/" onClick={login}> Log In </Nav.Link>
