@@ -175,20 +175,25 @@ def update_user_profile(id):
         return 'Could not update user'
 
 #update a user (either email or password!)
-# you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
-@app.route('/user/settings/<int:id>', methods=['PUT'])
-def update_user_settings(id):
-    user = User.query.get(id)
-    if request.json['user_email'] != '':
-        user.user_email = request.json['user_email']
-    if request.json['password'] != '':
-        user.password = request.json['password']
-    try:
-        db.session.commit()
-        
-        return user_schema.jsonify(user)
-    except:
-        return 'Could not update user'
+@app.route('/user/settings', methods=['PUT'])
+def update_user_settings():
+    db = sqlite3.connect('trippy.db')
+    user_email = request.json['user_email']
+    password = request.json['password']
+    new_password = request.json['new_password']
+	
+    rv = db.execute("SELECT password FROM user where user_email = ?", (user_email,)).fetchone()[0]
+
+    if bcrypt.check_password_hash(rv, password):
+	    db.execute("INSERT INTO user (user_email, password) VALUES (?, ?)", (user_email, new_password))
+	    db.session.commit()
+    else:
+	    result = jsonify({"error":"Invalid username and password",})
+
+    return result
+
+
+
 
 
 #delete user
