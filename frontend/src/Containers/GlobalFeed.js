@@ -1,4 +1,6 @@
 import React, {useEffect} from 'react';
+import NavbarComponent from '../Components/Navbar';
+
 //import { BrowserRouter as Router } from 'react-router-dom';
 
 function GlobalFeed() {
@@ -13,6 +15,8 @@ function GlobalFeed() {
 
   return (
     <div className="user-profile">
+            <NavbarComponent />
+
         <h1>GlobalFeed</h1>
     </div>
   );

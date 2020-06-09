@@ -5,7 +5,7 @@ function Timeline() {
 
   return (
     <div className="timeline-container">
-      <h1>This is time liney</h1>
+      <h1>Timeline</h1>
     </div>
   );
 }
