@@ -239,49 +239,69 @@ trips_schema = TripSchema(many=True)
 #         return False
 
 
-@app.route("/trip", methods=["POST"])
-def create_trip():
-    print(request, request.files, request.cookies)
+@app.route("/trip/<int:user_id>", methods=["POST"])
+def create_trip(user_id):
     if request.files:
-        files = request.files.getlist("image")
+        files = request.files.getlist("file")
         images = []
-        s = ', '
         for file in files:
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
             images.append(filename)
-        a = ','.join(images)
-        trip_image = a
-        print("Image saved")
-        user_id= request.json['user_id']
-        trip_country = request.json['trip_country']
-        trip_bio = request.json['trip_bio']
-        trip_length = request.json['trip_length']
-        trip_image = filename
-        new_trip = Trip(
-            user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
+        trip_image = ','.join(images)
+        trip_country = request.form['trip_country']
+        trip_bio = request.form['trip_bio']
+        trip_length = request.form['trip_length']
+        new_trip = Trip(user_id, trip_country, trip_bio, trip_length, trip_image)
         try:
             db.session.add(new_trip)
             db.session.commit()
-            # return trip_schema.jsonify(new_trip)
+            return trip_schema.jsonify(new_trip)
         except:
-            return 'Could not create a user'
+            return 'Could not create a trip'
     else:
-        user_id = request.json['user_id']
-        trip_country = request.json['trip_country']
-        trip_bio = request.json['trip_bio']
-        trip_length = request.json['trip_length']
-        trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
-        new_trip = Trip(
-            user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=trip_image)
-        try:
-            db.session.add(new_trip)
-            db.session.commit()
-            # return trip_schema.jsonify(new_trip)
-            return 'created trip'
-        except:
-            return 'Could not create a user'
-    return "could not upload image"
+        print('didnt work')
+        return 'meh'
+    #     images = []
+    #     s = ', '
+    #     for file in files:
+    #         filename = secure_filename(file.name)
+    #         file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+    #         images.append(filename)
+    #     print (images)
+    #     a = ','.join(images)
+    #     print(a)
+    #     trip_image = a
+    #     print("Image saved")
+    #     user_id= request.json['user_id']
+    #     trip_country = request.json['trip_country']
+    #     trip_bio = request.json['trip_bio']
+    #     trip_length = request.json['trip_length']
+    #     trip_image = image
+    #     # new_trip = Trip(
+    #     #     user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
+    #     # try:
+    #     #     db.session.add(new_trip)
+    #     #     db.session.commit()
+    #     #     # return trip_schema.jsonify(new_trip)
+    #     # except:
+    #     return 'Could not create a user'
+    # else:
+    #     user_id = request.json['user_id']
+    #     trip_country = request.json['trip_country']
+    #     trip_bio = request.json['trip_bio']
+    #     trip_length = request.json['trip_length']
+    #     trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
+    #     new_trip = Trip(
+    #         user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=trip_image)
+    #     try:
+    #         db.session.add(new_trip)
+    #         db.session.commit()
+    #         # return trip_schema.jsonify(new_trip)
+    #         return 'created trip'
+    #     except:
+    #         return 'Could not create a user'
+    # return "could not upload image"
 
 
 # @app.route('/trip', methods=['POST'])
@@ -331,19 +351,20 @@ def create_trip():
 
 #TRIP TABLE ROUTES
 
-# @app.route('/trip/<int:user_id>', methods=['POST'])
-# def create_trip(user_id):
-#     trip_country = request.json['trip_country']
-#     trip_bio = request.json['trip_bio']
-#     trip_length = request.json['trip_length']
-#     new_trip = Trip(user_id, trip_country, trip_bio, trip_length)
+@app.route('/craetetrip/<int:user_id>', methods=['POST'])
+def create_trip_two(user_id):
+    trip_country = request.json['trip_country']
+    trip_bio = request.json['trip_bio']
+    trip_length = request.json['trip_length']
+    trip_image = 'hey'
+    new_trip = Trip(user_id, trip_country, trip_bio, trip_length, trip_image)
 
-#     try:
-#         db.session.add(new_trip)
-#         db.session.commit()
-#         return trip_schema.jsonify(new_trip)
-#     except:
-#         return 'There was an issue creating trip'
+    try:
+        db.session.add(new_trip)
+        db.session.commit()
+        return trip_schema.jsonify(new_trip)
+    except:
+        return 'There was an issue creating trip'
 
 
 @app.route('/trip/user', methods=['GET'])
