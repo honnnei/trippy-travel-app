@@ -12,33 +12,8 @@ export default function AddTripForm(props) {
   const [tripPhoto, setTripPhoto] = useState();
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
 
-  const handleChange = (e) => {
-    let file = e.target.files;
-    setTripPhoto(file);
-
-  }
-  const addTripButton = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("file", tripPhoto);
-    const data = {
-      trip_country: tripCountry,
-      trip_bio: tripBio,
-      trip_length: tripLength,
-      user_id: userId,
-      image: tripPhoto,
-    };
-    console.log(data);
-    Axios.post("/trip", data)
-      .then((response) => console.log(response))
-      .then((data) => {
-        console.log(data);
-      });
-    
-  }
-
   return (
-    <Form encType="multipart/form-data">
+    <Form action="/trip" method="POST" encType="multipart/form-data">
       <Form.Control type="hidden" name="user_id" value={userId} />
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Trip Country</Form.Label>
@@ -80,11 +55,11 @@ export default function AddTripForm(props) {
           multiple="true"
           autocomplete="off"
           placeholder="enter image"
-          onChange={handleChange}
+          onChange={(e) => setTripPhoto(e.target.value)}
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit" onClick={addTripButton}>
+      <Button variant="primary" type="submit">
         Create Trip
       </Button>
     </Form>
