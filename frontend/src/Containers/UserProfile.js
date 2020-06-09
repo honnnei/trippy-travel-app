@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
@@ -7,6 +7,7 @@ import Gallery from '../Components/Gallery';
 import Timeline from '../Components/Timeline';
 import AddTripForm from '../Components/AddTripForm';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import jwt_decode from 'jwt-decode'
 
 function UserProfile() {
   const [mapShow, setMapShow] = useState(true);
@@ -14,6 +15,7 @@ function UserProfile() {
   const [galleryShow, setGalleryShow] = useState(false);
   const [followersShow, setFollowersShow] = useState(false);
   const [modal, setModal] = useState(false);
+  const [userId, setUserId] = useState("");
  
   
 
@@ -44,8 +46,19 @@ function UserProfile() {
     setTimelineShow(false)
     setGalleryShow(false)
     setMapShow(false)
-    console.log(localStorage.usertoken);
   }
+  const getUserId = () => {
+      // console.log(localStorage.usertoken);
+      const token = localStorage.usertoken;
+      const decoded = jwt_decode(token);
+      setUserId(decoded.identity.user_id)
+      console.log(decoded.identity.user_id)
+  }
+  
+  
+  useEffect(() => {
+    getUserId();
+    }, []);
 
     return (
       <div className="user-profile-page-container">
