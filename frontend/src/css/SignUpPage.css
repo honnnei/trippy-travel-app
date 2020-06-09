@@ -1,0 +1,28 @@
+/* Sign Up Page */
+.signup-page-container {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+  }
+  
+  p#signup, p#signin{
+    color:blue;
+  }
+  
+  p#signup:hover ,p#signin:hover {
+    cursor: pointer;
+  }
+  
+  .sign-up-form-container, .log-in-form-container {
+    /* height: 500px; */
+  }
+  
+  .log-in-form-container {
+  
+  }
+  
+  .sign-up-form {
+   
+  }
+  

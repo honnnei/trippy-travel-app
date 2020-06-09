@@ -63,7 +63,7 @@ function Timeline() {
 
   return (
     <div className="timeline-container">
-      <h1>This is time liney</h1>
+      <h1>Timeline</h1>
       <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
       <div className="modal">
             <Modal isOpen={modal} toggle={toggleAddTripModal}> 
