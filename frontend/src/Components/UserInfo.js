@@ -28,6 +28,8 @@ function UserInfo() {
       console.log(response.data);
     });
   }
+
+
   const updateUserInfo = () => {
     console.log('update user request')
     Axios.put(`/user/` + userId, {
@@ -43,7 +45,7 @@ function UserInfo() {
   }
   
   useEffect(()=>{
-    getUserData()
+    getUserData();
   }, [])
 
   useEffect(() => {
