@@ -122,8 +122,6 @@ def get_user_email():
 
     return response
 
-#USER TABLE ROUTES
-
 #ONLY KEEPING THIS CREATE_USER FOR POSTMAN:
 @app.route('/user', methods=['POST'])
 def create_user():
@@ -305,34 +303,34 @@ def get_trip_by_trip_id(trip_id):
     return trip_schema.jsonify(trip)
 
 #get all trips of a user:
-@app.route('/user/trip/<in:user_id>', methods=['GET'])
+@app.route('/user/trip/<int:user_id>', methods=['GET'])
 def get_trips_of_single_user(user_id):
     user_trips = Trip.query.filter(Trip.user_id == user_id).order_by(Trip.date_created).all()
     result = trips_schema.dump(user_trips)
     return jsonify(result)
 
-@app.route('/trip/<int:trip_id>', methods=['DELETE'])
-def delete_trip(trip_id):
-    trip = Trip.query.get(trip_id)
-    db.session.delete(trip)
-    db.session.commit()
-    return trip_schema.jsonify(trip)
+# @app.route('/trip/<int:trip_id>', methods=['DELETE'])
+# def delete_trip(trip_id):
+#     trip = Trip.query.get(trip_id)
+#     db.session.delete(trip)
+#     db.session.commit()
+#     return trip_schema.jsonify(trip)
 
-@app.route('/trip/<int:trip_id>', methods=['PUT'])
-def update_trip(trip_id):
-    trip = Trip.query.get(trip_id)
-    if request.json['trip_country'] != '':
-        trip.trip_country = request.json['trip_country']
-    if request.json['trip_bio'] != '':
-        trip.trip_bio = request.json['trip_bio']
-    if request.json['trip_length'] != 0:
-        trip.trip_length = request.json['trip_length']
-    try:
-        db.session.commit()
+# @app.route('/trip/<int:trip_id>', methods=['PUT'])
+# def update_trip(trip_id):
+#     trip = Trip.query.get(trip_id)
+#     if request.json['trip_country'] != '':
+#         trip.trip_country = request.json['trip_country']
+#     if request.json['trip_bio'] != '':
+#         trip.trip_bio = request.json['trip_bio']
+#     if request.json['trip_length'] != 0:
+#         trip.trip_length = request.json['trip_length']
+#     try:
+#         db.session.commit()
         
-        return trip_schema.jsonify(trip)
-    except:
-        return 'Could not update trip'
+#         return trip_schema.jsonify(trip)
+#     except:
+#         return 'Could not update trip'
 
 
 def calc(a, b):
@@ -345,9 +343,5 @@ def calc(a, b):
 #     date_created = db.Column(db.DateTime, default=datetime.utcnow)
 
 if __name__ == '__main__':
-    app.run(debug=True)
-
-#Run Server
-if __name__ == "__main__":
     app.run(debug=True)
     

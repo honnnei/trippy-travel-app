@@ -9,15 +9,22 @@ import Axios from 'axios';
 function Timeline() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [modal, setModal] = useState(false);
-  const [userTripData, setUserTripData] = useState({})
+  const [userTripData, setUserTripData] = useState([])
   //   const [showSignUp, setShowSignUp] = useState(true);
   const getUserData = () => {
-    Axios(`/trip/${userId}`)
+    Axios(`/user/trip/${userId}`)
     .then(response => {
     setUserTripData(response.data);
+    console.log(response.data)
+    })
+    .catch(error => {
+          console.log("this is error", error.message);
     });
   }
 
+  console.log(Array.isArray(userTripData))
+  console.log(Array.isArray([1, 2, 3]))
+  console.log(userTripData[0])
   const updateUserInfo = () => {
     console.log('put request')
     // Axios.put(`/user/${userId}`, {
@@ -68,6 +75,12 @@ function Timeline() {
               </ModalFooter>
             </Modal>
           </div>
+          {userTripData ? userTripData.map(trip => (
+            <div>
+              <h1>I went to {trip.trip_country} for {trip.trip_length} days, and it was {trip.trip_bio}</h1>
+            </div>
+            )
+          ) : ""}
     </div>
   );
 }

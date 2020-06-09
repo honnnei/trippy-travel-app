@@ -11,9 +11,7 @@ function UserInfo() {
   const [userDisplayName, setUserDisplayName] = useState({});
   const [modal, setModal] = useState(false);
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
- 
   
-
   const toggle = () => {
     setModal(!modal)
   };
