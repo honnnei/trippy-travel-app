@@ -10,8 +10,6 @@ function UserInfo() {
   const [userDisplayName, setUserDisplayName] = useState({});
   const [modal, setModal] = useState(false);
  
-  
-
   const toggle = () => {
     setModal(!modal)
   };
@@ -50,7 +48,7 @@ function UserInfo() {
 
   const handleUpdate = e => {
     e.persist();
-    if (e.target.name == 'userDisplayName') {
+    if (e.target.name === 'userDisplayName') {
       setUserDisplayName(e.target.value);
     }
     else {

@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import LogInForm from '../Components/LogInForm';
 import SignUpForm from '../Components/SignUpForm';
-import AboutUs from '../Components/AboutUs';
+import AboutUS from '../Components/AboutUS';
 
 function SignUpPage() {
   const [showSignUp, setShowSignUp] = useState(true);
@@ -9,7 +9,7 @@ function SignUpPage() {
 
   return (
     <div className="signup-page-container">
-      <AboutUs />
+      <AboutUS />
       {showSignUp ? (
         <div className="login_form" id="first">
           <LogInForm />

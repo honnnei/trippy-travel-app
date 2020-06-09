@@ -9,9 +9,10 @@ export default function AddTripForm() {
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
-
+  
   return (
     <Form action="/image" method="POST" encType="multipart/form-data">
+    
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Trip Country</Form.Label>
         <Form.Control

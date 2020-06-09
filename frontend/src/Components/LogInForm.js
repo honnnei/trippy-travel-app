@@ -1,5 +1,5 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
+import React, {  useState  } from 'react';
+//import { Redirect } from "react-router-dom";
 import { useHistory } from "react-router"
 import { Form, Button } from 'react-bootstrap';
 import AlertMessage from './Alert'
@@ -12,6 +12,7 @@ export default function LogInForm() {
     const [userPassword, setUserPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
     const [alertShow, setAlertShow] = useState(false);
+    
     let history = useHistory()
 
     const handleSubmit = (e) => {
@@ -39,9 +40,13 @@ export default function LogInForm() {
           const token = localStorage.usertoken;
           const decoded = jwt_decode(token);
           console.log(decoded);
+          console.log(decoded.identity.user_id);
+          const a = decoded.identity.user_id;
+        
+         
           setAlertShow(false)
           setTimeout(() => {
-            history.push("/profile");
+            history.push("/profile/"+ a);
           }, 2000);
     
           return response.data

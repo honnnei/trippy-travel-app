@@ -25,7 +25,7 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
 #image folder 
-foldername ="C:\\Users\\Amita\\Desktop\\fyp\\trippy-travel-app\\frontend\\api\\uploads"
+foldername ="C:\\Users\\Amita\\Desktop\\trippy\\trippy-travel-app\\frontend\\api\\uploads"
 app.config["IMAGE_UPLOADS"] = foldername
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG","JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
@@ -403,24 +403,11 @@ class TripSchema(ma.Schema):
 trip_schema = TripSchema()
 # strict=True
 trips_schema = TripSchema(many=True)
-# def allowed_image(filename):
-    
-#     # We only want files with a . in the filename
-#     if not "." in filename:
-#         return False
-
-#     # Split the extension from the filename
-#     ext = filename.rsplit(".", 1)[1]
-
-#     # Check if the extension is in ALLOWED_IMAGE_EXTENSIONS
-#     if ext.upper() in app.config["ALLOWED_IMAGE_EXTENSIONS"]:
-#         return True
-#     else:
-#         return False
 
 
-@app.route("/image", methods=["POST"])
-def upload_image():
+@app.route("/image/<int:user_id>", methods=["POST"])
+def upload_image(user_id):
+    user = User.query.get(id)
     print(request, request.files, request.cookies)
     if request.files:
         files = request.files.getlist("image")
@@ -433,12 +420,13 @@ def upload_image():
         a = ','.join(images)
         trip_image = a
         print("Image saved")
+        user_id = user
         trip_country = request.form['trip_country']
         trip_bio = request.form['trip_bio']
         trip_length = request.form['trip_length']
         trip_image = filename
         new_trip = Trip(
-            user_id=1, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
+            user_id=user, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
         try:
             db.session.add(new_trip)
             db.session.commit()
