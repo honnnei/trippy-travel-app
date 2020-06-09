@@ -28,7 +28,8 @@ ma = Marshmallow(app)
 #image folder
 # foldername ="C:\\Users\\Amita\\Desktop\\fyp\\trippy-travel-app\\frontend\\api\\uploads"
 #foldername = 'C:\Users\hannp\github\Futureproof/trippy-travel-app/frontend/api/uploads'
-foldername = os.path.join(basedir, 'uploads')
+# foldername = os.path.join(basedir, 'uploads')
+foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
 app.config["IMAGE_UPLOADS"] = foldername
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
@@ -262,47 +263,6 @@ def create_trip(user_id):
     else:
         print('didnt work')
         return 'meh'
-    #     images = []
-    #     s = ', '
-    #     for file in files:
-    #         filename = secure_filename(file.name)
-    #         file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
-    #         images.append(filename)
-    #     print (images)
-    #     a = ','.join(images)
-    #     print(a)
-    #     trip_image = a
-    #     print("Image saved")
-    #     user_id= request.json['user_id']
-    #     trip_country = request.json['trip_country']
-    #     trip_bio = request.json['trip_bio']
-    #     trip_length = request.json['trip_length']
-    #     trip_image = image
-    #     # new_trip = Trip(
-    #     #     user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=a)
-    #     # try:
-    #     #     db.session.add(new_trip)
-    #     #     db.session.commit()
-    #     #     # return trip_schema.jsonify(new_trip)
-    #     # except:
-    #     return 'Could not create a user'
-    # else:
-    #     user_id = request.json['user_id']
-    #     trip_country = request.json['trip_country']
-    #     trip_bio = request.json['trip_bio']
-    #     trip_length = request.json['trip_length']
-    #     trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
-    #     new_trip = Trip(
-    #         user_id=user_id, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length, trip_image=trip_image)
-    #     try:
-    #         db.session.add(new_trip)
-    #         db.session.commit()
-    #         # return trip_schema.jsonify(new_trip)
-    #         return 'created trip'
-    #     except:
-    #         return 'Could not create a user'
-    # return "could not upload image"
-
 
 # @app.route('/trip', methods=['POST'])
 # def create_trip():

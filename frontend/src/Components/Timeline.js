@@ -4,6 +4,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Button } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
+import city from '../images/city-of-london.jpg'
 
 
 function Timeline() {
@@ -68,6 +69,9 @@ function Timeline() {
           </ModalFooter>
         </Modal>
       </div>
+      {/* <img src={city}/> */}
+      <img src={require("C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images\\" + "city-of-london.jpg")}/>
+      
     </div>
   );
 }
