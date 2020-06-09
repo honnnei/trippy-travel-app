@@ -3,15 +3,24 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 //import Axios from 'axios';
+import jwt_decode from 'jwt-decode'
 
-export default function AddTripForm() {
+export default function AddTripForm(props) {
   const [tripCountry, setTripCountry] = useState("");
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
+  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  
+  const addTripButton = (e) => {
+    e.preventDefault();
+    props.togglefunction();
+  }
 
   return (
-    <Form action="/image" method="POST" encType="multipart/form-data">
+    <Form action="/profile" method="POST" encType="multipart/form-data">
+      <Form.Control type="hidden" name="user_id"
+            value={userId} />
       <Form.Group controlId="formBasicEmail">
         <Form.Label>Trip Country</Form.Label>
         <Form.Control
@@ -57,7 +66,7 @@ export default function AddTripForm() {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit" >
+      <Button variant="primary" type="submit" onClick={props.togglefunction}>
         Create Trip
           </Button>
 

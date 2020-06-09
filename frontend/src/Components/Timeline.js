@@ -60,7 +60,7 @@ function Timeline() {
             <Modal isOpen={modal} toggle={toggleAddTripModal}> 
               <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
               <ModalBody>
-                  <AddTripForm />
+                  <AddTripForm togglefunction={toggleAddTripModal}/>
               </ModalBody>
               <ModalFooter>
                 <Button className="modalBtn" onClick={() => {toggleAddTripModal();}}>Create</Button>
