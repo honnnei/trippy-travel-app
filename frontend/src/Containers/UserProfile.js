@@ -15,7 +15,8 @@ function UserProfile() {
   const [galleryShow, setGalleryShow] = useState(false);
   const [followersShow, setFollowersShow] = useState(false);
   const [modal, setModal] = useState(false);
-  const [userId, setUserId] = useState("");
+  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  console.log(userId)
  
   
 
@@ -47,17 +48,10 @@ function UserProfile() {
     setGalleryShow(false)
     setMapShow(false)
   }
-  const getUserId = () => {
-      // console.log(localStorage.usertoken);
-      const token = localStorage.usertoken;
-      const decoded = jwt_decode(token);
-      setUserId(decoded.identity.user_id)
-      console.log(decoded.identity.user_id)
+  const getUserData = () => {
   }
   
-  
   useEffect(() => {
-    getUserId();
     }, []);
 
     return (
