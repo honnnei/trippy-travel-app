@@ -174,6 +174,23 @@ def update_user_profile(id):
     except:
         return 'Could not update user'
 
+#update a user (either email or password!)
+# you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
+@app.route('/user/settings/<int:id>', methods=['PUT'])
+def update_user_settings(id):
+    user = User.query.get(id)
+    if request.json['user_email'] != '':
+        user.user_email = request.json['user_email']
+    if request.json['password'] != '':
+        user.password = request.json['password']
+    try:
+        db.session.commit()
+        
+        return user_schema.jsonify(user)
+    except:
+        return 'Could not update user'
+
+
 #delete user
 @app.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):

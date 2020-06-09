@@ -35,7 +35,7 @@ function App() {
                       component={UserProfile}
                   />
                   <Route 
-                      path='/user-settings'
+                      path='/settings'
                       exact 
                       component={AccountSettings}
 
