@@ -12,13 +12,18 @@ import '../css/UserInfo.css'
 function UserInfo() {
 
   const [userData, setUserData] = useState({});
-  const [userBio, setUserBio] = useState('default bio');
-  const [userDisplayName, setUserDisplayName] = useState('default name');
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const [userBio, setUserBio] = useState();
+  const [userDisplayName, setUserDisplayName] = useState({});
+  const [modal, setModal] = useState(false);
+ 
+  const toggle = () => {
+    setModal(!modal)
+  };
 
   const getUserData = () => {
     console.log('get user request')
@@ -43,7 +48,7 @@ function UserInfo() {
   }
   
   useEffect(()=>{
-    getUserData()
+    getUserData();
   }, [])
 
   useEffect(() => {
@@ -52,6 +57,7 @@ function UserInfo() {
     }, [userData]);
 
   const handleUpdate = e => {
+    e.persist();
     if (e.target.name === 'userDisplayName') {
       setUserDisplayName(e.target.value);
     }

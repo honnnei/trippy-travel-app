@@ -48,42 +48,54 @@ function Timeline() {
 
   useEffect(() => {
     getUserData();
-    }, []);
+  }, []);
 
-    const handleUpdate = e => {
-      // e.persist();
-      // if (e.target.name == 'userDisplayName') {
-      //   setUserDisplayName(e.target.value);
-      // }
-      // else {
-      //   setUserBio(e.target.value);
-      // }
-  
-    };
+  const handleUpdate = e => {
+    // e.persist();
+    // if (e.target.name == 'userDisplayName') {
+    //   setUserDisplayName(e.target.value);
+    // }
+    // else {
+    //   setUserBio(e.target.value);
+    // }
+
+  };
 
   return (
     <div className="timeline-container">
-      <h1>Timeline</h1>
+      <h1>This is time liney</h1>
       <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
       <div className="modal">
-            <Modal isOpen={modal} toggle={toggleAddTripModal}> 
-              <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
-              <ModalBody>
-                  <AddTripForm togglefunction={toggleAddTripModal}/>
-              </ModalBody>
-              <ModalFooter>
-                <Button className="modalBtn" onClick={() => {toggleAddTripModal();}}>Create</Button>
-                <Button className="modalBtn2" onClick={toggleAddTripModal} id="cancel" >Cancel</Button>
-              </ModalFooter>
-            </Modal>
+        <Modal isOpen={modal} toggle={toggleAddTripModal}>
+          <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
+          <ModalBody>
+            <AddTripForm togglefunction={toggleAddTripModal} />
+          </ModalBody>
+          <ModalFooter>
+            <Button className="modalBtn" onClick={() => { toggleAddTripModal(); getUserData(); }}>Create</Button>
+            <Button className="modalBtn2" onClick={toggleAddTripModal} id="cancel" >Cancel</Button>
+          </ModalFooter>
+        </Modal>
+      </div>
+      <div
+        className="gallery-container"
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(3, 1fr)",
+          gridGap: "1rem",
+        }}
+      >
+        {userTripData ? userTripData.map((trip) => (
+          <div key={trip.id} className="gallery">
+              <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
+            <img
+              src={require("../images/" + trip.trip_image)}
+              style={{ width: "100px", height: "100px", cursor: "pointer" }}
+            />
+          
           </div>
-          {userTripData ? userTripData.map(trip => (
-            <div>
-              <h1>I went to {trip.trip_country} for {trip.trip_length} days, and it was {trip.trip_bio}</h1>
-              {/* <img src={picture} /> */}
-            </div>
-            )
-          ) : ""}
+        )) : ""}
+    </div>      
     </div>
   );
 }

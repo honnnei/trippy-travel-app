@@ -1,9 +1,9 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect, Link } from "react-router-dom";
+import React, {useState } from 'react';
+//import { Redirect, Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { useHistory } from "react-router";
-import Alert from 'react-bootstrap/Alert';
+//import Alert from 'react-bootstrap/Alert';
 import AlertMessage from './Alert'
 
 export default function SignUpForm() {

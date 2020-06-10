@@ -14,9 +14,7 @@ function App() {
   return (
     <div className="app-container">
     <div className="App">
-      {/* <NavbarComponent /> */}
       <Router>
-      {/* <Navbar /> */}
         <Switch>
                   <Route 
                       path='/'
@@ -28,6 +26,7 @@ function App() {
                       exact 
                       component={GlobalFeed}
 
+<<<<<<< HEAD
                   />
                   <Route
                       path='/profile'
@@ -38,17 +37,29 @@ function App() {
                       path='/settings'
                       exact 
                       component={AccountSettings}
+=======
+            />
+            <Route
+              path='/profile'
+              exact
+              component={UserProfile}
+            />
+            <Route
+              path='/user-settings'
+              exact
+              component={AccountSettings}
+>>>>>>> origin/dev-new
 
-                  />
-                   <Route 
-                      path='/trip'
-                      exact 
-                      component={AddTripForm}
+            />
+            <Route
+              path='/trip'
+              exact
+              component={AddTripForm}
 
-                  />
-               </Switch>
-      </Router>
-    </div>
+            />
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }
