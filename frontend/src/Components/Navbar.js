@@ -1,5 +1,5 @@
-import React from "react";
-//import { Link, Redirect } from "react-router-dom";
+import React, { Fragment } from "react";
+import { Link, Redirect } from "react-router-dom";
 import { Navbar, Nav } from 'react-bootstrap';
 
 const NavbarComponent = () => {
@@ -7,11 +7,15 @@ const NavbarComponent = () => {
     const logout = (e) => {
         e.preventDefault();
         localStorage.removeItem('usertoken');
+        window.location.href = "/";
     }
 
     const login = (e) => {
         e.preventDefault();
+        window.location.href = "/";
     }
+
+    
 
     return (
         <div>
@@ -21,12 +25,12 @@ const NavbarComponent = () => {
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto"></Nav>
                 <Nav>
-                    <Nav.Link href="#profile"> Profile </Nav.Link>
-                </Nav>
-                <Nav>
 
-                    {localStorage.usertoken ? 
-                    <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
+                    {localStorage.usertoken ?
+                    <Nav>
+                        <Nav.Link href="/profile"> Profile </Nav.Link>
+                        <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
+                    </Nav>
                     :
                     <Nav.Link href="/" onClick={login}> Log In </Nav.Link>
                     }               

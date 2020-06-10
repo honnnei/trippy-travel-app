@@ -7,9 +7,7 @@ import Axios from "axios";
 
 function Gallery() {
 //   const [showSignUp, setShowSignUp] = useState(true);
-  const [userId, setUserId] = useState(
-    jwt_decode(localStorage.usertoken).identity.user_id
-  );
+  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [userTripData, setUserTripData] = useState([]);
   
   //const a = require('../images');

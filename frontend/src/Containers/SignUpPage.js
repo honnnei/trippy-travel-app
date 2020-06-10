@@ -1,15 +1,19 @@
 import React, {useState} from 'react';
 import LogInForm from '../Components/LogInForm';
 import SignUpForm from '../Components/SignUpForm';
-import AboutUS from '../Components/AboutUS';
+import AboutUs from '../Components/AboutUs';
+import NavbarComponent from '../Components/Navbar';
 
 function SignUpPage() {
   const [showSignUp, setShowSignUp] = useState(true);
   const toggle = () => setShowSignUp(!showSignUp);
 
   return (
+    <div>
+    <NavbarComponent />
     <div className="signup-page-container">
-      <AboutUS />
+
+      <AboutUs />
       {showSignUp ? (
         <div className="login_form" id="first">
           <LogInForm />
@@ -26,6 +30,7 @@ function SignUpPage() {
           </p>
         </div>
       )}
+    </div>
     </div>
   );
 }
