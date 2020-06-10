@@ -38,6 +38,7 @@ console.log(tripData)
         tripData ? tripData.reverse().map(trip => (
         <div key={trip.id} className="feed-trip">
           <div className="user-info">
+          <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="profile picture" width="" height="170" />
             <p className="trip-user"> {trip[4]} </p>
             <p className="trip-date"> {trip[3].split(' ')[0]} </p>
           </div>
@@ -46,7 +47,7 @@ console.log(tripData)
             <p className="trip-bio"> {trip[1]} </p>
           </div>
           <div className="trip-image">
-            <img src={require("../images/" + trip[2])} style={{ height: "10em", cursor: "pointer" }}/> 
+            <img src={require("../images/" + trip[2])} style={{ height: "10em", width:"auto", cursor: "pointer" }}/> 
           </div>
         </div>))
         : <p>Loading...</p>

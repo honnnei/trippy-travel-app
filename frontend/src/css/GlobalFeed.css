@@ -1,7 +1,7 @@
 .feed-trip{
     display: flex;
     flex-direction: row;
-    margin: 2em;
+    margin: 1em;
     background-color: rgb(220,220,220);
     padding: 1em;
 }
@@ -11,18 +11,21 @@
     flex-direction: column;
     /* border: 1px solid red; */
     width: 20%;
+    margin: 1em;
 }
 .trip-info{
     display: flex;
     flex-direction: column;
     /* border: 1px solid blue; */
     width: 60%;
+    margin: 1em;
 }
 .trip-image{
     display: flex;
     flex-direction: column;
     /* border: 1px solid green; */
     width: 20%;
+    margin: 1em;
 }
 .trip-country{
     display: flex;
@@ -33,4 +36,5 @@
     display: flex;
     justify-content: start;
     font-size: 1em;
+    text-align: justify;
 }
