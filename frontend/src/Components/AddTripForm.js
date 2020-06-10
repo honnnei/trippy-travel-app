@@ -34,10 +34,10 @@ export default function AddTripForm(props) {
       }
     })
       .then((response) => {
-        response.json();
+       window.location.reload(false);
       }).catch((error) => {
         console.log(error);
-      }).then(window.location.reload(false));
+      });
 
   }
 
