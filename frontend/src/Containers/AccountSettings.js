@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, {useState, useEffect, useCallback} from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
@@ -7,6 +8,12 @@ import UpdateEmail from '../Components/UpdateEmail';
 import Axios from 'axios';
 import { Button } from 'react-bootstrap';
 
+=======
+import React from 'react';
+import NavbarComponent from '../Components/Navbar';
+
+//import { BrowserRouter as Router } from 'react-router-dom';
+>>>>>>> origin/dev-new
 
 function AccountSettings() {
 
@@ -25,6 +32,7 @@ function AccountSettings() {
   }
 
     return (
+<<<<<<< HEAD
       <div>
         <NavbarComponent />
         <div className="user-profile">
@@ -35,6 +43,12 @@ function AccountSettings() {
             <br></br>
             <Button variant="danger" onClick={deleteUser}>Delete Account</Button>
         </div>
+=======
+      <div className="user-profile">
+              <NavbarComponent />
+
+          <h1>AccountSettings</h1>
+>>>>>>> origin/dev-new
       </div>
     );
 }

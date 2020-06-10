@@ -26,37 +26,25 @@ function App() {
                       exact 
                       component={GlobalFeed}
 
-<<<<<<< HEAD
                   />
                   <Route
                       path='/profile'
                       exact 
                       component={UserProfile}
+                      
                   />
                   <Route 
                       path='/settings'
                       exact 
                       component={AccountSettings}
-=======
-            />
-            <Route
-              path='/profile'
-              exact
-              component={UserProfile}
-            />
-            <Route
-              path='/user-settings'
-              exact
-              component={AccountSettings}
->>>>>>> origin/dev-new
 
-            />
-            <Route
-              path='/trip'
-              exact
-              component={AddTripForm}
+                  />
+                  <Route
+                    path='/trip'
+                    exact
+                    component={AddTripForm}
 
-            />
+                  />
           </Switch>
         </Router>
       </div>
