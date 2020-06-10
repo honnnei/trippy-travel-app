@@ -40,8 +40,8 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     display_name = db.Column(db.String(200), nullable=False)
     bio = db.Column(db.String(255), default="Hi, I'm new to Trippy!")
+    profile_picture = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
     Trip = db.relationship('Trip', backref='User', lazy=True)
 
     def __init__(self, user_email, password, display_name):
@@ -53,7 +53,7 @@ class User(db.Model):
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'user_email', 'password',
-                  'display_name', 'bio', 'date_created')
+                  'display_name', 'bio', 'profile_picture', 'date_created')
 
 
 #Init schema
@@ -78,9 +78,10 @@ def register():
         request.get_json()['password']).decode('utf-8')
     display_name = request.get_json()['display_name']
     bio = "Hi, I've just joined Trippy!"
+    profile_picture = "142116164-side-view-silhouette-of-a-bald-gender-neutral-head-.jpg"
     date_created = datetime.utcnow()
-    db.execute("INSERT INTO user (user_email, password, display_name, bio, date_created) VALUES (?, ?, ?, ?, ?)",
-               (user_email, password, display_name, bio, date_created))
+    db.execute("INSERT INTO user (user_email, password, display_name, bio, profile_picture, date_created) VALUES (?, ?, ?, ?, ?, ?)",
+                (user_email, password, display_name, bio, profile_picture, date_created))
 
     db.commit()
 
