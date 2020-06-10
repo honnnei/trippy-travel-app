@@ -7,11 +7,11 @@ function AboutUs() {
                 Trippy
         <br />
             </h1>
-            <small>By - H.A.M.R</small>
+            <small>by hamr</small>
             <br />
             <p>
-                <h2>Share your travls</h2>
-                <h3>Stay connected</h3>
+                <h2>Share your travels.</h2>
+                <h3>Stay connected.</h3>
             </p>
         </div>
     );
