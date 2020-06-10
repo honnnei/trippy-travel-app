@@ -60,7 +60,7 @@ function Timeline() {
                   <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
                 </div>
                 <div className="trip-area">
-                  {trip.date_created}
+                  {trip.date_created.split('T')[0].split('-').reverse().join('/')}
                   <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
                   <div className="trip-images">
                     <img
