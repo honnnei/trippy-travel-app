@@ -1,9 +1,7 @@
 import React, {useState } from 'react';
-//import { Redirect, Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import { useHistory } from "react-router";
-//import Alert from 'react-bootstrap/Alert';
 import AlertMessage from './Alert'
 
 export default function SignUpForm() {
@@ -61,6 +59,7 @@ export default function SignUpForm() {
 
     return(
         <div>
+            <AlertMessage show={alertShow} variant={alertVariant} message={alertMessage}/>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Display Name</Form.Label>
@@ -72,7 +71,6 @@ export default function SignUpForm() {
                         onChange={(e) => setDisplayName(e.target.value)}
                     />
                 </Form.Group>
-
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
@@ -86,7 +84,6 @@ export default function SignUpForm() {
                     We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
-
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
@@ -97,7 +94,6 @@ export default function SignUpForm() {
                         onChange = {(e) => setUserPassword(e.target.value)}
                     />
                 </Form.Group>
-
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Confirm password</Form.Label>
                     <Form.Control 
@@ -108,13 +104,10 @@ export default function SignUpForm() {
                         onChange = {(e) => setUserPasswordAgain(e.target.value)}
                     />
                 </Form.Group>
-
                 <Button variant="primary" type="submit">
                     Create Account
                 </Button>
             </Form>
-
-            <AlertMessage show={alertShow} variant={alertVariant} message={alertMessage}/>
-
         </div>
-)}
+    );
+}
