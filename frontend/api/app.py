@@ -181,9 +181,17 @@ def update_user_profile(id):
         user.bio = request.json['bio']
     if request.json['display_name'] != '':
         user.display_name = request.json['display_name']
+    if request.files:
+        files = request.files.getlist("file")
+        images = []
+        for file in files:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            images.append(filename)
+        profile_picture_image = ','.join(images)
+        user.profile_picture = profile_picture_image
     try:
         db.session.commit()
-
         return user_schema.jsonify(user)
     except:
         return 'Could not update user'
@@ -220,8 +228,7 @@ class Trip(db.Model):
 
 class TripSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country'
-                  'trip_bio', 'trip_length', 'trip_image', 'date_created')
+        fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country', 'trip_bio', 'trip_length', 'trip_image', 'date_created')
 
 #Init schema
 trip_schema = TripSchema()

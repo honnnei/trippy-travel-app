@@ -6,7 +6,8 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
 import Form from 'react-bootstrap/Form'
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import FormData from 'form-data';
 import '../css/UserInfo.css'
 
 function UserInfo() {
@@ -34,11 +35,20 @@ function UserInfo() {
       console.log(response.data);
     });
   }
+
   const updateUserInfo = () => {
     console.log('update user request')
-    Axios.put(`/user/` + userId, {
-      bio: userBio,
-      display_name: userDisplayName
+    let bodyFormData = new FormData();
+    bodyFormData.set('bio', userBio);
+    bodyFormData.set('display_name', userDisplayName);
+    bodyFormData.append('file', profilePicture);
+
+    Axios.put(`/user/${userId}`, bodyFormData, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`,
+      }
     })
     .then( response => console.log(response) )
     .then( getUserData() )
