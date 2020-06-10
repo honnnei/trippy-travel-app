@@ -21,6 +21,7 @@ function UserInfo() {
   const [userBio, setUserBio] = useState();
   const [userDisplayName, setUserDisplayName] = useState();
   const [profilePicture, setProfilePicture] = useState();
+  const [profilePictureURL, setProfilePictureURL] = useState();
   const [modal, setModal] = useState(false);
  
   const toggle = () => {
@@ -39,7 +40,6 @@ function UserInfo() {
     bodyFormData.set('bio', userBio);
     bodyFormData.set('display_name', userDisplayName);
     bodyFormData.append('file', profilePicture);
-
     Axios.put(`/user/${userId}`, bodyFormData, {
       headers: {
         'accept': 'application/json',
@@ -61,7 +61,8 @@ function UserInfo() {
 
   useEffect(() => {
     setUserBio(userData.bio);
-    setUserDisplayName(userData.display_name)
+    setUserDisplayName(userData.display_name);
+    setProfilePictureURL(userData.profile_picture);
     }, [userData]);
 
   const handleUpdate = e => {
@@ -78,9 +79,6 @@ function UserInfo() {
     }
 
   };
-  let profile_picture_url;
-  userData.profile_picture ? profile_picture_url = require("../images/" + userData.profile_picture) : profile_picture_url =  ""
-  
  
   return (
     <div className="user-info-container">
@@ -88,9 +86,7 @@ function UserInfo() {
         <h1 className="user-info-display-name" >{userData ? userData.display_name : "default name"}</h1>
       </div>
       <div className="user-info-image-container">
-        {/* {userData ? <h1>{profile_picture_url}</h1> : ""} */}
-        {userData.profile_picture ? <img src={profile_picture_url} alt="profile picture" width="200" height="170" /> : ""}
-        {/* {userData ? <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" /> : ""} */}
+        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="170" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" />}
       </div>
       <div className="user-info-bio-container">
         <p>{userData ? userData.bio : "hi my bio"}</p>
