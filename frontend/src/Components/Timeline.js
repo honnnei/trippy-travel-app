@@ -4,15 +4,14 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Button } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
-// import picture from '../../api/uploads/dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
-
 
 function Timeline() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
-  // const [tripImageUrl, setTripImageUrl] = useState('C:\Users\hannp\github\Futureproof\trippy-travel-app\frontend\api\uploads\dino-reichmuth-A5rCN8626Ck-unsplash.jpg')
-  //   const [showSignUp, setShowSignUp] = useState(true);
+  const [tripId, setTripId] = useState();
+  const [lgShow, setLgShow] = useState(false);
   const getUserData = () => {
     Axios(`/user/trip/${userId}`)
     .then(response => {
@@ -23,79 +22,71 @@ function Timeline() {
           console.log("this is error", error.message);
     });
   }
-
-  console.log(Array.isArray(userTripData))
-  console.log(Array.isArray([1, 2, 3]))
   console.log(userTripData[0])
   const updateUserInfo = () => {
     console.log('put request')
-    // Axios.put(`/user/${userId}`, {
-    //   bio: userBio,
-    //   display_name: userDisplayName
-    // })
-    //   .then(response => response)
-    //   .then(
-    //     getUserData()
-    //   )
-    //   .catch(error => {
-    //     console.log("this is error", error.message);
-    //   });
-  }
+    }
 
   const toggleAddTripModal = () => {
     setModal(!modal)
+  };
+  const toggleModal = () => {
+    setEditModal(!editModal)
   };
 
   useEffect(() => {
     getUserData();
   }, []);
 
-  const handleUpdate = e => {
-    // e.persist();
-    // if (e.target.name == 'userDisplayName') {
-    //   setUserDisplayName(e.target.value);
-    // }
-    // else {
-    //   setUserBio(e.target.value);
-    // }
-
+  const deleteTrip = (id) => {
+    console.log(id);
+    const data = {
+      trip : id
+    }
+    if (window.confirm("Are you sure you want to delete it forever") === true) {
+      Axios.delete(`/trip/${id}`, data)
+        .then((response) => {
+          response.json();
+        }).catch((error) => {
+          console.log(error);
+        }).then(window.location.reload(false));
+    }
+   
   };
-
+  
   return (
     <div className="timeline-container">
-      <h1>This is time liney</h1>
-      <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
-      <div className="modal">
-        <Modal isOpen={modal} toggle={toggleAddTripModal}>
-          <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
-          <ModalBody>
-            <AddTripForm togglefunction={toggleAddTripModal} />
-          </ModalBody>
-          <ModalFooter>
-            <Button className="modalBtn" onClick={() => { toggleAddTripModal(); getUserData(); }}>Create</Button>
-            <Button className="modalBtn2" onClick={toggleAddTripModal} id="cancel" >Cancel</Button>
-          </ModalFooter>
-        </Modal>
+      <div className="add-trip-area">
+        <h1>Add Your Latest Trip </h1>
+        <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+        <div className="modal">
+          <Modal isOpen={modal} toggle={toggleAddTripModal}>
+            <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
+            <ModalBody>
+              <AddTripForm togglefunction={toggleAddTripModal} />
+            </ModalBody>
+          </Modal>
+        </div>
       </div>
-      <div
-        className="gallery-container"
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(3, 1fr)",
-          gridGap: "1rem",
-        }}
-      >
+      <div className="trip-container">
         {userTripData ? userTripData.map((trip) => (
-          <div key={trip.id} className="gallery">
+          <div key={trip.id} className="user-trip">
+            <div className="button-area">
+              <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
+            </div>
+            <div className="trip-area">
+              {trip.date_created}
               <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
-            <img
-              src={require("../images/" + trip.trip_image)}
-              style={{ width: "100px", height: "100px", cursor: "pointer" }}
-            />
-          
+              <div className="trip-images">
+                <img
+                  src={require("../images/" + trip.trip_image)}
+                  id="trip-image"
+                />
+                </div>
+              </div>
           </div>
-        )) : ""}
-    </div>      
+        )) : "Please enter your travel journey"}
+      </div>      
     </div>
   );
 }

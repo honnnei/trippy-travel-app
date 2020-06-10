@@ -39,6 +39,7 @@ function Gallery() {
     >
       {userTripData.map((item) => (
         <div key={item.id} className="gallery">
+          
           <img
             src={require("../images/" + item.trip_image)}
             style={{ width: "100px", height: "100px", cursor: "pointer" }}
