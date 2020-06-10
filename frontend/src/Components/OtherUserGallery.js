@@ -2,12 +2,21 @@ import React, { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
 import { Form, Button } from "react-bootstrap";
 import Axios from "axios";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
 
 // import { Button } from "react-bootstrap";
 
-function Gallery() {
+function OtherUserGallery() {
 //   const [showSignUp, setShowSignUp] = useState(true);
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+let { id } = useParams();
+
+  const [userId, setUserId] = useState(id);
   const [userTripData, setUserTripData] = useState([]);
   
   //const a = require('../images');
@@ -49,4 +58,4 @@ function Gallery() {
   );
 }
 
-export default Gallery;
+export default OtherUserGallery;

@@ -1,0 +1,17 @@
+.update-email-form {
+    display: flex;
+    justify-content: center;
+    /* width: 70vw; */
+}
+
+.update-password-form {
+    display: flex;
+    justify-content: center;
+    /* width: 70vw; */
+}
+
+
+.delete-user-button {
+    display: flex;
+    justify-content: center;
+}
