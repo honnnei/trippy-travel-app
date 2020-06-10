@@ -323,7 +323,7 @@ def create_trip():
             return 'created trip'
         except:
             return 'Could not create a user'
-    return "could not upload image"
+    return redirect('/profile')
 
 # @app.route('/trip', methods=['POST'])
 # def create_trip():
