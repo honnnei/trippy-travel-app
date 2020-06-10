@@ -26,6 +26,7 @@ export default function AddTripForm(props) {
     bodyFormData.set('trip_bio', tripBio);
     bodyFormData.set('trip_length', tripLength);
     bodyFormData.append('file', tripPhoto);
+    
     Axios.post(`/trip/${userId}`, bodyFormData, {
       headers: {
         'accept': 'application/json',
