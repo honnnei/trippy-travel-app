@@ -1,36 +1,17 @@
-
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
-<<<<<<< HEAD
-//import Axios from 'axios';
-import jwt_decode from 'jwt-decode'
-=======
 import Axios from 'axios';
 import jwt_decode from 'jwt-decode'
 import FormData from 'form-data';
->>>>>>> dev-new
 
 export default function AddTripForm(props) {
-  const [tripCountry, setTripCountry] = useState("");
+  const [tripCountryCode, setTripCountryCode] = useState("");
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
-<<<<<<< HEAD
   
-  const addTripButton = (e) => {
-    e.preventDefault();
-    props.togglefunction();
-  }
-
-  return (
-    <Form action="/profile" method="POST" encType="multipart/form-data">
-      <Form.Control type="hidden" name="user_id"
-            value={userId} />
-      <Form.Group controlId="controlSelect">
-=======
-
   const handleChange = (e) => {
     let file = e.target.files[0];
     setTripPhoto(file);
@@ -41,14 +22,13 @@ export default function AddTripForm(props) {
   const addTripButton = (e) => {
     e.preventDefault();
     let bodyFormData = new FormData();
-    bodyFormData.set('trip_country', tripCountry);
+    bodyFormData.set('trip_country_code', tripCountryCode);
     bodyFormData.set('trip_bio', tripBio);
     bodyFormData.set('trip_length', tripLength);
     bodyFormData.append('file', tripPhoto);
     console.log(bodyFormData)
-    console.log(tripCountry, tripBio, tripLength, userId, tripPhoto)
+    console.log(tripCountryCode, tripBio, tripLength, userId, tripPhoto)
 
-    
     Axios.post(`/trip/${userId}`, bodyFormData, {
       headers: {
         'accept': 'application/json',
@@ -88,17 +68,17 @@ export default function AddTripForm(props) {
   
 
   return (
+    <div>
     <Form encType="multipart/form-data">
-      <Form.Control type="hidden" name="user_id" value={userId} />
+      {/* <Form.Control type="hidden" name="user_id" value={userId} /> */}
       <Form.Group controlId="formBasicEmail">
->>>>>>> dev-new
         <Form.Label>Trip Country</Form.Label>
         <Form.Control
           as="select"
           name="trip_country_code"
           placeholder="Enter country name"
-          value={tripCountry}
-          onChange={(e) => setTripCountry(e.target.value)}>
+          value={tripCountryCode}
+          onChange={(e) => setTripCountryCode(e.target.value)}>
         <option value="AF">Afghanistan</option>
         <option value="AX">Åland Islands</option>
         <option value="AL">Albania</option>
@@ -372,7 +352,7 @@ export default function AddTripForm(props) {
         />
       </Form.Group>
 
-      {/* <Form.Group controlId="formBasicPassword">
+      <Form.Group controlId="formBasicPassword">
         <Form.Label>Select the trip photo</Form.Label>
         <Form.Control
           type="file"
@@ -382,15 +362,13 @@ export default function AddTripForm(props) {
           placeholder="enter image"
           onChange={handleChange}
         />
-      </Form.Group> */}
+      </Form.Group>
 
-<<<<<<< HEAD
-      <Button variant="primary" type="submit" onClick={props.togglefunction}>
-=======
+      {/* <Button variant="primary" type="submit" onClick={props.togglefunction}> */}
       <Button variant="primary" type="submit" onClick={addTripButton}>
->>>>>>> dev-new
         Create Trip
       </Button>
     </Form>
+    </div>
   );
 }

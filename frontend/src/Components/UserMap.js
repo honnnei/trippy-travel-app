@@ -10,12 +10,16 @@ import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
 function UserMap() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [userTripData, setUserTripData] = useState([])
+    console.log(userTripData, userId)
 
 
     let countryArray = []
-    userTripData.map(trip=>{
-      countryArray.push(trip.trip_country_code)
-    })
+    if (userTripData) {
+      userTripData.map(trip => {
+        countryArray.push(trip.trip_country_code)
+      })
+    }
+    
     // Default data
 
     // Create map instance
@@ -49,9 +53,12 @@ function UserMap() {
     activeState.properties.fill = am4core.color("#7EA2D6")
 
     polygonTemplate.events.on("ready", function(ev) {
-        countryArray.forEach(id => {
+        if (countryArray) {
+          countryArray.forEach(id => {
             polygonSeries.getPolygonById(id).isActive = true;
         })
+        }
+        
     });
 
     // Remove Antarctica

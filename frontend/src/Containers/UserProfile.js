@@ -103,7 +103,7 @@ function UserProfile() {
                       
           </Row>
         </Container>
-            <div className="modal">
+            {/* <div className="modal">
               <Modal isOpen={modal} toggle={toggleAddTripModal}> 
                 <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
                 <ModalBody>
@@ -115,7 +115,7 @@ function UserProfile() {
                 </ModalFooter>
               </Modal>
             </div>
-          
+           */}
         
       
      </div>

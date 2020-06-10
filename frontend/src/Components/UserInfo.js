@@ -12,15 +12,11 @@ import '../css/UserInfo.css'
 function UserInfo() {
 
   const [userData, setUserData] = useState({});
-<<<<<<< HEAD
-  const [userBio, setUserBio] = useState('default bio');
-  const [userDisplayName, setUserDisplayName] = useState('default name');
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-=======
   const [userBio, setUserBio] = useState();
   const [userDisplayName, setUserDisplayName] = useState({});
   const [modal, setModal] = useState(false);
@@ -28,7 +24,6 @@ function UserInfo() {
   const toggle = () => {
     setModal(!modal)
   };
->>>>>>> dev-new
 
   const getUserData = () => {
     console.log('get user request')
@@ -62,10 +57,7 @@ function UserInfo() {
     }, [userData]);
 
   const handleUpdate = e => {
-<<<<<<< HEAD
-=======
     e.persist();
->>>>>>> dev-new
     if (e.target.name === 'userDisplayName') {
       setUserDisplayName(e.target.value);
     }

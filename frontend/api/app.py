@@ -242,8 +242,9 @@ trips_schema = TripSchema(many=True)
 #         return False
 
 
-@app.route("/profile", methods=["POST"])
-def create_trip():
+@app.route("/trip/<int:user_id>", methods=["POST"])
+def create_trip(user_id):
+    print('post request')
     ISO3166 = {
 	'AD': 'Andorra',
 	'AE': 'United Arab Emirates',
@@ -493,6 +494,7 @@ def create_trip():
 }
     print(request, request.files, request.cookies)
     if request.files:
+        print('in request files')
         files = request.files.getlist("file")
         images = []
         for file in files:
@@ -502,26 +504,28 @@ def create_trip():
         trip_image = ','.join(images)
         trip_country_code = request.form['trip_country_code']
         trip_country = ISO3166[trip_country_code]
+        # trip_country = 'Spain'
         trip_bio = request.form['trip_bio']
         trip_length = request.form['trip_length']
-        new_trip = Trip(user_id, trip_country_code, trip_bio, trip_length, trip_image)
+        print(user_id, trip_country_code, trip_country, trip_bio, trip_length, trip_image)
+        new_trip = Trip(user_id, trip_country_code, trip_country, trip_bio, trip_length, trip_image)
         try:
             db.session.add(new_trip)
             db.session.commit()
-            # return trip_schema.jsonify(new_trip)
-            return 'created trip'
+            return trip_schema.jsonify(new_trip)
+        # return 'created trip'
         except:
-    #         return 'Could not create a user'
+            return 'Could not create a user'
     # else:
-    #     user_id = request.form['user_id']
-    #     trip_country_code = request.form['trip_country_code']
-    #     trip_bio = request.form['trip_bio']
-    #     trip_length = request.form['trip_length']
-    #     trip_country = ISO3166[trip_country_code]
-    #     print(trip_country)
-    #     # trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
-    #     new_trip = Trip(
-    #         user_id=user_id, trip_country_code=trip_country_code, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length)
+        # user_id = request.form['user_id']
+        # trip_country_code = request.form['trip_country_code']
+        # trip_bio = request.form['trip_bio']
+        # trip_length = request.form['trip_length']
+        # trip_country = ISO3166[trip_country_code]
+        # print(trip_country)
+        # # trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
+        # new_trip = Trip(
+        #     user_id=user_id, trip_country_code=trip_country_code, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length)
     #     try:
     #         db.session.add(new_trip)
     #         db.session.commit()
@@ -530,7 +534,7 @@ def create_trip():
     #     except:
     #         return 'Could not create a user'
     # return "could not upload image"
-            return 'Could not create a trip'
+            # return 'Could not create a trip'
     else:
         print('didnt work')
         return 'meh'
