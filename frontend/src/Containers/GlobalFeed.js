@@ -31,7 +31,7 @@ console.log(tripData)
   return (
     <div className="global-feed">
       <NavbarComponent />
-      <h1>GlobalFeed</h1>
+      <h1>Global Feed</h1>
       <div>
 
         {
@@ -40,7 +40,7 @@ console.log(tripData)
           <div className="user-info">
           <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="profile picture" width="" height="170" />
             <p className="trip-user"> {trip[4]} </p>
-            <p className="trip-date"> {trip[3].split(' ')[0]} </p>
+            <p className="trip-date"> {trip[3].split(' ')[0].split('-').reverse().join('-')} </p>
           </div>
           <div className="trip-info">
             <p className="trip-country"> {trip[0]} </p>

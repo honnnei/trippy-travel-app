@@ -1,9 +1,16 @@
+.global-feed{
+    background-color: rgb(220,220,220);
+
+}
+
 .feed-trip{
     display: flex;
     flex-direction: row;
     margin: 1em;
-    background-color: rgb(220,220,220);
+    background-color:white;
     padding: 1em;
+    box-shadow: 0px 0px 2px 1px grey;
+    border-radius: 1em;
 }
 
 .user-info{
@@ -37,4 +44,11 @@
     justify-content: start;
     font-size: 1em;
     text-align: justify;
+}
+.trip-user{
+    font-weight: 700;
+    font-size: 1.5em;
+}
+.trip-date{
+    font-style: italic;
 }
