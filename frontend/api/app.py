@@ -40,8 +40,8 @@ class User(db.Model):
     password = db.Column(db.String(200), nullable=False)
     display_name = db.Column(db.String(200), nullable=False)
     bio = db.Column(db.String(255), default="Hi, I'm new to Trippy!")
+    profile_picture = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
-
     Trip = db.relationship('Trip', backref='User', lazy=True)
 
     def __init__(self, user_email, password, display_name):
@@ -53,7 +53,7 @@ class User(db.Model):
 class UserSchema(ma.Schema):
     class Meta:
         fields = ('id', 'user_email', 'password',
-                  'display_name', 'bio', 'date_created')
+                  'display_name', 'bio', 'profile_picture', 'date_created')
 
 
 #Init schema
@@ -78,9 +78,10 @@ def register():
         request.get_json()['password']).decode('utf-8')
     display_name = request.get_json()['display_name']
     bio = "Hi, I've just joined Trippy!"
+    profile_picture = "default_profile_picture.jpg"
     date_created = datetime.utcnow()
-    db.execute("INSERT INTO user (user_email, password, display_name, bio, date_created) VALUES (?, ?, ?, ?, ?)",
-               (user_email, password, display_name, bio, date_created))
+    db.execute("INSERT INTO user (user_email, password, display_name, bio, profile_picture, date_created) VALUES (?, ?, ?, ?, ?, ?)",
+                (user_email, password, display_name, bio, profile_picture, date_created))
 
     db.commit()
 
@@ -175,14 +176,23 @@ def get_user(id):
 # you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
 @app.route('/user/<int:id>', methods=['PUT'])
 def update_user_profile(id):
+    print(request, request.form)
     user = User.query.get(id)
-    if request.json['bio'] != '':
-        user.bio = request.json['bio']
-    if request.json['display_name'] != '':
-        user.display_name = request.json['display_name']
+    if request.form['bio'] != '':
+        user.bio = request.form['bio']
+    if request.form['display_name'] != '':
+        user.display_name = request.form['display_name']
+    if request.files:
+        files = request.files.getlist("file")
+        images = []
+        for file in files:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            images.append(filename)
+        profile_picture_image = ','.join(images)
+        user.profile_picture = profile_picture_image
     try:
         db.session.commit()
-
         return user_schema.jsonify(user)
     except:
         return 'Could not update user'
@@ -264,8 +274,7 @@ class Trip(db.Model):
 
 class TripSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country'
-                  'trip_bio', 'trip_length', 'trip_image', 'date_created')
+        fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country', 'trip_bio', 'trip_length', 'trip_image', 'date_created')
 
 #Init schema
 trip_schema = TripSchema()
