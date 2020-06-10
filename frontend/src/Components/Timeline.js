@@ -89,7 +89,7 @@ function Timeline() {
           <div key={trip.id} className="gallery">
               <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
             <img
-              src={require("../images/" + trip.trip_image)}
+              // src={require("../images/" + trip.trip_image)}
               style={{ width: "100px", height: "100px", cursor: "pointer" }}
             />
           
