@@ -8,10 +8,8 @@ import Axios from 'axios';
 function Timeline() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [modal, setModal] = useState(false);
-  const [editModal, setEditModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
-  const [tripId, setTripId] = useState();
-  const [lgShow, setLgShow] = useState(false);
+  
   const getUserData = () => {
     Axios(`/user/trip/${userId}`)
     .then(response => {
@@ -29,9 +27,6 @@ function Timeline() {
 
   const toggleAddTripModal = () => {
     setModal(!modal)
-  };
-  const toggleModal = () => {
-    setEditModal(!editModal)
   };
 
   useEffect(() => {
