@@ -1,0 +1,36 @@
+.feed-trip{
+    display: flex;
+    flex-direction: row;
+    margin: 2em;
+    background-color: rgb(220,220,220);
+    padding: 1em;
+}
+
+.user-info{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid red; */
+    width: 20%;
+}
+.trip-info{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid blue; */
+    width: 60%;
+}
+.trip-image{
+    display: flex;
+    flex-direction: column;
+    /* border: 1px solid green; */
+    width: 20%;
+}
+.trip-country{
+    display: flex;
+    justify-content: start;
+    font-size: 2em;
+}
+.trip-bio{
+    display: flex;
+    justify-content: start;
+    font-size: 1em;
+}

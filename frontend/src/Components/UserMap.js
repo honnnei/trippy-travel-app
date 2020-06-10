@@ -79,10 +79,12 @@ function UserMap() {
 
     return (
       <div className="user-map">
-               <h1>Map</h1>
-
-           <div id="chartdiv" style={{backgroundColor: "grey", height: "600px", width: "1000px"}}>
-           </div>
+        <h1>Map</h1>
+        {userTripData ? 
+         <div id="chartdiv" style={{backgroundColor: "grey", height: "600px", width: "1000px"}} />
+         :
+         <p> Loading...</p>
+        }
       </div>
     );
 }
