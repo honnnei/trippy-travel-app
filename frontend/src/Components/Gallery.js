@@ -15,10 +15,8 @@ function Gallery() {
     fetch(`/user/trip/${userId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUserTripData(data);
         const a = userTripData.trip_image;
-        console.log(a);
       });
     
   };
@@ -41,7 +39,7 @@ function Gallery() {
         <div key={item.id} className="gallery">
           
           <img
-            src={require("../images/" + item.trip_image)}
+            // src={require("../images/" + item.trip_image)}
             style={{ width: "100px", height: "100px", cursor: "pointer" }}
           />
         

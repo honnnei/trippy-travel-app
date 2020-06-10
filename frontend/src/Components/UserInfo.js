@@ -6,38 +6,46 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
 import Form from 'react-bootstrap/Form'
-import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode';
+import FormData from 'form-data';
 import '../css/UserInfo.css'
 
 function UserInfo() {
 
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
   const [userBio, setUserBio] = useState();
-  const [userDisplayName, setUserDisplayName] = useState({});
+  const [userDisplayName, setUserDisplayName] = useState();
+  const [profilePicture, setProfilePicture] = useState();
+  const [profilePictureURL, setProfilePictureURL] = useState();
   const [modal, setModal] = useState(false);
  
   const toggle = () => {
     setModal(!modal)
   };
-
+  
   const getUserData = () => {
-    console.log('get user request')
     Axios.get('/user/' + userId)
     .then(response => {
       setUserData(response.data);
-      console.log(response.data);
     });
   }
+
   const updateUserInfo = () => {
-    console.log('update user request')
-    Axios.put(`/user/` + userId, {
-      bio: userBio,
-      display_name: userDisplayName
+    let bodyFormData = new FormData();
+    bodyFormData.set('bio', userBio);
+    bodyFormData.set('display_name', userDisplayName);
+    bodyFormData.append('file', profilePicture);
+    Axios.put(`/user/${userId}`, bodyFormData, {
+      headers: {
+        'accept': 'application/json',
+        'Accept-Language': 'en-US,en;q=0.8',
+        'Content-Type': `multipart/form-data; boundary=${bodyFormData._boundary}`,
+      }
     })
     .then( response => console.log(response) )
     .then( getUserData() )
@@ -53,7 +61,8 @@ function UserInfo() {
 
   useEffect(() => {
     setUserBio(userData.bio);
-    setUserDisplayName(userData.display_name)
+    setUserDisplayName(userData.display_name);
+    setProfilePictureURL(userData.profile_picture);
     }, [userData]);
 
   const handleUpdate = e => {
@@ -61,22 +70,23 @@ function UserInfo() {
     if (e.target.name === 'userDisplayName') {
       setUserDisplayName(e.target.value);
     }
-    else {
+    if (e.target.name === 'userBio'){
       setUserBio(e.target.value);
+    }
+    if (e.target.files) {
+      let file = e.target.files[0];
+      setProfilePicture(file);
     }
 
   };
-
-  
  
   return (
     <div className="user-info-container">
       <div className="user-info-name-container">
         <h1 className="user-info-display-name" >{userData ? userData.display_name : "default name"}</h1>
-        
       </div>
       <div className="user-info-image-container">
-        <img src="https://www.pngitem.com/pimgs/m/146-1468479_my-profile-icon-blank-profile-picture-circle-hd.png" alt="profile picture" width="200" height="170" />
+        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="170" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" />}
       </div>
       <div className="user-info-bio-container">
         <p>{userData ? userData.bio : "hi my bio"}</p>
@@ -99,7 +109,18 @@ function UserInfo() {
 
                   <Form.Group>
                     <Form.Label>Update your bio</Form.Label>
-                    <Form.Control type="text" value={userBio} onChange={handleUpdate}/>
+                    <Form.Control type="text" name="userBio" value={userBio} onChange={handleUpdate}/>
+                  </Form.Group>
+                  <Form.Group>
+                    <Form.Label>Update your profile picture</Form.Label>
+                    <Form.Control 
+                    type="file"
+                    name="profile_picture"
+                    multiple="false"
+                    autoComplete="off"
+                    placeholder="choose image"
+                    onChange={handleUpdate}
+                    />
                   </Form.Group>
                 </Form>
 

@@ -3,6 +3,8 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
+import AlertMessage from './Alert'
+
 
 
 function UpdateEmail() {
@@ -11,7 +13,33 @@ function UpdateEmail() {
   const [userEmail, setUserEmail] = useState('');
   const [newUserEmail, setNewUserEmail] = useState('');
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [alertShow, setAlertShow] = useState(false);
+  const [alertVariant, setAlertVariant] = useState(null);
+  const [alertMessage, setAlertMessage] = useState("default error");
 
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    const valid = validateForm();
+    if(valid === false){
+        setAlertVariant("danger");
+        setAlertShow(true);        
+    } else {
+        updateUserEmail()
+    } 
+}
+
+  const validateForm = () => {
+    let valid = true;
+    if(userEmail === "" || newUserEmail === ""){
+        setAlertMessage("Please fill out all inputs.")
+        valid = false;
+    } else if (userEmail === newUserEmail) {
+        setAlertMessage("You cannot choose the same email.")
+        valid = false;
+    }
+    return valid
+  }
 
   const getUserData = () => {
     console.log('get user request')
@@ -22,8 +50,8 @@ function UpdateEmail() {
     });
   }
 
-  const updateUserSettings = () => {
-    console.log('update user settings')
+  const updateUserEmail = () => {
+    console.log('update user email')
     Axios.put(`/user/email`, {
       user_id: userId,
       user_email: userEmail,
@@ -47,7 +75,7 @@ function UpdateEmail() {
 
     return (
       <div className="user-profile">
-          <Form onSubmit={updateUserSettings}>
+          <Form onSubmit={handleSubmit}>
 
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Current Email Address</Form.Label>
@@ -72,9 +100,11 @@ function UpdateEmail() {
                
 
                 <Button variant="primary" type="submit">
-                    Update email
+                    Update Email Address
                 </Button>
             </Form>
+            <br></br>
+            <AlertMessage show={alertShow} variant={alertVariant} message={alertMessage}/>
       </div>
     );
 }

@@ -8,6 +8,10 @@ function SignUpPage() {
   const [showSignUp, setShowSignUp] = useState(true);
   const toggle = () => setShowSignUp(!showSignUp);
 
+  if(localStorage.usertoken){
+    window.location.href="/feed"
+  }
+
   return (
     <div>
     <NavbarComponent />

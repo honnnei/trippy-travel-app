@@ -14,7 +14,6 @@ function Timeline() {
     Axios(`/user/trip/${userId}`)
     .then(response => {
     setUserTripData(response.data);
-    console.log(response.data)
     })
     .catch(error => {
           console.log("this is error", error.message);
