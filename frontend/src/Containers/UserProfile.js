@@ -1,21 +1,14 @@
 import React, { useState, useEffect } from 'react';
-//import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
-import { Button, Nav } from 'react-bootstrap'
 import Gallery from '../Components/Gallery';
-import Followers from '../Components/Followers'
 import Timeline from '../Components/Timeline';
-import AddTripForm from '../Components/AddTripForm';
-import Modal from 'react-bootstrap/Modal'
-import ModalHeader from 'react-bootstrap/ModalHeader'
-import ModalBody from 'react-bootstrap/ModalBody'
-import ModalFooter from 'react-bootstrap/ModalFooter'
-import jwt_decode from 'jwt-decode'
+import { Nav } from 'react-bootstrap'
 import NavbarComponent from '../Components/Navbar';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import jwt_decode from 'jwt-decode'
 
 
 function UserProfile() {
