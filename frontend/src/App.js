@@ -14,9 +14,7 @@ function App() {
   return (
     <div className="app-container">
     <div className="App">
-      {/* <NavbarComponent /> */}
       <Router>
-      {/* <Navbar /> */}
         <Switch>
                   <Route 
                       path='/'

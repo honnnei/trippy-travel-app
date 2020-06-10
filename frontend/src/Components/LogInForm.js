@@ -34,15 +34,13 @@ export default function LogInForm() {
             password: userPassword
       })
       .then(response => {
-          localStorage.setItem('usertoken', response.data);
-          console.log(localStorage.usertoken);
-          const token = localStorage.usertoken;
-          const decoded = jwt_decode(token);
-          console.log(decoded);
-          setAlertShow(false)
-          setTimeout(() => {
+            localStorage.setItem('usertoken', response.data);
+            console.log(localStorage.usertoken);
+            const token = localStorage.usertoken;
+            const decoded = jwt_decode(token);
+            console.log(decoded);
+            setAlertShow(false)
             history.push("/profile");
-          }, 2000);
     
           return response.data
       })
