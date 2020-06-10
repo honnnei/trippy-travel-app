@@ -13,6 +13,8 @@ marshmallow-sqlalchemy = "*"
 flask-cors = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
+werkzeug-utils = "*"
+werkzeug = "*"
 
 [requires]
 python_version = "3.8"

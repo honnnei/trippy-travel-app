@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 //import { BrowserRouter as Router } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
@@ -23,14 +23,10 @@ function UserProfile() {
   const [timelineShow, setTimelineShow] = useState(false);
   const [galleryShow, setGalleryShow] = useState(false);
   const [followersShow, setFollowersShow] = useState(false);
-  const [modal, setModal] = useState(false);
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
  
   
 
-  const toggleAddTripModal = () => {
-    setModal(!modal)
-  };
 
   const toggleMap = () => {
     setMapShow(true)

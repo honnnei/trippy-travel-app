@@ -1,5 +1,10 @@
+<<<<<<< HEAD
 import React, { Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
+=======
+import React from "react";
+//import { Link, Redirect } from "react-router-dom";
+>>>>>>> dev-new
 import { Navbar, Nav } from 'react-bootstrap';
 
 const NavbarComponent = () => {
