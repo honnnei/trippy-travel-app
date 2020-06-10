@@ -12,6 +12,7 @@ function UserMap() {
   const [userTripData, setUserTripData] = useState([])
   
   const countryArray = userTripData.map(trip => trip.trip_country_code);
+  console.log(countryArray)
 
     
     // Default data
@@ -63,6 +64,8 @@ function UserMap() {
   useEffect(() => {
     getUserData();
     }, []);
+
+    console.log(userTripData)
 
     return (
       <div className="user-map">

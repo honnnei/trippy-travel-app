@@ -25,21 +25,18 @@ function UserProfile() {
     setMapShow(true)
     setTimelineShow(false)
     setGalleryShow(false)
-    setFollowersShow(false)
   }
 
   const toggleTimeline = () => {
     setTimelineShow(true)
     setMapShow(false)
     setGalleryShow(false)
-    setFollowersShow(false)
   }
 
   const toggleGallery = () => {
     setGalleryShow(true)
     setTimelineShow(false)
     setMapShow(false)
-    setFollowersShow(false)
   }
 
   return (

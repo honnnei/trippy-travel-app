@@ -37,7 +37,8 @@ export default function AddTripForm(props) {
         response.json();
       }).catch((error) => {
         console.log(error);
-      }).then(window.location.reload(false));
+      });
+      // .then(window.location.reload(false));
 
   }
 
@@ -338,8 +339,11 @@ export default function AddTripForm(props) {
           />
         </Form.Group>
        <br/>
-        <Button variant="primary" type="submit" onClick={addTripButton}>
+      <Button variant="primary" type="submit" onClick={addTripButton}>
           Create Trip
+      </Button>
+      <Button variant="primary" type="submit" onClick={props.togglefunction}>
+          Cancel
       </Button>
       </Form>
     </div>
