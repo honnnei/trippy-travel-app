@@ -187,6 +187,51 @@ def update_user_profile(id):
     except:
         return 'Could not update user'
 
+#update a user email
+@app.route('/user/email', methods=['PUT'])
+def update_user_email():
+    db = sqlite3.connect('trippy.db')
+    user_id = request.json['user_id']
+    user_email = request.json['user_email']
+    new_user_email = request.json['new_user_email']	
+    result = ""
+
+    rv = db.execute("SELECT user_email FROM user where id = ?", (user_id,)).fetchone()[0]
+
+    if rv == user_email:
+	    update_query = "UPDATE user SET user_email = ? WHERE id = ?"
+	    data = (new_user_email, user_id)
+	    db.execute(update_query, data)
+	    db.commit()
+    else:
+	    result = jsonify({"error":"Invalid username and password",})
+
+    return result
+
+#update a user password
+@app.route('/user/password', methods=['PUT'])
+def update_user_password():
+    db = sqlite3.connect('trippy.db')
+    user_id = request.json['user_id']
+    password = request.json['password']
+    new_password = bcrypt.generate_password_hash(request.get_json()['new_password']).decode('utf-8')
+    result = ""
+
+    rv = db.execute("SELECT password FROM user where id = ?", (user_id,)).fetchone()[0]
+
+    if bcrypt.check_password_hash(rv, password):
+	    update_query = "UPDATE user SET password = ? WHERE id = ?"
+	    data = (new_password, user_id)
+	    db.execute(update_query, data)
+	    db.commit()
+    else:
+	    result = jsonify({"error":"Invalid username and password",})
+
+    return result
+
+
+
+
 #delete user
 @app.route('/user/<int:id>', methods=['DELETE'])
 def delete_user(id):
