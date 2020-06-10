@@ -5,11 +5,9 @@ import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 
 
-function UpdateAccount() {
+function UpdatePassword() {
 
   const [userData, setUserData] = useState({});
-  const [userEmail, setUserEmail] = useState('');
-  const [newUserEmail, setNewUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [newUserPassword, setNewUserPassword] = useState('');
   const [newUserPasswordAgain, setNewUserPasswordAgain] = useState("");
@@ -27,10 +25,8 @@ function UpdateAccount() {
 
   const updateUserSettings = () => {
     console.log('update user settings')
-    Axios.put(`/user/settings`, {
+    Axios.put(`/user/password`, {
       user_id: userId,
-      user_email: userEmail,
-      new_user_email: newUserEmail,
       password: userPassword,
       new_password: newUserPassword
     })
@@ -46,7 +42,6 @@ function UpdateAccount() {
   }, [])
 
   useEffect(() => {
-    setUserEmail(userData.user_email)
     setUserPassword(userData.password)
     }, [userData]);
 
@@ -54,27 +49,6 @@ function UpdateAccount() {
     return (
       <div className="user-profile">
           <Form onSubmit={updateUserSettings}>
-
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Current Email Address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="user_email"
-                        placeholder="Enter email"
-                        value={userEmail}
-                        onChange = {(e) => setUserEmail(e.target.value)}
-                    />
-                </Form.Group>
-
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Enter New Email Address</Form.Label>
-                    <Form.Control
-                        type="email"
-                        name="new_user_email"
-                        placeholder="Enter email"
-                        onChange = {(e) => setNewUserEmail(e.target.value)}
-                    />
-                </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Enter Current Password</Form.Label>
@@ -109,11 +83,11 @@ function UpdateAccount() {
                
 
                 <Button variant="primary" type="submit">
-                    Update Account
+                    Update password
                 </Button>
             </Form>
       </div>
     );
 }
 
-export default UpdateAccount;
+export default UpdatePassword;
