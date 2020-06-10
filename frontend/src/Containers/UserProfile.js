@@ -23,6 +23,11 @@ function UserProfile() {
   const [timelineShow, setTimelineShow] = useState(false);
   const [galleryShow, setGalleryShow] = useState(false);
   const [followersShow, setFollowersShow] = useState(false);
+
+  if(!localStorage.usertoken){
+    window.location.href="/"
+  }
+
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
  
   
