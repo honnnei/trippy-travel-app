@@ -15,10 +15,8 @@ function Gallery() {
     fetch(`/user/trip/${userId}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
         setUserTripData(data);
         const a = userTripData.trip_image;
-        console.log(a);
       });
     
   };

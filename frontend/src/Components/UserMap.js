@@ -10,17 +10,8 @@ import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
 function UserMap() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [userTripData, setUserTripData] = useState([])
-    console.log(userTripData, userId)
-
-
-    // let countryArray = []
-    // if (userTripData) {
-    //   userTripData.map(trip => {
-    //     countryArray.push(trip.trip_country_code)
-    //   })
-    // }
-
-    const countryArray = userTripData.map(trip => trip.trip_country_code);
+  
+  const countryArray = userTripData.map(trip => trip.trip_country_code);
 
     
     // Default data
@@ -50,9 +41,7 @@ function UserMap() {
 
     polygonTemplate.events.on("ready", function(ev) {
         if (countryArray) {
-          // console.log(countryArray)
           countryArray.forEach(id => {
-            // console.log(id)
             polygonSeries.getPolygonById(id).isActive = true;
         })
         }
@@ -65,8 +54,6 @@ function UserMap() {
     chart.zoomControl = new am4maps.ZoomControl();
 
   const getUserData = () => {
-    console.log('getUserData fired')
-
     Axios(`/user/trip/${userId}`)
     .then(response => setUserTripData(response.data))
     .catch(error => console.log("this is error", error.message))

@@ -17,18 +17,13 @@ function Timeline() {
     Axios(`/user/trip/${userId}`)
     .then(response => {
     setUserTripData(response.data);
-    console.log(response.data)
     })
     .catch(error => {
           console.log("this is error", error.message);
     });
   }
 
-  console.log(Array.isArray(userTripData))
-  console.log(Array.isArray([1, 2, 3]))
-  console.log(userTripData[0])
   const updateUserInfo = () => {
-    console.log('put request')
     // Axios.put(`/user/${userId}`, {
     //   bio: userBio,
     //   display_name: userDisplayName

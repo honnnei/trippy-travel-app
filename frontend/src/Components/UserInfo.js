@@ -28,16 +28,13 @@ function UserInfo() {
   };
   
   const getUserData = () => {
-    console.log('get user request')
     Axios.get('/user/' + userId)
     .then(response => {
       setUserData(response.data);
-      console.log(response.data);
     });
   }
 
   const updateUserInfo = () => {
-    console.log('update user request')
     let bodyFormData = new FormData();
     bodyFormData.set('bio', userBio);
     bodyFormData.set('display_name', userDisplayName);
@@ -79,14 +76,10 @@ function UserInfo() {
       let file = e.target.files[0];
       setProfilePicture(file);
     }
-    console.log(userData)
+
   };
   let profile_picture_url;
   userData.profile_picture ? profile_picture_url = require("../images/" + userData.profile_picture) : profile_picture_url =  ""
-  // console.log(userData.profile_picture)
-  // console.log(typeof(userData.profile_picture))
-  // console.log(profile_picture_url)
-  // console.log("../images/" + 'default_profile_picture.jpg')
   
  
   return (

@@ -176,11 +176,12 @@ def get_user(id):
 # you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
 @app.route('/user/<int:id>', methods=['PUT'])
 def update_user_profile(id):
+    print(request, request.form)
     user = User.query.get(id)
-    if request.json['bio'] != '':
-        user.bio = request.json['bio']
-    if request.json['display_name'] != '':
-        user.display_name = request.json['display_name']
+    if request.form['bio'] != '':
+        user.bio = request.form['bio']
+    if request.form['display_name'] != '':
+        user.display_name = request.form['display_name']
     if request.files:
         files = request.files.getlist("file")
         images = []
