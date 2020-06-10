@@ -29,6 +29,7 @@ const NavbarComponent = () => {
                     {localStorage.usertoken ?
                     <Nav>
                         <Nav.Link href="/profile"> Profile </Nav.Link>
+                        <Nav.Link href="/settings"> Settings </Nav.Link>
                         <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
                     </Nav>
                     :
