@@ -13,48 +13,46 @@ function UserMap() {
     console.log(userTripData, userId)
 
 
-    let countryArray = []
-    if (userTripData) {
-      userTripData.map(trip => {
-        countryArray.push(trip.trip_country_code)
-      })
-    }
+    // let countryArray = []
+    // if (userTripData) {
+    //   userTripData.map(trip => {
+    //     countryArray.push(trip.trip_country_code)
+    //   })
+    // }
+
+    const countryArray = userTripData.map(trip => trip.trip_country_code);
+
     
     // Default data
 
     // Create map instance
     let chart = am4core.create("chartdiv", am4maps.MapChart);
-
     // Set map definition
     chart.geodata = am4geodataWorldLow;
-    
     // Set projection
     chart.projection = new am4maps.projections.Miller();
-    
     // Create map polygon series
     let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-    
     // Make map load polygon (like country names) data from GeoJSON
     polygonSeries.useGeodata = true;
-    
     // Configure series
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
     polygonTemplate.fill = am4core.color("#666666");
     polygonTemplate.stroke = am4core.color("#333333");
     polygonTemplate.propertyFields.fill = "color";
-
     // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create("hover");
     hs.properties.fill = am4core.color("#888888");
-
     // Create active state
     let activeState = polygonTemplate.states.create("active");
     activeState.properties.fill = am4core.color("#7EA2D6")
 
     polygonTemplate.events.on("ready", function(ev) {
         if (countryArray) {
+          // console.log(countryArray)
           countryArray.forEach(id => {
+            // console.log(id)
             polygonSeries.getPolygonById(id).isActive = true;
         })
         }
@@ -63,7 +61,6 @@ function UserMap() {
 
     // Remove Antarctica
     polygonSeries.exclude = ["AQ"];
-    
     // Add zoom control
     chart.zoomControl = new am4maps.ZoomControl();
 

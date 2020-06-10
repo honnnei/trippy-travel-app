@@ -221,7 +221,7 @@ class Trip(db.Model):
 
 class TripSchema(ma.Schema):
     class Meta:
-        fields = ('id', 'user_id', 'user_email', 'trip_country', 'trip_country_code'
+        fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country'
                   'trip_bio', 'trip_length', 'trip_image', 'date_created')
 
 #Init schema
