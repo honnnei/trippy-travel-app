@@ -14,42 +14,42 @@ import NavbarComponent from './Components/Navbar';
 function App() {
   return (
     <div className="app-container">
-    <div className="App">
-      <NavbarComponent />
-      <Router>
-      {/* <Navbar /> */}
-        <Switch>
-                  <Route 
-                      path='/'
-                      exact 
-                      component={SignUpPage}
-                  />
-                  <Route 
-                      path='/feed'
-                      exact 
-                      component={GlobalFeed}
+      <div className="App">
+        <NavbarComponent />
+        <Router>
+          {/* <Navbar /> */}
+          <Switch>
+            <Route
+              path='/'
+              exact
+              component={SignUpPage}
+            />
+            <Route
+              path='/feed'
+              exact
+              component={GlobalFeed}
 
-                  />
-                  <Route
-                      path='/profile'
-                      exact 
-                      component={UserProfile}
-                  />
-                  <Route 
-                      path='/user-settings'
-                      exact 
-                      component={AccountSettings}
+            />
+            <Route
+              path='/profile'
+              exact
+              component={UserProfile}
+            />
+            <Route
+              path='/user-settings'
+              exact
+              component={AccountSettings}
 
-                  />
-                   <Route 
-                      path='/trip'
-                      exact 
-                      component={AddTripForm}
+            />
+            <Route
+              path='/trip'
+              exact
+              component={AddTripForm}
 
-                  />
-               </Switch>
-      </Router>
-    </div>
+            />
+          </Switch>
+        </Router>
+      </div>
     </div>
   );
 }
