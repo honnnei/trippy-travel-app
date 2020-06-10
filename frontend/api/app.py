@@ -178,15 +178,20 @@ def update_user_profile(id):
 @app.route('/user/settings', methods=['PUT'])
 def update_user_settings():
     db = sqlite3.connect('trippy.db')
+    user_id = request.json['user_id']
     user_email = request.json['user_email']
+    new_user_email = request.json['new_user_email']	
     password = request.json['password']
-    new_password = request.json['new_password']
-	
+    new_password = bcrypt.generate_password_hash(request.get_json()['new_password']).decode('utf-8')
+    result = ""
+
     rv = db.execute("SELECT password FROM user where user_email = ?", (user_email,)).fetchone()[0]
 
     if bcrypt.check_password_hash(rv, password):
-	    db.execute("INSERT INTO user (user_email, password) VALUES (?, ?)", (user_email, new_password))
-	    db.session.commit()
+	    update_query = "UPDATE user SET password = ?, user_email = ? WHERE id = ?"
+	    data = (new_password, new_user_email, user_id)
+	    db.execute(update_query, data)
+	    db.commit()
     else:
 	    result = jsonify({"error":"Invalid username and password",})
 

@@ -9,6 +9,7 @@ function UpdateAccount() {
 
   const [userData, setUserData] = useState({});
   const [userEmail, setUserEmail] = useState('');
+  const [newUserEmail, setNewUserEmail] = useState('');
   const [userPassword, setUserPassword] = useState('');
   const [newUserPassword, setNewUserPassword] = useState('');
   const [newUserPasswordAgain, setNewUserPasswordAgain] = useState("");
@@ -27,12 +28,14 @@ function UpdateAccount() {
   const updateUserSettings = () => {
     console.log('update user settings')
     Axios.put(`/user/settings`, {
+      user_id: userId,
       user_email: userEmail,
+      new_user_email: newUserEmail,
       password: userPassword,
       new_password: newUserPassword
     })
     .then( response => console.log(response) )
-    .then( getUserData() )
+    .then( window.location.href = "/profile")
     .catch(error => {
       console.log("Error:", error.message);
     });
@@ -53,7 +56,7 @@ function UpdateAccount() {
           <Form onSubmit={updateUserSettings}>
 
                 <Form.Group controlId="formBasicEmail">
-                    <Form.Label>Email address</Form.Label>
+                    <Form.Label>Current Email Address</Form.Label>
                     <Form.Control
                         type="email"
                         name="user_email"
@@ -63,8 +66,18 @@ function UpdateAccount() {
                     />
                 </Form.Group>
 
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Enter New Email Address</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="new_user_email"
+                        placeholder="Enter email"
+                        onChange = {(e) => setNewUserEmail(e.target.value)}
+                    />
+                </Form.Group>
+
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Old password</Form.Label>
+                    <Form.Label>Enter Current Password</Form.Label>
                     <Form.Control 
                         type="password" 
                         name="password"
@@ -75,7 +88,7 @@ function UpdateAccount() {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Enter new password</Form.Label>
+                    <Form.Label>Enter New Password</Form.Label>
                     <Form.Control 
                         type="password" 
                         name="password"
@@ -99,9 +112,6 @@ function UpdateAccount() {
                     Update Account
                 </Button>
             </Form>
-            <Button variant="primary" type="submit" onClick={getUserData}>
-                    getUserData
-                </Button>
       </div>
     );
 }
