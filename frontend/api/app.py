@@ -26,7 +26,7 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
 
-foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
+foldername = '/Users/richard/Futureproof/python/trippy-travel-app/frontend/src/images'
 app.config["IMAGE_UPLOADS"] = foldername
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
@@ -608,8 +608,14 @@ def get_trips_of_all_users():
     result = trips_schema.dump(all_trips)
     return jsonify(result)
 
-#get single trip by id
+# feed data
+@app.route('/trip/feed', methods=['GET'])
+def get_feed_trips_of_all_users():
+	db = sqlite3.connect('trippy.db')
+	result = db.execute('select trip.trip_country, trip.trip_bio, trip.trip_image, trip.date_created, user.display_name from trip inner join user on trip.user_id=user.id order by trip.date_created').fetchall()
+	return jsonify(result)
 
+#get single trip by id
 
 @app.route('/trip/<int:trip_id>', methods=['GET'])
 def get_trip_by_trip_id(trip_id):
