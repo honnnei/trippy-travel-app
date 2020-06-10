@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import LogInForm from '../Components/LogInForm';
 import SignUpForm from '../Components/SignUpForm';
-import AboutUs from '../Components/AboutUs';
+import AboutUs from '../Components/AboutUS';
 import NavbarComponent from '../Components/Navbar';
 
 function SignUpPage() {
