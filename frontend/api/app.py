@@ -78,7 +78,7 @@ def register():
         request.get_json()['password']).decode('utf-8')
     display_name = request.get_json()['display_name']
     bio = "Hi, I've just joined Trippy!"
-    profile_picture = "142116164-side-view-silhouette-of-a-bald-gender-neutral-head-.jpg"
+    profile_picture = "default_profile_picture.jpg"
     date_created = datetime.utcnow()
     db.execute("INSERT INTO user (user_email, password, display_name, bio, profile_picture, date_created) VALUES (?, ?, ?, ?, ?, ?)",
                 (user_email, password, display_name, bio, profile_picture, date_created))

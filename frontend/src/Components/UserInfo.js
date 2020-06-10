@@ -71,7 +71,12 @@ function UserInfo() {
     }
     console.log(userData)
   };
-
+  let profile_picture_url;
+  userData.profile_picture ? profile_picture_url = require("../images/" + userData.profile_picture) : profile_picture_url =  ""
+  // console.log(userData.profile_picture)
+  // console.log(typeof(userData.profile_picture))
+  // console.log(profile_picture_url)
+  // console.log("../images/" + 'default_profile_picture.jpg')
   
  
   return (
@@ -80,8 +85,9 @@ function UserInfo() {
         <h1 className="user-info-display-name" >{userData ? userData.display_name : "default name"}</h1>
       </div>
       <div className="user-info-image-container">
-        {/* {userData ? <img src={require("../images/" + userData.profile_picture)} alt="profile picture" width="200" height="170" /> : ""} */}
-        {userData ? <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" /> : ""}
+        {/* {userData ? <h1>{profile_picture_url}</h1> : ""} */}
+        {userData.profile_picture ? <img src={profile_picture_url} alt="profile picture" width="200" height="170" /> : ""}
+        {/* {userData ? <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" /> : ""} */}
       </div>
       <div className="user-info-bio-container">
         <p>{userData ? userData.bio : "hi my bio"}</p>
