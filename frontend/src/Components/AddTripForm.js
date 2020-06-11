@@ -39,7 +39,6 @@ export default function AddTripForm(props) {
       }).catch((error) => {
         console.log(error);
       });
-
   }
 
   return (
@@ -311,6 +310,7 @@ export default function AddTripForm(props) {
             type="text"
             id="bio-input"
             name="trip_bio"
+            id="bio_input"
             placeholder="Enter trip bio"
             value={tripBio}
             onChange={(e) => setTripBio(e.target.value)}

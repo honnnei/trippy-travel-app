@@ -48,12 +48,18 @@ describe(" Add trip form ", () => {
        expect(optionOne.prop("value")).toEqual("");
      });
 
-    //  it("HandleChange works", () => {
-    //   wrapper.find("#bio_input").at(0).simulate("change", { target: { name:"trip_bio", value: "beautiful" } });
-    //   expect(wrapper.find("#bio_input").at(0).prop("value")).toEqual("beautiful");
-    // });
-
-
+  
+  it("HandleChange works", () => {
+    wrap
+      .find("#bio_input")
+      .at(1)
+      .simulate("change", {
+        target: { name:"trip_bio", value: "beautiful" },
+      });
+    expect(wrap.find("#bio_input").at(1).prop("value")).toEqual(
+      "beautiful"
+    );
+  });
 
     
 });
