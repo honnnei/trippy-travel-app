@@ -20,7 +20,6 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + \
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['JWT_SECRET_KEY'] = 'secret'
 
-
 db = SQLAlchemy(app)
 bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
@@ -64,12 +63,9 @@ users_schema = UserSchema(many=True)
 @app.route('/auth/register', methods=['POST'])
 def register():
     db = sqlite3.connect('trippy.db')
-
     checkEmail = get_user_email()
-
     if checkEmail is True:
         return jsonify({"error_message": "There is already an account registered with that email."})
-
     user_email = request.get_json()['user_email']
     password = bcrypt.generate_password_hash(
         request.get_json()['password']).decode('utf-8')
@@ -79,9 +75,7 @@ def register():
     date_created = datetime.utcnow()
     db.execute("INSERT INTO user (user_email, password, display_name, bio, profile_picture, date_created) VALUES (?, ?, ?, ?, ?, ?)",
                 (user_email, password, display_name, bio, profile_picture, date_created))
-
     db.commit()
-
     result = {
         'success_message': 'Created account successfully',
     }
