@@ -16,7 +16,6 @@ function SignUpPage() {
     <div>
     <NavbarComponent />
     <div className="signup-page-container">
-
       <AboutUs />
       {showSignUp ? (
         <div className="login_form" id="first">

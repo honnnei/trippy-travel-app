@@ -3,19 +3,13 @@ import NavbarComponent from '../Components/Navbar';
 import Axios from 'axios';
 import '../css/GlobalFeed.css'
 
-
-//import { BrowserRouter as Router } from 'react-router-dom';
-
 function GlobalFeed() {
-  //const [users, setUsers ] = useState();
-  
-  const [tripData, setTripData] = useState([])  
+  const [feedData, setFeedData] = useState([])  
 
-  const getTripData = () => {
+  const getFeedData = () => {
     Axios(`/trip/feed`)
     .then(response => {
-    setTripData(response.data);
-    console.log(response.data)
+    setFeedData(response.data);
     })
     .catch(error => {
           console.log("this is error", error.message);
@@ -24,10 +18,8 @@ function GlobalFeed() {
 
   useEffect(() => {
     getTripData();
-
   }, []);
 
-console.log(tripData)
 
 
   return (
@@ -37,7 +29,7 @@ console.log(tripData)
       <div>
 
         {
-        tripData ? tripData.reverse().map(trip => (
+        feedData ? feedData.reverse().map(trip => (
         <div key={trip.id} className="feed-trip">
           <div className="user-info">
           <img src={require("../images/" + trip[5])} style={{ height: "10em", width:"auto", cursor: "pointer" }}/>            

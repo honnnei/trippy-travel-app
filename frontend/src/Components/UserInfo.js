@@ -86,7 +86,7 @@ function UserInfo() {
         <h1 className="user-info-display-name" >{userData ? userData.display_name : "default name"}</h1>
       </div>
       <div className="user-info-image-container">
-        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="170" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" />}
+        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="200" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="200" />}
       </div>
       <div className="user-info-bio-container">
         <p>{userData ? userData.bio : "hi my bio"}</p>

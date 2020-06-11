@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+// import { BrowserRouter as Router } from 'react-router-dom';
 import jwt_decode from 'jwt-decode';
 import UpdatePassword from '../Components/UpdatePassword';
 import NavbarComponent from '../Components/Navbar';
@@ -10,7 +10,6 @@ import '../css/AccountSettings.css';
 
 
 function AccountSettings() {
-
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
 
   const deleteUser = () => {

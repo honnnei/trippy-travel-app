@@ -8,7 +8,7 @@ import AlertMessage from './Alert'
 
 function UpdatePassword() {
 
-  const [userData, setUserData] = useState({});
+  const [userData, setUserData] = useState([]);
   const [userPassword, setUserPassword] = useState('');
   const [newUserPassword, setNewUserPassword] = useState('');
   const [newUserPasswordAgain, setNewUserPasswordAgain] = useState("");

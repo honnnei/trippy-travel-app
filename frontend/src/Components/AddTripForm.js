@@ -26,9 +26,7 @@ export default function AddTripForm(props) {
     bodyFormData.set('trip_bio', tripBio);
     bodyFormData.set('trip_length', tripLength);
     bodyFormData.append('file', tripPhoto);
-    console.log(bodyFormData)
-    console.log(tripCountryCode, tripBio, tripLength, userId, tripPhoto)
-
+    
     Axios.post(`/trip/${userId}`, bodyFormData, {
       headers: {
         'accept': 'application/json',
@@ -37,35 +35,16 @@ export default function AddTripForm(props) {
       }
     })
       .then((response) => {
-        response.json();
+       window.location.reload(false);
       }).catch((error) => {
         console.log(error);
-      }).then(window.location.reload(false));
+      });
+<<<<<<< HEAD
+      // .then(window.location.reload(false));
+=======
+>>>>>>> 740cb2cc64cf713e7420146048409e715066bd7e
 
   }
-  // const addTripButton = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   console.log(formData)
-  //   formData.append("file", tripPhoto);
-  //   console.log(formData)
-  //   const data = {
-  //     trip_country: tripCountry,
-  //     trip_bio: tripBio,
-  //     trip_length: tripLength,
-  //     user_id: userId,
-  //     trip_image: tripPhoto,
-  //   };
-  //   console.log(data);
-  //   Axios.post("/trip", data)
-  //     .then((response) => console.log(response))
-  //     .then((data) => {
-  //       console.log(data);
-  //   });
-
-  // }
-
-
 
   return (
     <div>
@@ -363,10 +342,12 @@ export default function AddTripForm(props) {
             onChange={handleChange}
           />
         </Form.Group>
-
        <br/>
-        <Button variant="primary" type="submit" onClick={addTripButton}>
+      <Button variant="primary" type="submit" onClick={addTripButton}>
           Create Trip
+      </Button>
+      <Button variant="primary" type="submit" onClick={props.togglefunction}>
+          Cancel
       </Button>
       </Form>
     </div>
