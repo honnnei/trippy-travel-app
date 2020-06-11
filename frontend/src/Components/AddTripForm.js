@@ -35,11 +35,11 @@ export default function AddTripForm(props) {
       }
     })
       .then((response) => {
-       window.location.reload(false);
+        window.location.reload(false);
       }).catch((error) => {
         console.log(error);
       });
-      // .then(window.location.reload(false));
+
   }
 
   return (
@@ -328,7 +328,7 @@ export default function AddTripForm(props) {
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Select the trip photo</Form.Label>
+          <Form.Label>One photo to describe Trip</Form.Label>
           <Form.Control
             type="file"
             name="trip_image"

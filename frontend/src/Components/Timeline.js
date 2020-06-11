@@ -40,24 +40,33 @@ function Timeline() {
   };
   
   return (
-        <div className="timeline-container">
-          <div className="add-trip-area">
-            <h1>Add Your Latest Trip </h1>
-            <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
-            <div className="modal">
-              <Modal isOpen={modal} toggle={toggleAddTripModal}>
-                <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
-                <ModalBody>
-                  <AddTripForm togglefunction={toggleAddTripModal} />
-                </ModalBody>
-              </Modal>
+    <div className="timeline-container">
+      <div className="add-trip-area">
+        <h1>Add Your Latest Trip </h1>
+        <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+        <div className="modal">
+          <Modal isOpen={modal} toggle={toggleAddTripModal}>
+            <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
+            <ModalBody>
+              <AddTripForm togglefunction={toggleAddTripModal} />
+            </ModalBody>
+          </Modal>
+        </div>
+      </div>
+      <div className="trip-container">
+        {userTripData ? userTripData.reverse().map((trip) => (
+          <div key={trip.id} className="user-trip">
+            <div className="button-area">
+              <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
             </div>
-          </div>
-          <div className="trip-container">
-            {userTripData ? userTripData.map((trip) => (
-              <div key={trip.id} className="user-trip">
-                <div className="button-area">
-                  <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
+            <div className="trip-area">
+              {trip.date_created.split('T')[0].split('-').reverse().join('/')}
+              <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
+              <div className="trip-images">
+                <img
+                  src={require("../images/" + trip.trip_image)}
+                  id="trip-image"
+                />
                 </div>
                 <div className="trip-area">
                   {trip.date_created.split('T')[0].split('-').reverse().join('/')}
