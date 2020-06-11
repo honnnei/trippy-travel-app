@@ -1,14 +1,6 @@
 import React, { useState, useEffect, useCallback } from "react";
 import AddTripForm from "../Components/AddTripForm";
-import { enableFetchMocks } from "jest-fetch-mock";
-import Enzyme, { shallow, render, mount } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import { Form, Button } from "react-bootstrap";
-
-// Enzyme.configure({ adapter: new Adapter() });
-// enableFetchMocks();
-// window.alert = jest.fn();
-// jest.mock("jwt-decode");
+import { shallow, mount } from 'enzyme';
 
 describe(" Add trip form ", () => {
     // let wrapper = shallow(<AddTripForm />);
@@ -47,12 +39,26 @@ describe(" Add trip form ", () => {
        const optionOne = wrapper.find("option").at(0);
        expect(optionOne.prop("value")).toEqual("");
      });
+    
+     it("HandleChange works", () => {
+      wrapper.find("#trip_country_code").at(0).simulate("change", { target: { name: "trip_country_code", value: "AF" } });
+      expect(wrapper.find("#trip_country_code").at(0).prop("value")).toEqual("AF");
+    });
 
-    //  it("HandleChange works", () => {
-    //   wrapper.find("#bio_input").at(0).simulate("change", { target: { name:"trip_bio", value: "beautiful" } });
-    //   expect(wrapper.find("#bio_input").at(0).prop("value")).toEqual("beautiful");
-    // });
+     it("HandleChange works", () => {
+      wrapper.find("#trip_bio").at(0).simulate("change", { target: { name: "trip_bio", value: "beautiful" } });
+      expect(wrapper.find("#trip_bio").at(0).prop("value")).toEqual("beautiful");
+    });
 
+    it("HandleChange works", () => {
+      wrapper.find("#trip_length").at(0).simulate("change", { target: { name: "trip_length", value: "AF" } });
+      expect(wrapper.find("#trip_length").at(0).prop("value")).toEqual("AF");
+    });
+
+    it('HandleChange works1', () => {
+      expect(wrapper.find('#image').at(0).prop('type')).toEqual('file');
+      expect(wrapper.find('#image')).toBeTruthy();
+    });
 
 
     

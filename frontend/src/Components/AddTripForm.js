@@ -48,6 +48,7 @@ export default function AddTripForm(props) {
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Trip Country</Form.Label>
           <Form.Control
+            id="trip_country_code"
             as="select"
             name="trip_country_code"
             placeholder="Enter country name"
@@ -305,11 +306,11 @@ export default function AddTripForm(props) {
             <option value="ZW">Zimbabwe</option>
           </Form.Control>
         </Form.Group>
-        <Form.Group controlId="formBasicEmail">
+        <Form.Group>
           <Form.Label>Trip Bio</Form.Label>
           <Form.Control
             type="text"
-            id="bio-input"
+            id="trip_bio"
             name="trip_bio"
             placeholder="Enter trip bio"
             value={tripBio}
@@ -317,9 +318,10 @@ export default function AddTripForm(props) {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label>Trip duration</Form.Label>
           <Form.Control
+            id="trip_length"
             type="text"
             name="trip_length"
             placeholder="trip duration"
@@ -328,9 +330,10 @@ export default function AddTripForm(props) {
           />
         </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
+        <Form.Group>
           <Form.Label>One photo to describe Trip</Form.Label>
           <Form.Control
+            id="image"
             type="file"
             name="trip_image"
             multiple="false"

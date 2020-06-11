@@ -27,9 +27,7 @@ describe('AddGalleryForm', () => {
 
     it('HandleChange works1', () => {
       expect(wrap.find('#image').at(0).prop('type')).toEqual('file');
-        expect(wrapper.find('#image')).toBeTruthy();
-        // at(0).simulate('change', { target: { name: 'image', value: 'lisbon.jpg' } });
-        // expect(wrap.find('#image').at(0).prop('value')).toEqual('lisbon.jpg');
+      expect(wrapper.find('#image')).toBeTruthy();
     });
 
 

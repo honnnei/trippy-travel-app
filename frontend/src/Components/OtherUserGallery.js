@@ -14,7 +14,8 @@ import {
 
 function OtherUserGallery() {
 //   const [showSignUp, setShowSignUp] = useState(true);
-let { id } = useParams();
+// let { id } = useParams();
+let id = 1;
 
   const [userId, setUserId] = useState(id);
   const [userTripData, setUserTripData] = useState([]);
