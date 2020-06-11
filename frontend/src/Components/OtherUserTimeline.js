@@ -13,7 +13,8 @@ import {
 } from "react-router-dom";
 
 function Timeline() {
-  let { id } = useParams();
+  // let { id } = useParams();
+  let id = 1;
 
   const [userId, setUserId] = useState(id)
   const [userTripData, setUserTripData] = useState([])

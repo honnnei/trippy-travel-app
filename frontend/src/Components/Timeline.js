@@ -62,6 +62,7 @@ function Timeline() {
             <div className="trip-area">
               {trip.date_created.split('T')[0].split('-').reverse().join('/')}
               <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
+              <h1 id="trip_length_h">{trip.trip_length}</h1>
               <div className="trip-images">
                 <img
                   src={require("../images/" + trip.trip_image)}
