@@ -39,11 +39,7 @@ export default function AddTripForm(props) {
       }).catch((error) => {
         console.log(error);
       });
-<<<<<<< HEAD
       // .then(window.location.reload(false));
-=======
->>>>>>> 740cb2cc64cf713e7420146048409e715066bd7e
-
   }
 
   return (
