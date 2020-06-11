@@ -10,7 +10,6 @@ function Timeline() {
   const [userId, setUserId] = useState(1)
   const [modal, setModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
-  
   const getUserData = () => {
     Axios(`/user/trip/${userId}`)
     .then(response => {
@@ -79,8 +78,10 @@ function Timeline() {
                     />
                     </div>
                   </div>
+
                   </div>
               </div>
+
             )) : "Please enter your travel journey"}
           </div>      
         </div>

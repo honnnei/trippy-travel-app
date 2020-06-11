@@ -45,6 +45,7 @@ describe(" Add trip form ", () => {
       expect(wrapper.find("#trip_country_code").at(0).prop("value")).toEqual("AF");
     });
 
+<<<<<<< HEAD
      it("HandleChange works", () => {
       wrapper.find("#trip_bio").at(0).simulate("change", { target: { name: "trip_bio", value: "beautiful" } });
       expect(wrapper.find("#trip_bio").at(0).prop("value")).toEqual("beautiful");
@@ -60,6 +61,20 @@ describe(" Add trip form ", () => {
       expect(wrapper.find('#image')).toBeTruthy();
     });
 
+=======
+  
+  it("HandleChange works", () => {
+    wrap
+      .find("#bio_input")
+      .at(1)
+      .simulate("change", {
+        target: { name:"trip_bio", value: "beautiful" },
+      });
+    expect(wrap.find("#bio_input").at(1).prop("value")).toEqual(
+      "beautiful"
+    );
+  });
+>>>>>>> aa602ccc6f2c817bd60dda30bb76a496057c5e29
 
     
 });

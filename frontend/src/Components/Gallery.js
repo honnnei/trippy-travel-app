@@ -9,8 +9,10 @@ import Axios from 'axios';
 
 function Gallery() {
 
+
   // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [userId, setUserId] = useState(1)
+
   const [modal, setModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
 
