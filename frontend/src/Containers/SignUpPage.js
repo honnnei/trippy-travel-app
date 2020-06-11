@@ -13,9 +13,9 @@ function SignUpPage() {
   }
 
   return (
-    <div>
+    <div className="sing-up-page-container">
     <NavbarComponent />
-    <div className="signup-page-container">
+    <div className="sign-up-page-inner-container">
       <AboutUs />
       {showSignUp ? (
         <div className="login_form" id="first">

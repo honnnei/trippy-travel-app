@@ -62,3 +62,11 @@ function App() {
 }
 
 export default App;
+
+// "jest": {
+//   "transformIgnorePatterns": [
+//     "node_modules[/\\\\](?!@amcharts[/\\\\]amcharts4)",
+//     "node_modules[/\\\\](?!bootstrap)",
+//     "node_modules[/\\\\](?!jwt-decode)"
+//   ]
+// }

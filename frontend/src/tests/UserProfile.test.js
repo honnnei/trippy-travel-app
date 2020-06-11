@@ -1,133 +1,82 @@
-
 import React from 'react';
 import { render } from '@testing-library/react';
-import { shallow, mount } from 'enzyme';
-import { Link, BrowserRouter } from 'react-router-dom';
 import UserInfo from '../Components/UserInfo'
+import UserProfile from '../Containers/UserProfile';
 import UserMap from '../Components/UserMap'
 import Gallery from '../Components/Gallery';
 import Timeline from '../Components/Timeline';
+import { Nav } from 'react-bootstrap'
 import NavbarComponent from '../Components/Navbar';
 import Container from 'react-bootstrap/Container';
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
-// import jwt_decode from 'jwt-decode'
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+import { BrowserRouter } from 'react-router-dom';
+import { shallow, mount } from 'enzyme';
+import renderer from 'react-test-renderer';
 
-describe('Tracker', () => {
-  let wrapper;
-  beforeEach(() => {
-    wrapper = shallow(<BrowserRouter><Tracker location={{username: 'Johny'}}/></BrowserRouter>);
-  });
-
-
-var localStorageMock = (function() {
-  var store = {};
-    return {
-        getItem: function(key) {
-            return store[key] || null;
-        },
-        setItem: function(key, value) {
-            store[key] = value.toString();
-        },
-        clear: function() {
-            store = {};
-        }
-    };
-
-})();
-
-Object.defineProperty(window, 'localStorage', {
-     value: localStorageMock
-});
-
-  test('contains tracker container div', () => {
-    console.log(wrapper.debug());
-    expect(wrapper.find('.trackerDiv')).toBeTruthy();
-  });  
-
-  test('contains progress container div', () => {
-    expect(wrapper.find('.progessDiv')).toBeTruthy();
-  });  
-
-  test('contains habit-container container div', () => {
-    expect(wrapper.find('.habit-container')).toBeTruthy();
-  });  
-
-  test('contains BackDiv container div', () => {
-    expect(wrapper.find('.BackDiv')).toBeTruthy();
-  });  
-
-  test('contains Buttons', () => {
-    expect(wrapper.find('button')).toBeTruthy();
-  }); 
-
-  test('contains Form', () => {
-    expect(wrapper.find('form')).toBeTruthy();
-  }); 
-
-  test('contains Labels', () => {
-    expect(wrapper.find('label')).toBeTruthy();
-  }); 
-
-  test('contains Inputs', () => {
-    expect(wrapper.find('input')).toBeTruthy();
-  }); 
+describe('UserProfile', () => {
+    let wrapper;
+    beforeEach(() => {
+      wrapper = shallow(<UserProfile />);
+    });
   
-  test('contains Modal', () => {
-    expect(wrapper.find('Modal')).toBeTruthy();
-  });
+    // it('matches the snapshot', () => {
+    //   const tree = renderer.create(<App />).toJSON();
+    //   expect(tree).toMatchSnapshot();
+    // });
   
-  test('contains ModalBody', () => {
-    expect(wrapper.find('ModalBody')).toBeTruthy();
-  }); 
+    test('contains div', () => {
+      expect(wrapper.find(".user-profile-page-container")).toBeTruthy();
+    });
 
-  test('contains ModalFooter', () => {
-    expect(wrapper.find('ModalFooter')).toBeTruthy();
-  }); 
-  
-  // test('contains Routes', () => {
-  //   expect(wrapper.find('.trackerDiv')).toBeTruthy();
-  // });
+    test('contains div 2', () => {
+        expect(wrapper.find(".timeline-gallery-map-container")).toBeTruthy();
+    });
 
+    test('contains div 2', () => {
+    expect(wrapper.find(".t-g-m-container")).toBeTruthy();
+    });
 
-  // // test('contains a Link', () => {
-  // //   expect((wrapper.find('Link').length)).toEqual(1);
-  // // });
+    test('contains NavbarComponent', () => {
+      expect(wrapper.contains(<NavbarComponent />)).toBe(true);
+    });
 
-  // test('has a Link to /habit/add', () => {
-  //     let wrap = shallow (<BrowserRouter><Tracker location={{username: 'Johny'}}/></BrowserRouter>)
-  //     let route = wrap.find(<Link to='/habit/add' />)
-  //     expect(route).toBeTruthy();
-  // });
+    test('contains UserInfo', () => {
+      expect(wrapper.contains(<UserInfo />)).toBe(true);
+    });
 
-  
-  it('Login input on change the existingUsername should change', () => {
-    const wrap = mount(<BrowserRouter><Tracker location={{username: 'Johny'}}/></BrowserRouter>); 
-    wrap.find('#add-habit').at(0).simulate('click');
-    expect(wrap.find('#label-in-modal')).toBeTruthy();
-  });
+    test('contains UserMap', () => {
+        expect(wrapper.contains(<UserMap />)).toBe(true);
+      });
 
-  it('Login input on change the existingUsername should change', () => {
-    const wrap = mount(<BrowserRouter><Tracker location={{username: 'Johny'}}/></BrowserRouter>); 
-    wrap.find('#add-habit').at(0).simulate('click');
-    expect(wrap.find('#label-in-modal')).toBeTruthy();
-    wrap.find('#cancel').at(0).simulate('click');
-    expect(wrap.find('#label-in-modal')).toEqual({});
-  });
+      test('contains Galeery', () => {
+          wrapper.find('#toggleTimeline').at(0).simulate('click');
+        expect(wrapper.contains(<Timeline />)).toBe(true);
+      });
 
-  it('HandleChange works', () => {
-    const wrap = mount(<BrowserRouter><Tracker location={{username: 'Johny'}}/></BrowserRouter>); 
-    wrap.find('#add-habit').at(0).simulate('click');
-    wrap.find('input').at(0).simulate('change', { target: { name: 'habitName', value: 'Drinking Water' } });
-    expect(wrap.find('input').at(0).prop('value')).toEqual('Drinking Water');
-  });
+      test('toggles Timeline', () => {
+        wrapper.find('#toggleTimeline').at(0).simulate('click');
+      expect(wrapper.contains(<Timeline />)).toBe(true);
+    });
 
-  // it('Login input on change the existingUsername should change', () => {
-  //   const wrapper = mount(<BrowserRouter><Form /></BrowserRouter>); 
-  //   wrapper.find('input').at(1).simulate('change', { target: { name: 'existingUsername', value: 'Boris' } });
-  //   expect(wrapper.find('input').at(1).prop('value')).toEqual('Boris');
+    test('toggles Galeery', () => {
+        wrapper.find('#toggleGallery').at(0).simulate('click');
+      expect(wrapper.contains(<Gallery />)).toBe(true);
+    });
 
-  // });
+    test('toggles Map', () => {
+        wrapper.find('#toggleGallery').at(0).simulate('click');
+        wrapper.find('#toggleMap').at(0).simulate('click');
+      expect(wrapper.contains(<UserMap />)).toBe(true);
+    });
+
+    // test('contains LogInForm', () => {
+    //   expect(wrapper.contains(<LogInForm />)).toBe(true);
+    // });
+
+    // test('SignUpForm is hidden', () => {
+    //   expect(wrapper.contains(<SignUpForm />)).toBe(false);
+    // });
+
   
 });
-
