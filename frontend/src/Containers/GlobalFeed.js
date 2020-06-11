@@ -24,10 +24,10 @@ function GlobalFeed() {
 
   useEffect(() => {
     getTripData();
-
   }, []);
 
 console.log(tripData)
+
 
 
   return (
