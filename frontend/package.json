@@ -3,6 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "proxy": "http://localhost:5000",
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules[/\\\\](?!@amcharts[/\\\\]amcharts4)"
+  ]
+  },
   "dependencies": {
     "@amcharts/amcharts4": "^4.9.26",
     "@amcharts/amcharts4-geodata": "^4.1.15",
