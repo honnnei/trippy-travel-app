@@ -16,7 +16,7 @@ import renderer from 'react-test-renderer';
 
 describe('OtherUserProfile', () => {
     let wrapper;
-    // beforeEach(() => {
+    beforeEach(() => {
       wrapper = shallow(<OtherUserProfile 
       match={{
           isExact: true,
@@ -24,7 +24,7 @@ describe('OtherUserProfile', () => {
           path: "/other/:id",
           url: "/other/1"}} 
       />);
-    // });
+    });
   
     // it('matches the snapshot', () => {
     //   const tree = renderer.create(<App />).toJSON();
