@@ -5,15 +5,14 @@ import Enzyme, { shallow, render, mount } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import { Form, Button } from "react-bootstrap";
 
-Enzyme.configure({ adapter: new Adapter() });
-enableFetchMocks();
-window.alert = jest.fn();
+// Enzyme.configure({ adapter: new Adapter() });
+// enableFetchMocks();
+// window.alert = jest.fn();
 // jest.mock("jwt-decode");
 
 describe(" Add trip form ", () => {
     // let wrapper = shallow(<AddTripForm />);
     let wrap;
-
     let wrapper;
     beforeEach(() => {
       wrapper = shallow(<AddTripForm />);
@@ -48,5 +47,13 @@ describe(" Add trip form ", () => {
        const optionOne = wrapper.find("option").at(0);
        expect(optionOne.prop("value")).toEqual("");
      });
+
+    //  it("HandleChange works", () => {
+    //   wrapper.find("#bio_input").at(0).simulate("change", { target: { name:"trip_bio", value: "beautiful" } });
+    //   expect(wrapper.find("#bio_input").at(0).prop("value")).toEqual("beautiful");
+    // });
+
+
+
     
 });

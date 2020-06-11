@@ -74,26 +74,29 @@ function UpdatePassword() {
 
 
     return (
-      <div className="user-profile">
+      <div className="update-password-container">
           <Form onSubmit={handleSubmit}>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Enter Current Password</Form.Label>
-                    <Form.Control 
+                    <Form.Control
+                        id="password-input" 
                         type="password" 
                         name="password"
                         placeholder="Password" 
-                        
+                        value={userPassword}
                         onChange = {(e) => setUserPassword(e.target.value)}
                     />
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Enter New Password</Form.Label>
-                    <Form.Control 
+                    <Form.Control
+                        id="new-password-input" 
                         type="password" 
                         name="password"
-                        placeholder="New password" 
+                        placeholder="New password"
+                        value={newUserPassword} 
                         onChange = {(e) => setNewUserPassword(e.target.value)}
                     />
                 </Form.Group>
@@ -101,14 +104,14 @@ function UpdatePassword() {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Confirm New password</Form.Label>
                     <Form.Control 
+                        id="new-password-input-again" 
                         type="password"
                         name="re-password"
                         placeholder="Confirm new password"
+                        value={newUserPasswordAgain}
                         onChange = {(e) => setNewUserPasswordAgain(e.target.value)}
                     />
                 </Form.Group>
-               
-
                 <Button variant="primary" type="submit">
                     Update Password
                 </Button>

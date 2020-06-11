@@ -6,13 +6,14 @@ import Adapter from "enzyme-adapter-react-16";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 Enzyme.configure({ adapter: new Adapter() });
 
-enableFetchMocks();
-window.alert = jest.fn();
-jest.mock("jwt-decode");
+// enableFetchMocks();
+// window.alert = jest.fn();
+// jest.mock("jwt-decode");
 
 describe(" Gallery components", () => { 
 
-    let wrapper,wrap;
+    let wrapper;
+    let wrap;
     beforeEach(() => {
         wrapper = shallow(<Gallery />);
         wrap = mount(<Gallery/>);

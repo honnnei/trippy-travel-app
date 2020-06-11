@@ -2,11 +2,12 @@ import React, {useState, useEffect} from 'react';
 import AddTripForm from '../Components/AddTripForm';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Button } from 'react-bootstrap'
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
 
 function Timeline() {
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1)
   const [modal, setModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
   
@@ -43,7 +44,7 @@ function Timeline() {
     <div className="timeline-container">
       <div className="add-trip-area">
         <h1>Add Your Latest Trip </h1>
-        <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+        <Button id="toggleAddTripModal" variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
         <div className="modal">
           <Modal isOpen={modal} toggle={toggleAddTripModal}>
             <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
@@ -77,6 +78,7 @@ function Timeline() {
                       id="trip-image"
                     />
                     </div>
+                  </div>
                   </div>
               </div>
             )) : "Please enter your travel journey"}

@@ -69,12 +69,13 @@ function UpdateEmail() {
     }, [userData]);
 
   return (
-    <div className="user-profile">
+    <div className="update-email-container">
         <Form onSubmit={handleSubmit}>
 
               <Form.Group controlId="formBasicEmail">
                   <Form.Label>Current Email Address</Form.Label>
                   <Form.Control
+                      id="email-input"
                       type="email"
                       name="user_email"
                       placeholder="Enter email"
@@ -86,9 +87,11 @@ function UpdateEmail() {
               <Form.Group controlId="formBasicEmail">
                   <Form.Label>Enter New Email Address</Form.Label>
                   <Form.Control
+                      id="email-input-new"
                       type="email"
                       name="new_user_email"
                       placeholder="Enter email"
+                      value={newUserEmail}
                       onChange = {(e) => setNewUserEmail(e.target.value)}
                   />
               </Form.Group>

@@ -309,6 +309,7 @@ export default function AddTripForm(props) {
           <Form.Label>Trip Bio</Form.Label>
           <Form.Control
             type="text"
+            id="bio-input"
             name="trip_bio"
             placeholder="Enter trip bio"
             value={tripBio}
