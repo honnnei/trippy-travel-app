@@ -559,7 +559,7 @@ def get_trips_of_all_users():
 @app.route('/trip/feed', methods=['GET'])
 def get_feed_trips_of_all_users():
 	db = sqlite3.connect('trippy.db')
-	result = db.execute('select trip.trip_country, trip.trip_bio, trip.trip_image, trip.date_created, user.display_name, user.profile_picture from trip inner join user on trip.user_id=user.id order by trip.date_created').fetchall()
+	result = db.execute('select trip.trip_country, trip.trip_bio, trip.trip_image, trip.date_created, user.display_name, user.profile_picture, user.id from trip inner join user on trip.user_id=user.id order by trip.date_created').fetchall()
 	return jsonify(result)
 
 #get single trip by id
@@ -604,6 +604,13 @@ def update_trip(trip_id):
 #calc for example tests
 def calc(a, b):
     return a + b
+
+
+#get hello world
+@app.route('/hello', methods=['GET'])
+def get_hello():
+    return 'hello world!'
+
 
 #Run Server
 if __name__ == "__main__":

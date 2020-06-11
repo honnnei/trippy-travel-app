@@ -17,8 +17,9 @@ function GlobalFeed() {
   }
 
   useEffect(() => {
-    getFeedData();
+    getTripData();
   }, []);
+
 
 
   return (
@@ -32,7 +33,7 @@ function GlobalFeed() {
         <div key={trip.id} className="feed-trip">
           <div className="user-info">
           <img src={require("../images/" + trip[5])} style={{ height: "10em", width:"auto", cursor: "pointer" }}/>            
-          <p className="trip-user"> {trip[4]} </p>
+          <a className="trip-user" href={`/other/${trip[6]}`} > {trip[4]} </a>
             <p className="trip-date"> {trip[3].split(' ')[0].split('-').reverse().join('-')} </p>
           </div>
           <div className="trip-info">
