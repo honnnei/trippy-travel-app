@@ -58,12 +58,13 @@ export default function SignUpForm() {
     }
 
     return(
-        <div>
+        <div className="signup-form-container">
             <AlertMessage show={alertShow} variant={alertVariant} message={alertMessage}/>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Display Name</Form.Label>
                     <Form.Control
+                        id="display_name"
                         type="text"
                         name="display_name"
                         placeholder="Enter display name"
@@ -74,6 +75,7 @@ export default function SignUpForm() {
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
+                        id="email"
                         type="email"
                         name="user_email"
                         placeholder="Enter email"
@@ -87,6 +89,7 @@ export default function SignUpForm() {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control 
+                        id="password"
                         type="password" 
                         name="password"
                         placeholder="Password" 
@@ -97,6 +100,7 @@ export default function SignUpForm() {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Confirm password</Form.Label>
                     <Form.Control 
+                        id="re-password"
                         type="password"
                         name="re-password"
                         placeholder="Password"

@@ -59,7 +59,9 @@ export default function LogInForm() {
                 <Form.Group controlId="formBasicEmail">
                     <Form.Label>Email address</Form.Label>
                     <Form.Control
+                    id="email"
                     type="email"
+                    name="user_email"
                     placeholder="Enter email"
                     value={userEmail}
                     onChange={(e) => setUserEmail(e.target.value)}
@@ -68,8 +70,10 @@ export default function LogInForm() {
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
+                    id="password"
                     type="password"
                     placeholder="Password"
+                    name="password"
                     value={userPassword}
                     onChange={(e) => setUserPassword(e.target.value)}
                     />
