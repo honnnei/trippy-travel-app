@@ -43,6 +43,12 @@ describe('SignUpPage', () => {
     test('SignUpForm is hidden', () => {
       expect(wrapper.contains(<SignUpForm />)).toBe(false);
     });
+    
 
+    
+    // test('contains LogInForm', () => {
+    //   wrapper.find('#signup').at(0).simulate('click');
+    //   expect(wrapper.contains(<SignUpForm />)).toBe(true);
+    // });
   
 });

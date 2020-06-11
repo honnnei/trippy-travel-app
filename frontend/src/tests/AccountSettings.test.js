@@ -2,6 +2,8 @@ import React from 'react';
 import { render } from '@testing-library/react';
 import AccountSettings from '../Containers/AccountSettings';
 import NavbarComponent from '../Components/Navbar';
+import UpdateEmail from '../Components/UpdateEmail';
+import UpdatePassword from '../Components/UpdatePassword';
 import { shallow, mount } from 'enzyme';
 import renderer from 'react-test-renderer';
 
@@ -23,9 +25,18 @@ describe('Account Settings', () => {
     });
 
     test ('contains navbar', () => {
-        wrapper = shallow(<AccountSettings />);
         expect(wrapper.contains(<NavbarComponent />)).toEqual(true);
     });
+
+    test ('contains UpdateEmail', () => {
+      expect(wrapper.contains(<UpdateEmail />)).toEqual(true);
+    });
+
+    test ('contains UpdatePassword', () => {
+      expect(wrapper.contains(<UpdatePassword />)).toEqual(true);
+    });
+
+    
 
   
 });
