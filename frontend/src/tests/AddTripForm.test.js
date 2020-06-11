@@ -48,5 +48,17 @@ describe(" Add trip form ", () => {
        const optionOne = wrapper.find("option").at(0);
        expect(optionOne.prop("value")).toEqual("");
      });
+  
+  it("HandleChange works", () => {
+    wrap
+      .find("#bio_input")
+      .at(1)
+      .simulate("change", {
+        target: { name:"trip_bio", value: "beautiful" },
+      });
+    expect(wrap.find("#bio_input").at(1).prop("value")).toEqual(
+      "beautiful"
+    );
+  });
     
 });

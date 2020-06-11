@@ -3,13 +3,13 @@ import React, { useState, useEffect } from 'react';
 import AddGalleryForm from '../Components/AddGalleryForm';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Button } from 'react-bootstrap'
-import jwt_decode from 'jwt-decode';
+//import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
 // import { Button } from "react-bootstrap";
 
 function Gallery() {
-
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1);
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [modal, setModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
 

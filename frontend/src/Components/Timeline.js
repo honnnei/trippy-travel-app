@@ -9,7 +9,6 @@ function Timeline() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [modal, setModal] = useState(false);
   const [userTripData, setUserTripData] = useState([])
-  
   const getUserData = () => {
     Axios(`/user/trip/${userId}`)
     .then(response => {
@@ -78,7 +77,8 @@ function Timeline() {
                     />
                     </div>
                   </div>
-              </div>
+            </div>
+            </div>
             )) : "Please enter your travel journey"}
           </div>      
         </div>
