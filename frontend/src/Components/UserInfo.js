@@ -6,14 +6,15 @@ import ModalHeader from 'react-bootstrap/ModalHeader'
 import ModalBody from 'react-bootstrap/ModalBody'
 import ModalFooter from 'react-bootstrap/ModalFooter'
 import Form from 'react-bootstrap/Form'
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import FormData from 'form-data';
 import '../css/UserInfo.css'
 
 function UserInfo() {
 
   const [userData, setUserData] = useState([]);
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1)
 
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
@@ -86,14 +87,14 @@ function UserInfo() {
         <h1 className="user-info-display-name" >{userData ? userData.display_name : "default name"}</h1>
       </div>
       <div className="user-info-image-container">
-        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="170" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="170" />}
+        {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="200" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="200" />}
       </div>
       <div className="user-info-bio-container">
-        <p>{userData ? userData.bio : "hi my bio"}</p>
+        <p id="biop">{userData ? userData.bio : "hi my bio"}</p>
       </div>
       <div className="user-info-country-counter">
       <p>I've visited (db) countries and counting!</p>
-      <Button onClick={handleShow} className="edit-profile-button">Edit profile</Button>
+      <Button id="edit_profile-button" onClick={handleShow} className="edit-profile-button">Edit profile</Button>
       </div>
         <div className="modal">
           <Modal show={show} onHide={handleClose}>
@@ -101,7 +102,7 @@ function UserInfo() {
                 <Modal.Title>Edit your profile</Modal.Title>
               </Modal.Header>
               <Modal.Body>
-                <Form>
+                <Form id="modal-form">
                   <Form.Group>
                     <Form.Label>Update your display name</Form.Label>
                     <Form.Control type="text" name="userDisplayName" value={userDisplayName} onChange={handleUpdate}/>
@@ -126,8 +127,8 @@ function UserInfo() {
 
               </Modal.Body>
               <Modal.Footer>
-                <Button className="modalBtn" onClick={() => {handleClose(); updateUserInfo(); getUserData();}}>Update</Button>
-                <Button classsName="modalBtn2" onClick={handleClose} id="cancel">Cancel</Button>
+                <Button id="update-info-button" className="modalBtn" onClick={() => {handleClose(); updateUserInfo(); getUserData();}}>Update</Button>
+                <Button id="cancel-update-info-button" classsName="modalBtn2" onClick={handleClose}>Cancel</Button>
               </Modal.Footer>
           </Modal>
         </div>

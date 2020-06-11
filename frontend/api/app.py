@@ -25,6 +25,7 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
 
+#foldername = '/Users/medyenkadhum/Documents/futureproof/Lap 4/trippy-travel-app/frontend/src/images'
 # foldername = '/Users/richard/Futureproof/python/trippy-travel-app/frontend/src/images'
 foldername = 'C:\\Users\\Amita\\Desktop\\trippy\\trippy-travel-app\\frontend\\src\\images'
 #foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
@@ -55,12 +56,11 @@ class UserSchema(ma.Schema):
         fields = ('id', 'user_email', 'password',
                   'display_name', 'bio', 'profile_picture', 'date_created')
 
-#Init schema
+# Initialise schema
 user_schema = UserSchema()
-# strict=True
 users_schema = UserSchema(many=True)
 
-#REGISTER ROUTE
+# User Register Route
 @app.route('/auth/register', methods=['POST'])
 def register():
     db = sqlite3.connect('trippy.db')
@@ -83,7 +83,7 @@ def register():
 
     return result
 
-#LOGIN ROUTE
+#User Login Route
 @app.route('/auth/login', methods=['POST'])
 def login():
     db = sqlite3.connect('trippy.db')
@@ -106,7 +106,7 @@ def login():
 
     return result
 
-#checks user email
+# Check If User Email Exists
 def get_user_email():
     db = sqlite3.connect('trippy.db')
     print(request.get_json())
@@ -144,21 +144,21 @@ def create_user():
     except:
         return 'Could not create a user'
 
-#get all users
+# Retrieve All Users
 @app.route('/user', methods=['GET'])
 def get_users():
     all_users = User.query.all()
     result = users_schema.dump(all_users)
     return jsonify(result)
 
-#get single user
+# Retrieve a Single User
 @app.route('/user/<int:id>', methods=['GET'])
 def get_user(id):
     user = User.query.get(id)
     return user_schema.jsonify(user)
 
-#update a user (either bio or display_name!)
-# you have send both BIO and DISPLAY_NAME values, otherwise, you'll get an error, but the value you're not updating can be an empty string
+# Update User Information (Bio or Display Name) || A value for both Bio and Display Name must be sent to avoid an error. The value may be sent as an empty string. 
+
 @app.route('/user/<int:id>', methods=['PUT'])
 def update_user_profile(id):
     print(request, request.form)
@@ -182,7 +182,7 @@ def update_user_profile(id):
     except:
         return 'Could not update user'
 
-#update a user email
+# Update User Email
 @app.route('/user/email', methods=['PUT'])
 def update_user_email():
     db = sqlite3.connect('trippy.db')
@@ -203,7 +203,7 @@ def update_user_email():
 
     return result
 
-#update a user password
+# Update User Password
 @app.route('/user/password', methods=['PUT'])
 def update_user_password():
     db = sqlite3.connect('trippy.db')
@@ -233,7 +233,7 @@ def delete_user(id):
     db.session.commit()
     return user_schema.jsonify(user)
 
-#Trip model
+#TRIP MODEL
 class Trip(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
@@ -256,13 +256,14 @@ class Trip(db.Model):
 class TripSchema(ma.Schema):
     class Meta:
         fields = ('id', 'user_id', 'user_email', 'trip_country_code', 'trip_country', 'trip_bio', 'trip_length', 'trip_image', 'date_created')
-#Init schema
+
+# Initialise schema
 trip_schema = TripSchema()
-# strict=True
 trips_schema = TripSchema(many=True)
 
 #TRIP TABLE ROUTES
-#create trips
+
+# Create a Trip
 @app.route("/trip/<int:user_id>", methods=["POST"])
 def create_trip(user_id):
     print('post request')
@@ -528,7 +529,6 @@ def create_trip(user_id):
         trip_image = ','.join(images)
         trip_country_code = request.form['trip_country_code']
         trip_country = ISO3166[trip_country_code]
-        # trip_country = 'Spain'
         trip_bio = request.form['trip_bio']
         trip_length = request.form['trip_length']
         print(user_id, trip_country_code, trip_country, trip_bio, trip_length, trip_image)
@@ -540,55 +540,28 @@ def create_trip(user_id):
             db.session.add(new_gallery)
             db.session.commit()
             return trip_schema.jsonify(new_trip)
-        # return 'created trip'
         except:
-            return 'Could not create a user'
-    # else:
-        # user_id = request.form['user_id']
-        # trip_country_code = request.form['trip_country_code']
-        # trip_bio = request.form['trip_bio']
-        # trip_length = request.form['trip_length']
-        # trip_country = ISO3166[trip_country_code]
-        # print(trip_country)
-        # # trip_image = 'dino-reichmuth-A5rCN8626Ck-unsplash.jpg'
-        # new_trip = Trip(
-        #     user_id=user_id, trip_country_code=trip_country_code, trip_country=trip_country, trip_bio=trip_bio, trip_length=trip_length)
-    #     try:
-    #         db.session.add(new_trip)
-    #         db.session.commit()
-    #         # return trip_schema.jsonify(new_trip)
-    #         return 'created trip'
-    #     except:
-    #         return 'Could not create a user'
-    # return "could not upload image"
-            # return 'Could not create a trip'
+            return 'Could not add trip'
+   
     else:
-        print('didnt work')
-        return 'meh'
+        print('Unable to add trip')
+        return 'Unable to add trip'
 
-@app.route('/craetetrip/<int:user_id>', methods=['POST'])
-def create_trip_two(user_id):
-    trip_country = request.json['trip_country']
-    trip_bio = request.json['trip_bio']
-    trip_length = request.json['trip_length']
-    trip_image = 'hey'
-    new_trip = Trip(user_id, trip_country, trip_bio, trip_length, trip_image)
-
+#get all trips
 @app.route('/trip/user', methods=['GET'])
 def get_trips_of_all_users():
     all_trips = Trip.query.all()
     result = trips_schema.dump(all_trips)
     return jsonify(result)
 
-# feed data
+#global feed data. Joins trips and user table, sends relevent info.
 @app.route('/trip/feed', methods=['GET'])
 def get_feed_trips_of_all_users():
 	db = sqlite3.connect('trippy.db')
-	result = db.execute('select trip.trip_country, trip.trip_bio, trip.trip_image, trip.date_created, user.display_name from trip inner join user on trip.user_id=user.id order by trip.date_created').fetchall()
+	result = db.execute('select trip.trip_country, trip.trip_bio, trip.trip_image, trip.date_created, user.display_name, user.profile_picture, user.id from trip inner join user on trip.user_id=user.id order by trip.date_created').fetchall()
 	return jsonify(result)
 
 #get single trip by id
-
 @app.route('/trip/<int:trip_id>', methods=['GET'])
 def get_trip_by_trip_id(trip_id):
     trip = Trip.query.get(trip_id)
@@ -610,6 +583,7 @@ def delete_trip(trip_id):
     db.session.commit()
     return trip_schema.jsonify(trip)
 
+#update indiviudal trip
 @app.route('/trip/<int:trip_id>', methods=['PUT'])
 def update_trip(trip_id):
     trip = Trip.query.get(trip_id)
@@ -697,6 +671,13 @@ def delete_gallery(gallery_id):
 
 def calc(a, b):
     return a + b
+
+
+#get hello world
+@app.route('/hello', methods=['GET'])
+def get_hello():
+    return 'hello world!'
+
 
 #Run Server
 if __name__ == "__main__":

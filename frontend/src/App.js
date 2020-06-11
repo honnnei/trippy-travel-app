@@ -4,6 +4,8 @@ import './App.css';
 import SignUpPage from './Containers/SignUpPage';
 import GlobalFeed from './Containers/GlobalFeed';
 import UserProfile from './Containers/UserProfile';
+import OtherUserProfile from './Containers/OtherUserProfile';
+
 import AccountSettings from './Containers/AccountSettings';
 import AddTripForm from './Components/AddTripForm';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -11,6 +13,7 @@ import Navbar from './Components/Navbar';
 
 
 function App() {
+
   return (
     <div className="app-container">
     <div className="App">
@@ -39,10 +42,16 @@ function App() {
                       component={AccountSettings}
 
                   />
-                  <Route
+                  {/* <Route
                     path='/trip'
                     exact
                     component={AddTripForm}
+
+                  /> */}
+                   <Route
+                    path='/other/:id'
+                    exact
+                    component={OtherUserProfile}
 
                   />
           </Switch>
@@ -53,3 +62,11 @@ function App() {
 }
 
 export default App;
+
+// "jest": {
+//   "transformIgnorePatterns": [
+//     "node_modules[/\\\\](?!@amcharts[/\\\\]amcharts4)",
+//     "node_modules[/\\\\](?!bootstrap)",
+//     "node_modules[/\\\\](?!jwt-decode)"
+//   ]
+// }

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
-import jwt_decode from 'jwt-decode'
+// import jwt_decode from 'jwt-decode'
 import FormData from 'form-data';
 
 export default function AddTripForm(props) {
@@ -10,8 +10,8 @@ export default function AddTripForm(props) {
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
-
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1)
   const handleChange = (e) => {
     let file = e.target.files[0];
     setTripPhoto(file);
@@ -26,9 +26,7 @@ export default function AddTripForm(props) {
     bodyFormData.set('trip_bio', tripBio);
     bodyFormData.set('trip_length', tripLength);
     bodyFormData.append('file', tripPhoto);
-    console.log(bodyFormData)
-    console.log(tripCountryCode, tripBio, tripLength, userId, tripPhoto)
-
+    
     Axios.post(`/trip/${userId}`, bodyFormData, {
       headers: {
         'accept': 'application/json',
@@ -43,32 +41,9 @@ export default function AddTripForm(props) {
       });
 
   }
-  // const addTripButton = (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData();
-  //   console.log(formData)
-  //   formData.append("file", tripPhoto);
-  //   console.log(formData)
-  //   const data = {
-  //     trip_country: tripCountry,
-  //     trip_bio: tripBio,
-  //     trip_length: tripLength,
-  //     user_id: userId,
-  //     trip_image: tripPhoto,
-  //   };
-  //   console.log(data);
-  //   Axios.post("/trip", data)
-  //     .then((response) => console.log(response))
-  //     .then((data) => {
-  //       console.log(data);
-  //   });
-
-  // }
-
-
 
   return (
-    <div>
+    <div className="add-trip-form-container">
       <Form encType="multipart/form-data">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Trip Country</Form.Label>
@@ -363,10 +338,12 @@ export default function AddTripForm(props) {
             onChange={handleChange}
           />
         </Form.Group>
-
        <br/>
-        <Button variant="primary" type="submit" onClick={addTripButton}>
+      <Button variant="primary" type="submit" onClick={addTripButton}>
           Create Trip
+      </Button>
+      <Button variant="primary" type="submit" onClick={props.togglefunction}>
+          Cancel
       </Button>
       </Form>
     </div>
