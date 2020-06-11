@@ -605,6 +605,13 @@ def update_trip(trip_id):
 def calc(a, b):
     return a + b
 
+
+#get hello world
+@app.route('/hello', methods=['GET'])
+def get_hello():
+    return 'hello world!'
+
+
 #Run Server
 if __name__ == "__main__":
     app.run(debug=True)
