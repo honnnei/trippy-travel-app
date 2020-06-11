@@ -26,8 +26,8 @@ jwt = JWTManager(app)
 ma = Marshmallow(app)
 
 # foldername = '/Users/richard/Futureproof/python/trippy-travel-app/frontend/src/images'
-# foldername = 'C:\\Users\\Amita\\Desktop\\trippy\\trippy-travel-app\\frontend\\src\\images'
-foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
+foldername = 'C:\\Users\\Amita\\Desktop\\trippy\\trippy-travel-app\\frontend\\src\\images'
+#foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
 app.config["IMAGE_UPLOADS"] = foldername
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
@@ -43,6 +43,7 @@ class User(db.Model):
     profile_picture = db.Column(db.String(255))
     date_created = db.Column(db.DateTime, default=datetime.utcnow)
     Trip = db.relationship('Trip', backref='User', lazy=True)
+    Gallery = db.relationship('Gallery', backref='User', lazy=True)
 
     def __init__(self, user_email, password, display_name):
         self.user_email = user_email
@@ -222,8 +223,6 @@ def update_user_password():
 	    result = jsonify({"error":"Invalid username and password",})
 
     return result
-
-
 
 
 #delete user
@@ -534,8 +533,11 @@ def create_trip(user_id):
         trip_length = request.form['trip_length']
         print(user_id, trip_country_code, trip_country, trip_bio, trip_length, trip_image)
         new_trip = Trip(user_id, trip_country_code, trip_country, trip_bio, trip_length, trip_image)
+        new_gallery = Gallery(
+            user_id=user_id, image_caption=trip_bio,  gallery_image=trip_image)
         try:
             db.session.add(new_trip)
+            db.session.add(new_gallery)
             db.session.commit()
             return trip_schema.jsonify(new_trip)
         # return 'created trip'
@@ -624,6 +626,74 @@ def update_trip(trip_id):
     except:
         return 'Could not update trip'
 
+#Trip model
+
+class Gallery(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    image_caption = db.Column(db.String(200), nullable=True)
+    gallery_image = db.Column(
+        db.String(200), default='dino-reichmuth-A5rCN8626Ck-unsplash.jpg')
+    date_created = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __init__(self, user_id, image_caption, gallery_image):
+        self.user_id = user_id
+        self.image_caption = image_caption
+        self.gallery_image = gallery_image
+
+class GallerySchema(ma.Schema):
+    class Meta:
+        fields = ('id', 'user_id', 'user_email', 'image_caption',
+                  'gallery_image', 'date_created')
+
+
+#Init schema
+gallery_schema = GallerySchema()
+# strict=True
+gallerys_schema = GallerySchema(many=True)
+
+
+@app.route("/gallery", methods=["POST"])
+def create_gallery():
+    print(request, request.files, request.cookies)
+    if request.files:
+        files = request.files.getlist("image")
+        for file in files:
+            dateTimeObj = datetime.now()
+            timestampStr = dateTimeObj.strftime("%H%M%S-%b%d%Y")
+            print(timestampStr)
+            filename = timestampStr + secure_filename(file.filename)
+            file.save(os.path.join(app.config["IMAGE_UPLOADS"], filename))
+            gallery_image = filename
+            user_id = request.form['user_id']
+            trip_caption = request.form['trip_caption']
+            new_gallery = Gallery(
+                user_id=user_id, image_caption=trip_caption,  gallery_image=gallery_image)
+            try:
+                db.session.add(new_gallery)
+                db.session.commit()
+                # return trip_schema.jsonify(new_trip)
+            except:
+                return 'Could not create a user'
+    else:
+        print('didnt work')
+        return 'meh'
+        
+   
+
+@app.route('/user/gallery/<int:user_id>', methods=['GET'])
+def get_gallery_of_single_user(user_id):
+    user_gallery = Gallery.query.filter(
+        Gallery.user_id == user_id).order_by(Gallery.date_created).all()
+    result = gallerys_schema.dump(user_gallery)
+    return jsonify(result)
+
+@app.route('/gallery/<int:gallery_id>', methods=['DELETE'])
+def delete_gallery(gallery_id):
+    gallery = Gallery.query.get(gallery_id)
+    db.session.delete(gallery)
+    db.session.commit()
+    return gallery_schema.jsonify(gallery)
 
 def calc(a, b):
     return a + b
