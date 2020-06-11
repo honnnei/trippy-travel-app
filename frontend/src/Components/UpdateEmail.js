@@ -1,6 +1,5 @@
 import React, {useState, useEffect, useCallback} from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
-import jwt_decode from 'jwt-decode';
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import AlertMessage from './Alert'
@@ -9,7 +8,9 @@ function UpdateEmail() {
   const [userData, setUserData] = useState([]);
   const [userEmail, setUserEmail] = useState('');
   const [newUserEmail, setNewUserEmail] = useState('');
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1);
+
   const [alertShow, setAlertShow] = useState(false);
   const [alertVariant, setAlertVariant] = useState(null);
   const [alertMessage, setAlertMessage] = useState("default error");

@@ -2,7 +2,7 @@ import React, {useState, useEffect, useCallback} from 'react';
 import { Button } from 'react-bootstrap'
 import Axios from 'axios';
 import Form from 'react-bootstrap/Form'
-import jwt_decode from 'jwt-decode';
+// import jwt_decode from 'jwt-decode';
 import FormData from 'form-data';
 import '../css/UserInfo.css'
 import {
@@ -14,7 +14,10 @@ import {
 } from "react-router-dom";
 
 function OtherUserInfo() {
-  let { id } = useParams();
+  // let { id } = useParams();
+  // const [userId, setUserId] = useState(1)
+  // let id = props.match.params.id;
+  let id = 1;
 
   const [userData, setUserData] = useState([]);
   const [userId, setUserId] = useState(id);

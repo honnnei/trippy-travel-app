@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
-import jwt_decode from 'jwt-decode'
+// import jwt_decode from 'jwt-decode'
 import FormData from 'form-data';
 
 export default function AddTripForm(props) {
@@ -10,8 +10,8 @@ export default function AddTripForm(props) {
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
-  const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
-
+  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userId, setUserId] = useState(1)
   const handleChange = (e) => {
     let file = e.target.files[0];
     setTripPhoto(file);
@@ -39,15 +39,11 @@ export default function AddTripForm(props) {
       }).catch((error) => {
         console.log(error);
       });
-<<<<<<< HEAD
       // .then(window.location.reload(false));
-=======
->>>>>>> 740cb2cc64cf713e7420146048409e715066bd7e
-
   }
 
   return (
-    <div>
+    <div className="add-trip-form-container">
       <Form encType="multipart/form-data">
         <Form.Group controlId="formBasicEmail">
           <Form.Label>Trip Country</Form.Label>

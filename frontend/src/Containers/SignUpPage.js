@@ -13,17 +13,17 @@ function SignUpPage() {
   }
 
   return (
-    <div>
+    <div className="sing-up-page-container">
     <NavbarComponent />
-    <div className="signup-page-container">
+    <div className="sign-up-page-inner-container">
       <AboutUs />
       {showSignUp ? (
         <div className="login_form" id="first">
           <LogInForm />
           <br />
-          <p id="signup" className="signup" onClick={toggle}>
+          <button id="signup" className="signup" onClick={toggle}>
             Need an account? Register here!
-          </p>
+          </button>
         </div>
       ) : (
         <div className="register_form" id="second">

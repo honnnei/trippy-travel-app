@@ -13,6 +13,7 @@ import Navbar from './Components/Navbar';
 
 
 function App() {
+
   return (
     <div className="app-container">
     <div className="App">
@@ -41,12 +42,12 @@ function App() {
                       component={AccountSettings}
 
                   />
-                  <Route
+                  {/* <Route
                     path='/trip'
                     exact
                     component={AddTripForm}
 
-                  />
+                  /> */}
                    <Route
                     path='/other/:id'
                     exact
@@ -61,3 +62,11 @@ function App() {
 }
 
 export default App;
+
+// "jest": {
+//   "transformIgnorePatterns": [
+//     "node_modules[/\\\\](?!@amcharts[/\\\\]amcharts4)",
+//     "node_modules[/\\\\](?!bootstrap)",
+//     "node_modules[/\\\\](?!jwt-decode)"
+//   ]
+// }

@@ -2,7 +2,8 @@ import React from "react";
 
 function AboutUs() {
     return (
-        <div className="instruction">
+        <div className="about-us-container">
+            {/* class was 'instruction */}
             <h1>
                 Trippy
         <br />

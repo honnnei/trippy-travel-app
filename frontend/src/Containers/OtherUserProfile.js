@@ -19,8 +19,9 @@ import {
 } from "react-router-dom";
 
 
-function OtherUserProfile() {
-  let { id } = useParams();
+function OtherUserProfile(props) {
+  // let { id } = useParams();
+  let id = props.match.params.id;
 
   const [mapShow, setMapShow] = useState(true);
   const [timelineShow, setTimelineShow] = useState(false);
@@ -44,7 +45,7 @@ function OtherUserProfile() {
   }
 
     return (
-      <div>
+      <div className="user-profile-page-container">
         <NavbarComponent />
                   
         <Container>
@@ -56,13 +57,13 @@ function OtherUserProfile() {
              <div className="timeline-gallery-map-container">
                 <Nav justify variant="tabs" defaultActiveKey="maps">
                     <Nav.Item>
-                      <Nav.Link eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+                      <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+                      <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+                      <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
                     </Nav.Item>                    
                   </Nav>
                   <div className="t-g-m-container">
@@ -82,10 +83,3 @@ function OtherUserProfile() {
 }
 
 export default OtherUserProfile;
-
-
-
-
-
-
-
