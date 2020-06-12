@@ -26,26 +26,27 @@ Built using Flask, React, SQLite3.
 ### Technology
 
 ## Front-end
-- React Js - Hooks
+- React JS (& Hooks)
 - Bootstrap
-- armcharts 4 
+- amcharts 4 
 
 ## Back-end
-- Python - flask 
+- Python (Flask framework)
 
-## Database - Sqlite3
+## Database 
+- Sqlite3
 
 ## Testing
-### frontend
+### Frontend
 - Enzyme 
 - Jest 
 
-### backend 
+### Backend 
 - Unittest
 - Nose 2
 
-### Challenges & Solutions 
-- Authentication for signing up and logging in
+## Challenges
+- Authentication for signing up and logging in 
 - Utilising token authentication for users when logged in
 - Uploading images through the frontend and storing them in the database
 - Retrieving images from the database to show in the ‘Gallery’ tab
