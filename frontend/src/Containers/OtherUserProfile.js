@@ -12,19 +12,16 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
   useParams
 } from "react-router-dom";
-
+import '../css/UserProfile.css'
 
 function OtherUserProfile() {
   let { id } = useParams();
   // let id = props.match.params.id;
 
-  const [mapShow, setMapShow] = useState(true);
-  const [timelineShow, setTimelineShow] = useState(false);
+  const [mapShow, setMapShow] = useState(false);
+  const [timelineShow, setTimelineShow] = useState(true);
   const [galleryShow, setGalleryShow] = useState(false);
   const [userId, setUserId] = useState(id);
 
@@ -46,37 +43,34 @@ function OtherUserProfile() {
 
     return (
       <div className="user-profile-page-container">
-        <NavbarComponent />       
-        <Container>
-          <Row className="justify-content-md-center">
-            <Col md={2}>
+      <NavbarComponent />
+        <Container className="container">
+            <div className="user-profile-bio" md={3}>
               <OtherUserInfo />
-            </Col>
-            <Col md={{ span: 9, offset: 1 }}>
-             <div className="timeline-gallery-map-container">
-                <Nav justify variant="tabs" defaultActiveKey="maps">
-                    <Nav.Item>
-                      <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
-                    </Nav.Item>                    
-                  </Nav>
-                  <div className="t-g-m-container">
-                    {timelineShow ? <OtherUserTimeline /> : ""}
-                    {galleryShow ? <OtherUserGallery /> : ""}
-                    {mapShow ? <OtherUserMap /> : ""}
-                  </div>
+            </div>
+            <div className="timeline-gallery-map-container" md={8}>
+              <div>
+                <Nav justify variant="tabs" defaultActiveKey="timeline">
+                  <Nav.Item>
+                    <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <div className="t-g-m-container">
+                  {timelineShow ? <OtherUserTimeline /> : ""}
+                  {galleryShow ? <OtherUserGallery /> : ""}
+                  {mapShow ? <OtherUserMap /> : ""}
+                </div>
               </div>
-            </Col>
-                      
-          </Row>
+            </div>
+          
         </Container>
-            
-     </div>
+    </div>
 
     );
 }

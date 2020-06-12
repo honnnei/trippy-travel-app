@@ -44,11 +44,11 @@ function Timeline() {
     <div className="timeline-container">
       <Container className="add-trip-area">
         <Row className="justify-content-md-center">
-          <Col>
+          <Col md={8}>
             <h1>Add Your Latest Trip </h1>
           </Col>
-          <Col>
-            <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+          <Col md={4}>
+            <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>
           </Col>
         </Row>
         <div className="modal">
@@ -70,13 +70,13 @@ function Timeline() {
             <Container>
               <Row>
                 <Col>
-                      <h3>{trip.trip_country}</h3>
-                      <h4>{trip.trip_bio}</h4>
+                      <h4>{trip.trip_country}</h4>
+                      <p>{trip.trip_bio}</p>
                       {trip.date_created.split('T')[0].split('-').reverse().join('/')}
                 </Col>
                 <Col>
                   <div className="trip-images">
-                    <img src={require("../images/" + trip.trip_image)} id="trip-image"/>  
+                    <img width="10px" height="10px" src={require("../images/" + trip.trip_image)} id="trip-image"/>  
                   </div>
                 </Col>
               </Row>

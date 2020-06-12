@@ -7,7 +7,13 @@
     
   }
 */  
+  /* .container {
+    flex-direction: row;
+    justify-content: space-evenly;
+  } */
+
   .user-profile-bio{
+    
     margin-top: auto;
     margin-bottom: auto;
     background-color: white;
