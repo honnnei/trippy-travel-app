@@ -24,19 +24,23 @@ Built using Flask, React, SQLite3.
 ### Technology
 
 ## Front-end
-### React Js - Hooks
-### Bootstrap
-### armcharts 4 
+- React Js - Hooks
+- Bootstrap
+- armcharts 4 
 
 ## Back-end
-### Python - flask 
+- Python - flask 
 
 ## Database - Sqlite3
 
 ## Testing
-### frontend - Enzyme , Jest 
+### frontend
+- Enzyme 
+- Jest 
 
-### backend - Unittest , Nose 2
+### backend 
+- Unittest
+- Nose 2
 
 ### Challenges & Solutions 
 - making GET and POST requests work 
