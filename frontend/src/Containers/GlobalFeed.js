@@ -31,10 +31,10 @@ console.log(tripData)
 
 
   return (
-    <div >
+    <div className="global-feed-container">
       <NavbarComponent />
       <h1 className="global-feed">Global Feed</h1>
-      <div>
+      <div className="global-feed-inner-container">
 
         {
         tripData ? tripData.reverse().map(trip => (

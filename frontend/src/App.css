@@ -5,20 +5,10 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-<<<<<<< HEAD
-  background-color: #4dccc6;
-  background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
-
-=======
->>>>>>> dc376d2f02e8c3aa20253ad8080f7224dbf0975e
   height: 100vh;
   font-family: 'Nunito', sans-serif;
-<<<<<<< HEAD
   /* background-color: #73c2be; */
-  background-image: linear-gradient(315deg, #16a79f 0%, #98cecb 74%);
-=======
   background-image: linear-gradient(315deg, #216864 0%, #98cecb 74%);
->>>>>>> dc376d2f02e8c3aa20253ad8080f7224dbf0975e
   background-attachment: fixed;
   overflow-y: scroll;
 }
