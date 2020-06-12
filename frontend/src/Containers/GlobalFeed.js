@@ -31,9 +31,9 @@ console.log(tripData)
 
 
   return (
-    <div className="global-feed">
+    <div >
       <NavbarComponent />
-      <h1>Global Feed</h1>
+      <h1 className="global-feed">Global Feed</h1>
       <div>
 
         {

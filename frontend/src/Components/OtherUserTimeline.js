@@ -11,6 +11,8 @@ import {
   Link,
   useParams
 } from "react-router-dom";
+import { Container, Row, Col } from 'react-bootstrap';
+
 
 function Timeline() {
   let { id } = useParams();
@@ -40,16 +42,24 @@ function Timeline() {
         {userTripData ? userTripData.map((trip) => (
           <div key={trip.id} className="user-trip">
            
-            <div className="trip-area">
-              {trip.date_created}
-              <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
-              <div className="trip-images">
-                <img
-                  src={require("../images/" + trip.trip_image)}
-                  id="trip-image"
-                />
-                </div>
-              </div>
+           <div className="trip-area">
+            <Container>
+              <Row>
+                <Col>
+                      <h4>{trip.trip_country}</h4>
+                      <p>{trip.trip_bio}</p>
+                      {trip.date_created.split('T')[0].split('-').reverse().join('/')}
+                </Col>
+                <Col>
+                  <div className="trip-images">
+                    <img width="10px" height="10px" src={require("../images/" + trip.trip_image)} id="trip-image"/>  
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+            
+              
+            </div>
           </div>
         )) : "Please enter your travel journey"}
       </div>      

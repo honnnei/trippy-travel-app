@@ -46,7 +46,9 @@ function UserProfile() {
         <Container>
           <Row>
             <Col className="user-profile-bio" md={3}>
-              <UserInfo />
+              <div>
+                <UserInfo />
+              </div>
             </Col>
             <Col className="timeline-gallery-map-container" md={8}>
               <div>

@@ -6,20 +6,22 @@
 } */
 
 /* .user-info-container {
-    max-width: 200px;
-   }
-    */
-/* .user-info-name-container {
-    display: flex;
-}
+    min-height: 40vh;
+    max-height: 40vh;
 
+   } */
+   
+/* .user-info-name-container {
+    margin: 10px;
+} */
+/* 
 .user-info-image-container {
     
 }
-
+*/
 .user-info-bio-container {
-    display: flex;
-} */
+    margin: 10px;
+}
 
 /* .user-info-display-name {
     text-align: center;

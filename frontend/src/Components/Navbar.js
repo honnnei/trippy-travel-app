@@ -32,17 +32,11 @@ const NavbarComponent = () => {
                 <Nav className="mr-auto"></Nav>
                 <Nav>
                     {localStorage.usertoken ?
-<<<<<<< HEAD
                     <Nav id="trippy-logo-text">
-                        <Nav.Link href="/profile"> Profile </Nav.Link>
-                        <Nav.Link href="/settings"> Settings </Nav.Link>
-                        <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
-=======
-                    <Nav>
                         <Nav.Link href="/profile" className="login-logout-button"> Profile </Nav.Link>
                         <Nav.Link href="/settings" className="login-logout-button"> Settings </Nav.Link>
+                        <Nav.Link href="https://github.com/honnnei/trippy-travel-app" className="login-logout-button" > About</Nav.Link>
                         <Nav.Link href="/" className="login-logout-button" onClick={logout}> Log Out </Nav.Link>
->>>>>>> 01a1443dc7263bee7b3356f2d3b5b2a329695d03
                     </Nav>
                     :
                     <Nav.Link href="/" className="login-logout-button" onClick={login}> Log In </Nav.Link>
