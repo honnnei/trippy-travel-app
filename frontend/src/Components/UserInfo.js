@@ -122,8 +122,8 @@ function UserInfo() {
 
               </Modal.Body>
               <Modal.Footer>
-                <Button id="update-info-button" className="modalBtn" onClick={() => {handleClose(); updateUserInfo(); getUserData();}}>Update</Button>
-                <Button id="cancel-update-info-button" classsName="modalBtn2" onClick={handleClose}>Cancel</Button>
+                <Button id="update-info-button" className="modalBtn" variant="dark" onClick={() => {handleClose(); updateUserInfo(); getUserData();}}>Update</Button>
+                <Button id="cancel-update-info-button" classsName="modalBtn2" variant="dark" onClick={handleClose}>Cancel</Button>
               </Modal.Footer>
           </Modal>
         </div>

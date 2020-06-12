@@ -43,7 +43,7 @@ function UserProfile() {
   return (
     <div className="user-profile-page-container" >
       <NavbarComponent />
-        <Container>
+        <Container className="user-profile-bootstrap-container">
           <Row>
             <Col className="user-profile-bio" md={3}>
               <UserInfo />
@@ -52,13 +52,13 @@ function UserProfile() {
               <div>
                 <Nav justify variant="tabs" defaultActiveKey="timeline">
                   <Nav.Item >
-                    <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+                    <Nav.Link id="toggleTimeline" className="timeline-tabs" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+                    <Nav.Link id="toggleMap" className="timeline-tabs" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>
-                    <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+                    <Nav.Link id="toggleGallery" className="timeline-tabs" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
                   </Nav.Item>
                 </Nav>
                 <div className="t-g-m-container">
