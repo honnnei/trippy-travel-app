@@ -1,21 +1,21 @@
 /* Sign Up Page */
 
 .sign-up-page-container {
-  min-height: 100vh;
+  min-height: 90vh;
   min-width: 100vw;
   font-family: 'MuseoModerno', cursive;
   }
 
 .sign-up-page-inner-container {
-  min-height: 100vh;
+  min-height: 90vh;
   min-width: 100vw;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   }
   
-  p#signup, p#signin{
-    color:blue;
+  p#signup, p#signin, .alert-color {
+    color: rgb(241, 159, 128);
   }
   
   p#signup:hover ,p#signin:hover {

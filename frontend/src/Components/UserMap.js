@@ -38,7 +38,7 @@ function UserMap() {
     polygonTemplate.propertyFields.fill = "color";
     // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create("hover");
-    hs.properties.fill = am4core.color("#138D9D");
+    hs.properties.fill = am4core.color("#gcbb8d");
     // Create active state
     let activeState = polygonTemplate.states.create("active");
     activeState.properties.fill = am4core.color("#FBAA7C")
