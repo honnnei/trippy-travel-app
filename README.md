@@ -45,8 +45,14 @@ Built using Flask, React, SQLite3.
 - Nose 2
 
 ### Challenges & Solutions 
-- making GET and POST requests work 
-- making conurrenly 
+- Authentication for signing up and logging in
+- Utilising token authentication for users when logged in
+- Uploading images through the frontend and storing them in the database
+- Retrieving images from the database to show in the ‘Gallery’ tab
+- Retrieving the information needed for the ‘Global Feed’
+- Viewing other user profiles
+- Testing (both frontend and backend)!
+
 
 ### Further Iterations
 
