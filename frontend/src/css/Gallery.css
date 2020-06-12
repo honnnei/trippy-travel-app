@@ -1,0 +1,35 @@
+.add-trip-area {
+    padding: 10px;
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+}
+.gallery {
+    padding: 10px;
+    height: 200px;
+}
+div#delete-button {
+    float: right;
+}
+button#delete {
+    height: 20px;
+    width: 20px;
+    padding: 5px;
+    font-size: 10px;
+}
+
+
+div#images-area {
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+p#img-caption {
+    padding: 5px;
+    text-align: center;
+    /* font-size: small; */
+}
+
+.gallery {
+    padding: 10px;
+    height: 200px;
+    background-color: ghostwhite;
+}
