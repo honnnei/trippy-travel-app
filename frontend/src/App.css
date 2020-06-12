@@ -5,12 +5,24 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+<<<<<<< HEAD
   background-color: #4dccc6;
   background-image: linear-gradient(315deg, #4dccc6 0%, #96e4df 74%);
 
+=======
+  height: 100vh;
+  background-color: rgb(220,220,220);
+  font-family: 'MuseoModerno', cursive;
+>>>>>>> 8018bd1e271095f2bb6adeca2551783a905279ca
 
   background-attachment: fixed;
   overflow-y: scroll;
+}
+
+/* Navbar */
+
+#trippy-logo-text {
+  font-family: 'MuseoModerno', cursive;
 }
 
 
