@@ -26,7 +26,7 @@ const NavbarComponent = () => {
                 alt="React Bootstrap logo"
             />
             </Navbar.Brand>
-            <Navbar.Brand href="/feed">Trippy</Navbar.Brand>
+            <Navbar.Brand href="/feed" id="trippy-logo-text">Trippy</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">
                 <Nav className="mr-auto"></Nav>

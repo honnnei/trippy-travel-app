@@ -13,5 +13,11 @@
   overflow-y: scroll;
 }
 
+/* Navbar */
+
+#trippy-logo-text {
+  font-family: 'MuseoModerno', cursive;
+}
+
 
 

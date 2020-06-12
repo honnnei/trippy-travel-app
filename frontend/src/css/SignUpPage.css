@@ -36,6 +36,9 @@
 
   .about-us-container {
     height: 100%;
+    font-family: 'MuseoModerno', cursive;
+    font-weight: 900;
+    font-size: 40px;
   }
 
   .about-us {
