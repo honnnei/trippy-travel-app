@@ -649,6 +649,7 @@ def create_gallery():
                 # return trip_schema.jsonify(new_trip)
             except:
                 return 'Could not create a user'
+	return redirect("http://localhost:3000/profile", code=302)
     else:
         print('didnt work')
         return 'meh'
