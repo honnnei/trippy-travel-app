@@ -37,18 +37,11 @@ Built using Flask, React, SQLite3.
 - I want to be able edit my profile.
 - I want to be able to add trips to my profile.
 - I want to be able to view all the countries I've been to on the map.
+- I would like to view the images I've uploaded in a gallery.
 - I want to be able to see people's trip updates on a feed.
 - I want to be able to look at other people's profiles.
+- I would like to permanently delete my profile 
 
-# As a user 
-- I want to register and login to app that has authentication.
-- I would like to post about your adventurious trip 
-- I would like to add the trip destination
-- I would like to post beautiful images of the trip
-- I would like to edit or delete the data based on your interest 
-- I would like to change the account details , email and password
-- I would like to permanently delete your profile 
-- I would like to view the images I've uploaded in a gallery
 
 
 ### Technology
