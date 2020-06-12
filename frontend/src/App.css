@@ -1,50 +1,17 @@
-/* GENERAL */
-
-/* html, body {
-  height: 100hv;
-
-
-
-
-
-} */
-
-/* App Component */
-.app-container {
-  height: 100%;
-}
-
 .App {
   text-align: center;
+  height: 100vw;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  background-color: rgb(220,220,220);
+
+
+  background-attachment: fixed;
+  overflow-y: scroll;
 }
 
 
-.t-g-m-container {
-    padding-top: 20px;
-}
 
-.add-trip-area {
-    background-color: beige;
-    padding: 10px;
-}
-.user-trip {
-    margin-top: 10px;
-    background-color: darkgray;
-    margin-bottom: 10px;
-    padding-top: 10px;
-    padding-bottom: 15px;
-}
-.button-area {
- 
-    position: absolute;
-    right: 20px;
-}
-.trip-area {
-    margin-top: 50px;
-    background-color: aliceblue;
-}
-img#trip-image {
-    height: 150px;
-    width: 150px;
-    vertical-align: middle;
-}

@@ -1,0 +1,28 @@
+.t-g-m-container {
+    padding-top: 20px;
+}
+
+.add-trip-area {
+    background-color: ;
+    padding: 10px;
+}
+.user-trip {
+    margin: 10px;
+    background-color: darkgray;
+    box-shadow: 0px 0px 2px 1px grey;
+    border-radius: 1%;
+}
+.button-area {
+    position: absolute;
+    right: 20px;
+    margin-right: 5px;
+}
+.trip-area {
+    
+    background-color: white;
+}
+img#trip-image {
+    height: 150px;
+    width: 150px;
+    vertical-align: middle;
+}

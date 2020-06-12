@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
-import { Link } from "react-router-dom";
 import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
-// import jwt_decode from 'jwt-decode'
+import jwt_decode from 'jwt-decode'
 import FormData from 'form-data';
 
 export default function AddTripForm(props) {
@@ -10,8 +9,7 @@ export default function AddTripForm(props) {
   const [tripBio, setTripBio] = useState("");
   const [tripLength, setTripLength] = useState("");
   const [tripPhoto, setTripPhoto] = useState();
-  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
-  const [userId, setUserId] = useState(1)
+  const [userId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const handleChange = (e) => {
     let file = e.target.files[0];
     setTripPhoto(file);
@@ -53,7 +51,7 @@ export default function AddTripForm(props) {
             placeholder="Enter country name"
             value={tripCountryCode}
             onChange={(e) => setTripCountryCode(e.target.value)}>
-            <option value="" selected disabled hidden>Select Country here</option>
+            <option value="" selected disabled hidden>Select Country</option>
             <option value="AF">Afghanistan</option>
             <option value="AX">Åland Islands</option>
             <option value="AL">Albania</option>
@@ -306,29 +304,29 @@ export default function AddTripForm(props) {
           </Form.Control>
         </Form.Group>
         <Form.Group controlId="formBasicEmail">
-          <Form.Label>Trip Bio</Form.Label>
+          <Form.Label>Trip Description</Form.Label>
           <Form.Control
             type="text"
             name="trip_bio"
-            placeholder="Enter trip bio"
+            placeholder="Enter a short but snappy trip description!"
             value={tripBio}
             onChange={(e) => setTripBio(e.target.value)}
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>Trip duration</Form.Label>
+          <Form.Label>Trip Duration</Form.Label>
           <Form.Control
             type="text"
             name="trip_length"
-            placeholder="trip duration"
+            placeholder="How long did you stay? (In days)"
             value={tripLength}
             onChange={(e) => setTripLength(e.target.value)}
           />
         </Form.Group>
 
         <Form.Group controlId="formBasicPassword">
-          <Form.Label>One photo to describe Trip</Form.Label>
+          <Form.Label>Upload a favourite picture from the trip!</Form.Label>
           <Form.Control
             type="file"
             name="trip_image"
@@ -340,7 +338,7 @@ export default function AddTripForm(props) {
         </Form.Group>
        <br/>
       <Button variant="primary" type="submit" onClick={addTripButton}>
-          Create Trip
+          Add Trip
       </Button>
       <Button variant="primary" type="submit" onClick={props.togglefunction}>
           Cancel

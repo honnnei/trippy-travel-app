@@ -6,10 +6,10 @@
 } */
 
 /* .user-info-container {
-    height: 100%;
+    max-width: 200px;
    }
-   
-.user-info-name-container {
+    */
+/* .user-info-name-container {
     display: flex;
 }
 

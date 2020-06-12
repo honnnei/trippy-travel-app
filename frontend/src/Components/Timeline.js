@@ -1,9 +1,10 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import AddTripForm from '../Components/AddTripForm';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import { Button } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
+import { Container, Row, Col, Button } from 'react-bootstrap';
+import '../css/Timeline.css'
 
 function Timeline() {
   const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
@@ -41,47 +42,47 @@ function Timeline() {
   
   return (
     <div className="timeline-container">
-      <div className="add-trip-area">
-        <h1>Add Your Latest Trip </h1>
-        <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+      <Container className="add-trip-area">
+        <Row className="justify-content-md-center">
+          <Col>
+            <h1>Add Your Latest Trip </h1>
+          </Col>
+          <Col>
+            <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>{' '}
+          </Col>
+        </Row>
         <div className="modal">
           <Modal isOpen={modal} toggle={toggleAddTripModal}>
-            <ModalHeader toggle={toggleAddTripModal}>Create a Trip:</ModalHeader>
+            <ModalHeader toggle={toggleAddTripModal}>Add a Trip:</ModalHeader>
             <ModalBody>
               <AddTripForm togglefunction={toggleAddTripModal} />
             </ModalBody>
           </Modal>
         </div>
-      </div>
+      </Container>
       <div className="trip-container">
         {userTripData ? userTripData.reverse().map((trip) => (
           <div key={trip.id} className="user-trip">
             <div className="button-area">
+              
               <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
             </div>
             <div className="trip-area">
+              <h2 >{trip.trip_country}</h2>
               {trip.date_created.split('T')[0].split('-').reverse().join('/')}
-              <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
+              <h3>{trip.trip_bio}</h3>
               <div className="trip-images">
                 <img
                   src={require("../images/" + trip.trip_image)}
                   id="trip-image"
                 />
-                </div>
-                <div className="trip-area">
-                  {trip.date_created.split('T')[0].split('-').reverse().join('/')}
-                  <h1>I went to {trip.trip_country} for {trip.trip_length} days and it was {trip.trip_bio}</h1>
-                  <div className="trip-images">
-                    <img
-                      src={require("../images/" + trip.trip_image)}
-                      id="trip-image"
-                    />
-                    </div>
-                  </div>
               </div>
+            </div>
+          </div>     
+
             )) : "Please enter your travel journey"}
-          </div>      
-        </div>
+          </div> 
+      </div>
   );
 }
 

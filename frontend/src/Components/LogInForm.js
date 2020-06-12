@@ -1,5 +1,4 @@
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect } from "react-router-dom";
+import React, { useState }  from 'react';
 import { useHistory } from "react-router"
 import { Form, Button } from 'react-bootstrap';
 import AlertMessage from './Alert'

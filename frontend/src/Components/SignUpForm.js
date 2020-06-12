@@ -13,7 +13,7 @@ export default function SignUpForm() {
     const [alertVariant, setAlertVariant] = useState(null);
     const [alertMessage, setAlertMessage] = useState("default error");
 
-    let history = useHistory();
+    
 
     const handleSubmit = (e) => {
         e.preventDefault()

@@ -1,21 +1,17 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useState, useEffect } from 'react';
 import { Button } from 'react-bootstrap'
 import Axios from 'axios';
 import Modal from 'react-bootstrap/Modal'
-import ModalHeader from 'react-bootstrap/ModalHeader'
-import ModalBody from 'react-bootstrap/ModalBody'
-import ModalFooter from 'react-bootstrap/ModalFooter'
 import Form from 'react-bootstrap/Form'
-// import jwt_decode from 'jwt-decode';
+import jwt_decode from 'jwt-decode';
 import FormData from 'form-data';
+import { PencilSquare } from 'react-bootstrap-icons';
 import '../css/UserInfo.css'
 
 function UserInfo() {
 
   const [userData, setUserData] = useState([]);
-  // const [userId, setUserId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
-  const [userId, setUserId] = useState(1)
-
+  const [userId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -23,11 +19,7 @@ function UserInfo() {
   const [userDisplayName, setUserDisplayName] = useState();
   const [profilePicture, setProfilePicture] = useState();
   const [profilePictureURL, setProfilePictureURL] = useState();
-  const [modal, setModal] = useState(false);
- 
-  const toggle = () => {
-    setModal(!modal)
-  };
+
   
   const getUserData = () => {
     Axios.get('/user/' + userId)
@@ -94,7 +86,7 @@ function UserInfo() {
       </div>
       <div className="user-info-country-counter">
       <p>I've visited (db) countries and counting!</p>
-      <Button id="edit_profile-button" onClick={handleShow} className="edit-profile-button">Edit profile</Button>
+      <Button id="edit_profile-button" onClick={handleShow} className="edit-profile-button"><PencilSquare /></Button>
       </div>
         <div className="modal">
           <Modal show={show} onHide={handleClose}>

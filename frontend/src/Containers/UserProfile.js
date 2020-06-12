@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
 import Gallery from '../Components/Gallery';
@@ -9,14 +9,14 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 // var jwtDecode = require('jwt-decode');
+import '../css/UserProfile.css'
 
 
 function UserProfile() {
-  const [mapShow, setMapShow] = useState(true);
-  const [timelineShow, setTimelineShow] = useState(false);
+  const [timelineShow, setTimelineShow] = useState(true);
+  const [mapShow, setMapShow] = useState(false);
   const [galleryShow, setGalleryShow] = useState(false);
   // const [userId, setUserId] = useState(jwtDecode(localStorage.usertoken).identity.user_id);
-  const [userId, setUserId] = useState(1);
 
   if(!localStorage.usertoken){
     window.location.href="/"
@@ -43,33 +43,33 @@ function UserProfile() {
   return (
     <div className="user-profile-page-container">
       <NavbarComponent />
-      <Container>
-        <Row className="justify-content-md-center">
-          <Col md={2}>
-            <UserInfo />
-          </Col>
-          <Col md={{ span: 9, offset: 1 }}>
-            <div className="timeline-gallery-map-container">
-              <Nav justify variant="tabs" defaultActiveKey="maps">
-                <Nav.Item>
-                  <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                  <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
-                </Nav.Item>
-              </Nav>
-              <div className="t-g-m-container">
-                {timelineShow ? <Timeline /> : ""}
-                {galleryShow ? <Gallery /> : ""}
-                {mapShow ? <UserMap /> : ""}
+        <Container>
+          <Row>
+            <Col className="user-profile-bio" md={3}>
+              <UserInfo />
+            </Col>
+            <Col className="timeline-gallery-map-container" md={8}>
+              <div>
+                <Nav justify variant="tabs" defaultActiveKey="timeline">
+                  <Nav.Item>
+                    <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleMap" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleGallery" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <div className="t-g-m-container">
+                  {timelineShow ? <Timeline /> : ""}
+                  {galleryShow ? <Gallery /> : ""}
+                  {mapShow ? <UserMap /> : ""}
+                </div>
               </div>
-            </div>
-          </Col>        
-        </Row>
-      </Container>
+            </Col>
+          </Row>
+        </Container>
     </div>
   );
 }

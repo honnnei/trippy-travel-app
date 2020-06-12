@@ -14,10 +14,10 @@ import {
 } from "react-router-dom";
 
 function OtherUserInfo() {
-  // let { id } = useParams();
+  let { id } = useParams();
   // const [userId, setUserId] = useState(1)
   // let id = props.match.params.id;
-  let id = 1;
+  // let id = 1;
 
   const [userData, setUserData] = useState([]);
   const [userId, setUserId] = useState(id);

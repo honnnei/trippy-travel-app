@@ -19,9 +19,9 @@ import {
 } from "react-router-dom";
 
 
-function OtherUserProfile(props) {
-  // let { id } = useParams();
-  let id = props.match.params.id;
+function OtherUserProfile() {
+  let { id } = useParams();
+  // let id = props.match.params.id;
 
   const [mapShow, setMapShow] = useState(true);
   const [timelineShow, setTimelineShow] = useState(false);
@@ -46,8 +46,7 @@ function OtherUserProfile(props) {
 
     return (
       <div className="user-profile-page-container">
-        <NavbarComponent />
-                  
+        <NavbarComponent />       
         <Container>
           <Row className="justify-content-md-center">
             <Col md={2}>
