@@ -76,7 +76,6 @@ function OtherUserInfo() {
         <p>{userData ? userData.bio : "hi my bio"}</p>
       </div>
       <div className="user-info-country-counter">
-      <p>I've visited (db) countries and counting!</p>
       </div> 
     </div>
   );

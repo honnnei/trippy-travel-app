@@ -64,19 +64,25 @@ function Timeline() {
         {userTripData ? userTripData.reverse().map((trip) => (
           <div key={trip.id} className="user-trip">
             <div className="button-area">
-              
               <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
             </div>
             <div className="trip-area">
-              <h2 >{trip.trip_country}</h2>
-              {trip.date_created.split('T')[0].split('-').reverse().join('/')}
-              <h3>{trip.trip_bio}</h3>
-              <div className="trip-images">
-                <img
-                  src={require("../images/" + trip.trip_image)}
-                  id="trip-image"
-                />
-              </div>
+            <Container>
+              <Row>
+                <Col>
+                      <h3>{trip.trip_country}</h3>
+                      <h4>{trip.trip_bio}</h4>
+                      {trip.date_created.split('T')[0].split('-').reverse().join('/')}
+                </Col>
+                <Col>
+                  <div className="trip-images">
+                    <img src={require("../images/" + trip.trip_image)} id="trip-image"/>  
+                  </div>
+                </Col>
+              </Row>
+            </Container>
+            
+              
             </div>
           </div>     
 

@@ -10,9 +10,12 @@ import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
 function UserMap() {
   const [userId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
   const [userTripData, setUserTripData] = useState([])
+
   
   const countryArray = userTripData.map(trip => trip.trip_country_code);
-  console.log(countryArray)
+  let countryArrayFiltered = [...new Set(countryArray)];
+  let count = Object.keys(countryArrayFiltered).length;
+
 
     
     // Default data
@@ -60,15 +63,15 @@ function UserMap() {
     .catch(error => console.log("this is error", error.message))
   }
 
-
   useEffect(() => {
+    console.log('useEffect() fired')
     getUserData();
-    });
-
+    }, []);
     console.log(userTripData)
 
     return (
       <div className="user-map">
+        <p>Countries Visited: {count}</p>
         {userTripData ? 
          <div id="chartdiv" style={{backgroundColor: "grey", height: "600px", width: "100%"}} />
          :

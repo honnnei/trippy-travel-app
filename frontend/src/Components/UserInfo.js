@@ -82,10 +82,12 @@ function UserInfo() {
         {profilePictureURL ? <img src={require("../images/" + profilePictureURL)} alt="profile picture" width="200" height="200" /> : <img src={require("../images/" + 'default_profile_picture.jpg')} alt="profile picture" width="200" height="200" />}
       </div>
       <div className="user-info-bio-container">
-        <p id="biop">{userData ? userData.bio : "hi my bio"}</p>
+        <p id="biop">{userData ? userData.bio : "Hi, I've just joined Trippy!"}</p>
       </div>
       <div className="user-info-country-counter">
-      <p>I've visited (db) countries and counting!</p>
+
+      
+
       <Button id="edit_profile-button" onClick={handleShow} className="edit-profile-button"><PencilSquare /></Button>
       </div>
         <div className="modal">

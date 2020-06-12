@@ -75,7 +75,7 @@ function Gallery() {
             <a href={require("../images/" + item.gallery_image)} target="_blank">
             <img
               src={require("../images/" + item.gallery_image)}
-              style={{ width: "100px", height: "100px", cursor: "pointer" }}
+              style={{ width: "200px", height: "auto", cursor: "pointer" }}
               />
             {item.image_caption}
             </a>

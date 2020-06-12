@@ -21,6 +21,8 @@ function UserMap() {
   const [userTripData, setUserTripData] = useState([])
   
   const countryArray = userTripData.map(trip => trip.trip_country_code);
+  let countryArrayFiltered = [...new Set(countryArray)];
+  let count = Object.keys(countryArrayFiltered).length;
 
     
     // Default data
@@ -75,6 +77,8 @@ function UserMap() {
 
     return (
       <div className="user-map">
+                <p>Countries Visited: {count}</p>
+
         {userTripData ? 
          <div id="chartdiv" style={{backgroundColor: "grey", height: "600px", width: "100%"}} />
          :

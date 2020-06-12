@@ -49,7 +49,7 @@ let { id } = useParams();
           
           <img
             src={require("../images/" + item.trip_image)}
-            style={{ width: "100px", height: "100px", cursor: "pointer" }}
+            style={{ width: "200px", height: "auto", cursor: "pointer" }}
           />
         
         </div>
