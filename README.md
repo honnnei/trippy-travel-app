@@ -65,11 +65,11 @@ Built using Flask, React, SQLite3.
 - Sqlite3
 
 ## Testing
-### Frontend
+### Frontend - 55% coverage
 - Enzyme 
 - Jest 
 
-### Backend 
+### Backend - 60% coverage
 - Unittest
 - Nose 2
 
