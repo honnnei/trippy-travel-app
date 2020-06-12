@@ -33,12 +33,12 @@ const NavbarComponent = () => {
                 <Nav>
                     {localStorage.usertoken ?
                     <Nav>
-                        <Nav.Link href="/profile"> Profile </Nav.Link>
-                        <Nav.Link href="/settings"> Settings </Nav.Link>
-                        <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
+                        <Nav.Link href="/profile" className="login-logout-button"> Profile </Nav.Link>
+                        <Nav.Link href="/settings" className="login-logout-button"> Settings </Nav.Link>
+                        <Nav.Link href="/" className="login-logout-button" onClick={logout}> Log Out </Nav.Link>
                     </Nav>
                     :
-                    <Nav.Link href="/" onClick={login}> Log In </Nav.Link>
+                    <Nav.Link href="/" className="login-logout-button" onClick={login}> Log In </Nav.Link>
                     }               
                 </Nav>
             </Navbar.Collapse>

@@ -80,7 +80,7 @@ export default function SignUpForm() {
                         value={userEmail}
                         onChange={(e) => setUserEmail(e.target.value)}
                     />
-                    <Form.Text className="text-muted">
+                    <Form.Text className="alert-color">
                     We'll never share your email with anyone else.
                     </Form.Text>
                 </Form.Group>
@@ -104,7 +104,7 @@ export default function SignUpForm() {
                         onChange = {(e) => setUserPasswordAgain(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit">
+                <Button variant="dark" type="submit">
                     Create Account
                 </Button>
             </Form>

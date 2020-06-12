@@ -73,7 +73,7 @@ export default function LogInForm() {
                     onChange={(e) => setUserPassword(e.target.value)}
                     />
                 </Form.Group>
-                <Button variant="primary" type="submit" onClick={handleSubmit}>
+                <Button variant="dark" type="submit" onClick={handleSubmit}>
                     Login
                 </Button>
             </Form>
