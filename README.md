@@ -40,11 +40,56 @@ Built using Flask, React, SQLite3.
 - I want to be able to see people's trip updates on a feed.
 - I want to be able to look at other people's profiles.
 
+# As a user 
+- I want to register and login to app that has authentication.
+- I would like to post about your adventurious trip 
+- I would like to add the trip destination
+- I would like to post beautiful images of the trip
+- I would like to edit or delete the data based on your interest 
+- I would like to change the account details , email and password
+- I would like to permanently delete your profile 
+- I would like to view the images I've uploaded in a gallery
+
+
 ### Technology
 
-### Challenges & Solutions 
-- making GET and POST requests work 
-- making conurrenly 
+## Front-end
+- React JS (& Hooks)
+- Bootstrap
+- amcharts 4 
+
+## Back-end
+- Python (Flask framework)
+
+## Database 
+- Sqlite3
+
+## Testing
+### Frontend
+- Enzyme 
+- Jest 
+
+### Backend 
+- Unittest
+- Nose 2
+
+## Challenges
+- Authentication for signing up and logging in 
+- Utilising token authentication for users when logged in
+- Uploading images through the frontend and storing them in the database
+- Retrieving images from the database to show in the ‘Gallery’ tab
+- Retrieving the information needed for the ‘Global Feed’
+- Viewing other user profiles
+- Testing (both frontend and backend)!
+
+
+## Further Iterations
+
+### Functionality
+- Add ‘Following’ functionality
+- Give users the ability to follow other users, and give the option filter their timeline to only people that they follow.
+- Add ‘Search’ functionality
+- Give users the ability to search for other users, and search for specific countries to filter their feed.
 
 ### Further Iterations
 #### FUNCTIONS
@@ -52,15 +97,12 @@ Built using Flask, React, SQLite3.
 - Give users the ability to follow other users, and give the option filter their timeline to only people that they follow.
 - Add ‘Search’ functionality
 - Give users the ability to search for other users, and search for specific countries to filter their feed.
-#### IMPROVEMENTS
 - Add functionality to upload multiple photos per trip
 - So far users are only able to add a single image per trip.
 - Increase authorization security
 - Currently the access tokens are only used for logging in, and allowing you to access your own profile to make changes. We’d like to add token authentication to all requests to the server.
 - Add further error handling on the backend
 - Test coverage at 90%+
-
-
 
 
 
