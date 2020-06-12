@@ -48,7 +48,7 @@ function Timeline() {
             <h1>Add Your Latest Trip </h1>
           </Col>
           <Col md={4}>
-            <Button variant="secondary" onClick={toggleAddTripModal}>Add Trip</Button>
+            <Button variant="dark" onClick={toggleAddTripModal}>Add Trip</Button>
           </Col>
         </Row>
         <div className="modal">
@@ -64,10 +64,10 @@ function Timeline() {
         {userTripData ? userTripData.reverse().map((trip) => (
           <div key={trip.id} className="user-trip">
             <div className="button-area">
-              <Button variant="danger" onClick={() => deleteTrip(trip.id)}>X</Button>
+              <Button variant="dark" onClick={() => deleteTrip(trip.id)}>X</Button>
             </div>
             <div className="trip-area">
-            <Container>
+            <Container style={{padding: 20, borderRadius: 1}}>
               <Row>
                 <Col>
                       <h4>{trip.trip_country}</h4>

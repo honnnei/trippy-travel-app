@@ -337,10 +337,10 @@ export default function AddTripForm(props) {
           />
         </Form.Group>
        <br/>
-      <Button variant="primary" type="submit" onClick={addTripButton}>
+      <Button variant="dark" type="submit" onClick={addTripButton}>
           Add Trip
       </Button>
-      <Button variant="primary" type="submit" onClick={props.togglefunction}>
+      <Button variant="dark" type="submit" onClick={props.togglefunction}>
           Cancel
       </Button>
       </Form>

@@ -35,7 +35,7 @@ export default function AddTripForm(props) {
                 />
             </Form.Group>
 
-            <Button variant="primary" type="submit">
+            <Button variant="dark" type="submit">
                 Upload Image
       </Button>
         </Form>

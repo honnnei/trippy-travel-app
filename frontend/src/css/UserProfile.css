@@ -32,3 +32,22 @@
     margin-left: 20px;
     margin-right: 20px;
   }
+
+  .user-profile-bootstrap-container {
+    padding: 50px;
+  }
+
+  .t-g-m-container {
+    padding: 20px;
+  }
+
+  /* TimeLine */
+
+
+  /* .timeline-container {
+    padding: 50px;
+  } */
+
+  .button-area {
+    margin: 10px;
+  }
