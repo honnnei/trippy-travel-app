@@ -5,7 +5,7 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import { Button } from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 import Axios from 'axios';
-// import { Button } from "react-bootstrap";
+import '../css/Gallery.css'
 
 function Gallery() {
 
@@ -70,16 +70,22 @@ function Gallery() {
 
         {userTripData.map((item) => (
           <div key={item.id} className="gallery">
+            <div id="delete-button">
+              <Button variant="danger" onClick={() => deleteImage(item.id)} id="delete">X</Button>
+            </div>
+            <div id="images-area">
+              <a href={require("../images/" + item.gallery_image)} target="_blank">
+                <img
+                  src={require("../images/" + item.gallery_image)}
+                  style={{ width: "100px", height: "100px", cursor: "pointer" }}
+                />
+                <br />
+                <p id="img-caption">
+                  {item.image_caption}
+                </p>
+              </a>
+            </div>
             
-              <Button variant="danger" onClick={() => deleteImage(item.id)}>X</Button>
-            <a href={require("../images/" + item.gallery_image)} target="_blank">
-            <img
-              src={require("../images/" + item.gallery_image)}
-              style={{ width: "200px", height: "auto", cursor: "pointer" }}
-              />
-            {item.image_caption}
-            </a>
-
           </div>
         ))}
       </div>
@@ -90,3 +96,4 @@ function Gallery() {
 }
 
 export default Gallery;
+
