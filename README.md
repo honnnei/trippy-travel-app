@@ -49,17 +49,17 @@ Built using Flask, React, SQLite3.
 ### Further Iterations
 
 ## FUNCTIONS
--Add ‘Following’ functionality
--Give users the ability to follow other users, and give the option filter their timeline to only people that they follow.
--Add ‘Search’ functionality
--Give users the ability to search for other users, and search for specific countries to filter their feed.
+- Add ‘Following’ functionality
+- Give users the ability to follow other users, and give the option filter their timeline to only people that they follow.
+- Add ‘Search’ functionality
+- Give users the ability to search for other users, and search for specific countries to filter their feed.
 
 ## IMPROVEMENTS
--Add functionality to upload multiple photos per trip
--So far users are only able to add a single image per trip.
--Increase authorization security
--Currently the access tokens are only used for logging in, and allowing you to access your own profile to make changes. We’d like to add token authentication to all requests to the server.
--Add further error handling on the backend
--Error handling is mainly handled on the frontend, but this can be easily bypassed. We’d like to add further handling on the backend.
--Testing testing testing
--testing can always be improved
+- Add functionality to upload multiple photos per trip
+- So far users are only able to add a single image per trip.
+- Increase authorization security
+- Currently the access tokens are only used for logging in, and allowing you to access your own profile to make changes. We’d like to add token authentication to all requests to the server.
+- Add further error handling on the backend
+- Error handling is mainly handled on the frontend, but this can be easily bypassed. We’d like to add further handling on the backend.
+- Testing testing testing
+- testing can always be improved
