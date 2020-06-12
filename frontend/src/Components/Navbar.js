@@ -17,15 +17,15 @@ const NavbarComponent = () => {
     return (
         <div>
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-            {/* <Navbar.Brand>
+            <Navbar.Brand>
             <img
-                src="../images/travel.svg"
+                src={require('../images/trippy_logo.png')}
                 width="30"
                 height="30"
                 className="d-inline-block align-top"
                 alt="React Bootstrap logo"
             />
-            </Navbar.Brand> */}
+            </Navbar.Brand>
             <Navbar.Brand href="/feed">Trippy</Navbar.Brand>
             <Navbar.Toggle aria-controls="responsive-navbar-nav" />
             <Navbar.Collapse id="responsive-navbar-nav">

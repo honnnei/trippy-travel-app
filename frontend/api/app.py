@@ -25,10 +25,10 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 ma = Marshmallow(app)
 
-foldername = '/Users/medyenkadhum/Documents/futureproof/Lap 4/trippy-travel-app/frontend/src/images'
+# foldername = '/Users/medyenkadhum/Documents/futureproof/Lap 4/trippy-travel-app/frontend/src/images'
 # foldername = '/Users/richard/Futureproof/python/trippy-travel-app/frontend/src/images'
 # foldername = 'C:\\Users\\Amita\\Desktop\\trippy\\trippy-travel-app\\frontend\\src\\images'
-#foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
+foldername = 'C:\\Users\\hannp\\github\\Futureproof\\trippy-travel-app\\frontend\\src\\images'
 app.config["IMAGE_UPLOADS"] = foldername
 app.config["ALLOWED_IMAGE_EXTENSIONS"] = ["JPEG", "JPG", "PNG", "GIF"]
 app.config["MAX_IMAGE_FILESIZE"] = 50 * 1024 * 1024
