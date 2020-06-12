@@ -16,36 +16,30 @@ function SignUpPage() {
 
   return (
     <div className="sign-up-page-container">
-    <NavbarComponent />
-    <div className="sign-up-page-inner-container">
-    <Container className="about-us">
-      <Row>
-        <Col >
-          <AboutUs />
-        </Col>
-        <Col >
-            {showSignUp ? (
-            <div className="login_form" id="first">
-              <LogInForm />
-              <br />
-              <Button id="signup" className="signup" onClick={toggle}>
-                Need an account? Register here!
-              </Button>
-            </div>
-             ) : (
-            <div className="register_form" id="second">
-              <SignUpForm toggle = {toggle}/>
-              <Button id="signin" className="signin" onClick={toggle}>
-                Already have an account? Sign in here!
-              </Button>
-            </div>
-              )}
-            </Col>
-      
-      </Row>
-      
-    </Container>
-    </div>
+      <NavbarComponent />
+      <div className="sign-up-page-inner-container">
+        <div className="about-us">
+            <AboutUs />
+        </div>
+        <div className="sign-log-form">
+              {showSignUp ? (
+              <div className="login_form" id="first">
+                <LogInForm />
+                <br />
+                <p id="signup" className="signup" onClick={toggle}>
+                  Need an account? Register here!
+                </p>
+              </div>
+              ) : (
+              <div className="register_form" id="second">
+                <SignUpForm toggle = {toggle}/>
+                <p id="signin" className="signin" onClick={toggle}>
+                  Already have an account? Sign in here!
+                </p>
+              </div>
+                )}
+              </div>
+      </div>
     </div>
   );
 }

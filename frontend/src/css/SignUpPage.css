@@ -1,7 +1,16 @@
 /* Sign Up Page */
+
+.sign-up-page-container {
+  min-height: 100vh;
+  min-width: 100vw;
+  }
+
 .sign-up-page-inner-container {
   min-height: 100vh;
   min-width: 100vw;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
   }
   
   p#signup, p#signin{
@@ -25,7 +34,11 @@
    
   }
 
+  .about-us-container {
+    height: 100%;
+  }
+
   .about-us {
-    
+    height: 100%;
   }
   
