@@ -1,62 +1,86 @@
-import React, {useState} from 'react';
-import { BrowserRouter as Router } from 'react-router-dom';
+import React, { useState } from 'react';
 import UserInfo from '../Components/UserInfo'
 import UserMap from '../Components/UserMap'
-import { Button } from 'react-bootstrap'
+import Gallery from '../Components/Gallery';
+import Timeline from '../Components/Timeline';
+import { Nav } from 'react-bootstrap'
+import NavbarComponent from '../Components/Navbar';
+import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
+// var jwtDecode = require('jwt-decode');
+import '../css/UserProfile.css'
 
 
 function UserProfile() {
+  const [timelineShow, setTimelineShow] = useState(true);
   const [mapShow, setMapShow] = useState(false);
-  const [timelineShow, setTimelineShow] = useState(false);
   const [galleryShow, setGalleryShow] = useState(false);
-  const [followersShow, setFollowersShow] = useState(false);
+  // const [userId, setUserId] = useState(jwtDecode(localStorage.usertoken).identity.user_id);
 
+  if(!localStorage.usertoken){
+    window.location.href="/"
+  }
+  
   const toggleMap = () => {
-    setMapShow(!mapShow)
+    setMapShow(true)
     setTimelineShow(false)
     setGalleryShow(false)
-    setFollowersShow(false)
   }
+
   const toggleTimeline = () => {
-    setTimelineShow(!timelineShow)
+    setTimelineShow(true)
     setMapShow(false)
     setGalleryShow(false)
-    setFollowersShow(false)
   }
+
   const toggleGallery = () => {
-    setGalleryShow(!galleryShow)
+    setGalleryShow(true)
     setTimelineShow(false)
-    setMapShow(false)
-    setFollowersShow(false)
-  }
-  const toggleFollowers = () => {
-    setFollowersShow(!followersShow)
-    setTimelineShow(false)
-    setGalleryShow(false)
     setMapShow(false)
   }
 
-    return (
-      <div className="user-profile">
-        <h1>UserProfile</h1>
-        <div className="tab-buttons">
-          <Button variant="secondary" onClick={toggleMap}>Map</Button>{' '}
-          <Button variant="secondary" onClick={toggleTimeline}>Timeline</Button>{' '}
-          <Button variant="secondary" onClick={toggleGallery}>Gallery</Button>{' '}
-          <Button variant="secondary" onClick={toggleFollowers}>Followers</Button>{' '}
-        </div>
-        <div>
-          <div>
-            <UserInfo />
-          </div>
-          <div>
-            {followersShow ? <p>Followers</p> : timelineShow ? <p>Timeline</p> : galleryShow ? <p>Gallery</p> : <UserMap />}
-            {/* <UserInfo />
-            <UserMap /> */}
-          </div>
-        </div>
-      </div>
-    );
+  return (
+    <div className="user-profile-page-container" >
+      <NavbarComponent />
+        <Container className="user-profile-bootstrap-container">
+          <Row>
+            <Col className="user-profile-bio" md={3}>
+              <div>
+                <UserInfo />
+              </div>
+            </Col>
+            <Col className="timeline-gallery-map-container" md={8}>
+              <div>
+                <Nav justify variant="tabs" defaultActiveKey="timeline">
+                  <Nav.Item >
+                    <Nav.Link id="toggleTimeline" className="timeline-tabs" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleMap" className="timeline-tabs" eventKey="maps" onClick={toggleMap}> Map </Nav.Link>
+                  </Nav.Item>
+                  <Nav.Item>
+                    <Nav.Link id="toggleGallery" className="timeline-tabs" eventKey="gallery" onClick={toggleGallery}> Gallery </Nav.Link>
+                  </Nav.Item>
+                </Nav>
+                <div className="t-g-m-container">
+                  {timelineShow ? <Timeline /> : ""}
+                  {galleryShow ? <Gallery /> : ""}
+                  {mapShow ? <UserMap /> : ""}
+                </div>
+              </div>
+            </Col>
+          </Row>
+        </Container>
+    </div>
+  );
 }
 
 export default UserProfile;
+
+
+
+
+
+
+

@@ -1,0 +1,14 @@
+{
+    "setupFiles": [
+    "raf/polyfill",
+    "<rootDir>/tests/setup.js",
+    "jest-localstorage-mock"
+    ],
+    "snapshotSerializers": [
+       "enzyme-to-json/serializer"
+    ],
+   "collectCoverage": true,
+   "moduleNameMapper": {
+      "\\.(css|scss)$": "<rootDir>/__mocks__/styleMock.js"
+   }
+  }

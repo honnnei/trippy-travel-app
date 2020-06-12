@@ -2,16 +2,24 @@ import React from "react";
 
 function AboutUs() {
     return (
-        <div className="instruction">
+        <div className="about-us-container">
+             <img
+                src={require('../images/trippy_logo.png')}
+                width="150"
+                height="150"
+                style={{padding: '30'}}
+                alt="Trippy Logo"
+            />
+            {/* class was 'instruction */}
             <h1>
                 Trippy
         <br />
             </h1>
-            <small>By - H.A.M.R</small>
+            <small>by hamr</small>
             <br />
             <p>
-                <h2>Share your travls</h2>
-                <h3>Stay connected</h3>
+                <h2>Share your travels.</h2>
+                <h3>Stay connected.</h3>
             </p>
         </div>
     );

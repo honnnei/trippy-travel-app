@@ -1,46 +1,35 @@
 .App {
   text-align: center;
+  height: 100vw;
+  width: 100vw;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  font-family: 'Nunito', sans-serif;
+  /* background-color: #73c2be; */
+  background-image: linear-gradient(315deg, #216864 0%, #98cecb 74%);
+  background-attachment: fixed;
+  overflow-y: scroll;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* Navbar */
+
+#trippy-logo-text {
+  font-family: 'MuseoModerno', cursive;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.login-logout-button {
+  color: rgb(241, 159, 128) !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.timeline-tabs {
+  color:  #216864 !important;
 }
 
-.App-link {
-  color: #61dafb;
+.timeline-tabs:hover {
+  color:  #216864 !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
-p#signup, p#signin{
-    color:blue;
-}
 
-p#signup:hover ,p#signin:hover {
-    cursor: pointer;
-}

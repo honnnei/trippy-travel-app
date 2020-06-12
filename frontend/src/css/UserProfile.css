@@ -1,0 +1,53 @@
+/* User Profile Page */
+
+/* .user-profile-page-container {
+    display: flex;
+    justify-content: space-evenly;
+
+    
+  }
+*/  
+  /* .container {
+    flex-direction: row;
+    justify-content: space-evenly;
+  } */
+
+  .user-profile-bio{
+    
+    background-color: white;
+    border-radius: 3%;
+    padding: 5px;
+    margin: 10px;
+    
+  }
+  /* .user-info-sidebar-container {
+    width: 30%
+  } */
+  
+  .timeline-gallery-map-container {
+    
+    margin-top: 10px;
+    background-color: white;
+    border-radius: 3%;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+
+  .user-profile-bootstrap-container {
+    padding: 50px;
+  }
+
+  .t-g-m-container {
+    padding: 20px;
+  }
+
+  /* TimeLine */
+
+
+  /* .timeline-container {
+    padding: 50px;
+  } */
+
+  .button-area {
+    margin: 10px;
+  }

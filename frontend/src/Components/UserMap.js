@@ -1,76 +1,83 @@
-// import React from 'react';
-// import { Button } from 'react-bootstrap'
+import React, {useState, useEffect} from 'react';
+import jwt_decode from 'jwt-decode';
+import Axios from 'axios';
 
-// import * as am4core from "@amcharts/amcharts4/core";
-// import * as am4maps from "@amcharts/amcharts4/maps";
-// import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
+import * as am4core from "@amcharts/amcharts4/core";
+import * as am4maps from "@amcharts/amcharts4/maps";
+import am4geodataWorldLow from "@amcharts/amcharts4-geodata/worldLow"
 
 
-// //  <script src="https://www.amcharts.com/lib/4/core.js"></script>
-// // <script src="https://www.amcharts.com/lib/4/maps.js"></script>
-// // <script src="https://www.amcharts.com/lib/4/geodata/worldLow.js"></script>
-        
-// function UserMap() {
+function UserMap() {
+  const [userId] = useState(jwt_decode(localStorage.usertoken).identity.user_id);
+  const [userTripData, setUserTripData] = useState([])
+
+  
+  const countryArray = userTripData.map(trip => trip.trip_country_code);
+  let countryArrayFiltered = [...new Set(countryArray)];
+  let count = Object.keys(countryArrayFiltered).length;
+
+
     
-//    let myCountries = ["GB", "FR", "ES", "IT", "GR", "TR", "BA", "HR", "US", "CA"]
+    // Default data
 
-//   // Create map instance
-//   var chart = am4core.create("chartdiv", am4maps.MapChart);
+    // Create map instance
+    let chart = am4core.create("chartdiv", am4maps.MapChart);
+    // Set map definition
+    chart.geodata = am4geodataWorldLow;
+    // Set projection
+    chart.projection = new am4maps.projections.Miller();
+    // Create map polygon series
+    let polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
+    // Make map load polygon (like country names) data from GeoJSON
+    polygonSeries.useGeodata = true;
+    // Configure series
+    let polygonTemplate = polygonSeries.mapPolygons.template;
+    polygonTemplate.tooltipText = "{name}";
+    polygonTemplate.fill = am4core.color("#15CABD");
+    polygonTemplate.stroke = am4core.color("#138D9D");
+    polygonTemplate.propertyFields.fill = "color";
+    // Create hover state and set alternative fill color
+    let hs = polygonTemplate.states.create("hover");
+    hs.properties.fill = am4core.color("#fcbb8d");
+    // Create active state
+    let activeState = polygonTemplate.states.create("active");
+    activeState.properties.fill = am4core.color("#FBAA7C")
 
-//   // Set map definition
-//   chart.geodata = am4geodataWorldLow;
-  
-//   // Set projection
-//   chart.projection = new am4maps.projections.Miller();
-  
-//   // Create map polygon series
-//   var polygonSeries = chart.series.push(new am4maps.MapPolygonSeries());
-  
-//   // Make map load polygon (like country names) data from GeoJSON
-//   polygonSeries.useGeodata = true;
-  
-//   // Configure series
-//   var polygonTemplate = polygonSeries.mapPolygons.template;
-//   polygonTemplate.tooltipText = "{name}";
-//   polygonTemplate.fill = am4core.color("#666666");
-//   polygonTemplate.stroke = am4core.color("#333333");
-//   polygonTemplate.propertyFields.fill = "color";
+    polygonTemplate.events.on("ready", function(ev) {
+        if (countryArray) {
+          countryArray.forEach(id => {
+            polygonSeries.getPolygonById(id).isActive = true;
+        })
+        }
+        
+    });
 
-//   // Create hover state and set alternative fill color
-//   var hs = polygonTemplate.states.create("hover");
-//   hs.properties.fill = am4core.color("#888888");
+    // Remove Antarctica
+    polygonSeries.exclude = ["AQ"];
+    // Add zoom control
+    chart.zoomControl = new am4maps.ZoomControl();
 
-//   // Create active state
-//   var activeState = polygonTemplate.states.create("active");
-//   activeState.properties.fill = am4core.color("#7EA2D6")
+  const getUserData = () => {
+    Axios(`/user/trip/${userId}`)
+    .then(response => setUserTripData(response.data))
+    .catch(error => console.log("this is error", error.message))
+  }
 
-//   polygonTemplate.events.on("ready", function(ev) {
-//       myCountries.forEach(id => {
-//           polygonSeries.getPolygonById(id).isActive = true;
-//       })
-//   });
+  useEffect(() => {
+    console.log('useEffect() fired')
+    getUserData();
+    }, []);
+    console.log(userTripData)
 
-//   polygonTemplate.events.on("hit", function(ev) {
-//       var data = ev.target.dataItem.dataContext;
-//       const index = myCountries.indexOf(data.id)
-//       index === -1 ? myCountries.push(data.id) : myCountries.splice(index, 1);
-//       ev.target.isActive = !ev.target.isActive;
-//       myCountries.forEach(id => {
-//           polygonSeries.getPolygonById(id).isActive = true;
-//       })
-//   });
- 
-//   // Remove Antarctica
-//   polygonSeries.exclude = ["AQ"];
-  
-//   // Add zoom control
-//   chart.zoomControl = new am4maps.ZoomControl();
-
-//     return (
-//       <div className="user-map">
-//            <div id="chartdiv"></div>
-//       </div>
-//     );
-// }
-
-// export default UserMap;
+    return (
+      <div className="user-map" style={{padding:"1em"}}>
+        <p>Countries Visited: {count}</p>
+        {userTripData ? 
+         <div id="chartdiv" style={{backgroundColor: "#138D9D", height: "400px", width: "100%", padding:"1em", borderRadius: '1em'}} />
+         :
+         <p> Loading...</p>
+        }
+      </div>
+    );
+}
+export default UserMap;

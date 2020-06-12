@@ -1,150 +1,113 @@
-
-import React, { Component, Fragment, useState, useEffect } from 'react';
-import { Redirect, Link } from "react-router-dom";
-import { Form, Button, Alert } from 'react-bootstrap';
+import React, {useState } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
+import { useHistory } from "react-router";
+import AlertMessage from './Alert'
 
 export default function SignUpForm() {
     const [displayName, setDisplayName] = useState("");
     const [userEmail, setUserEmail] = useState("");
     const [userPassword, setUserPassword] = useState("");
     const [userPasswordAgain, setUserPasswordAgain] = useState("");
-    const [show, setShow] = useState(false);
-    const [visible, setVisible] = useState(false);
-    const createUser = (e) => {
-        //e.preventDefault();
-        console.log('create user function')
-        if (userPassword === userPasswordAgain) {
-            setShow(false);
-            if (userPassword.length < 6 || userPassword.length > 15) {
-                setVisible(true);
-                
-            } else {
-                setVisible(false);
-                const data = {
-                  email: userEmail,
-                  password: userPassword,
-                  display_name: displayName,
-                };
-                fetch("/user", {
-                  method: "POST",
-                  headers: {
-                    "Content-Type": "application/json",
-                  },
-                  body: JSON.stringify(data),
-                })
-                  .then((response) => {
-                    console.log(data);
-                    if (!response.ok) throw new Error(response.status);
-                      else return response.json();
-                  })
-                  .catch((error) => {
-                    console.log("Error:", error);
-                  });
-            }
+    const [alertShow, setAlertShow] = useState(false);
+    const [alertVariant, setAlertVariant] = useState(null);
+    const [alertMessage, setAlertMessage] = useState("default error");
+
+    
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        const valid = validateForm();
+        if(valid === false){
+            setAlertVariant("danger");
+            setAlertShow(true);        
         } else {
-            setShow(true);
-            console.log("password not match");
-        };
-        // // if (userPassword === userPasswordAgain) {
-        // //     console.log(displayName, userEmail, userPassword, userPasswordAgain)
-        //     Axios.post('/', {
-        //         user_email : "email@gmail.com",
-        //         password : "passwordUser",
-        //         display_name : "user display name",
-        //       }).then(response => console.log(response))
-        //       .catch(error => {
-        //         console.log("this is error", error.message);
-        //       });
-        //       console.log('creating user')
-        // // }
+            postUser()
+        } 
     }
-    return (
-      <Form>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Display Name</Form.Label>
-          <Form.Control
-            type="text"
-            name="display_name"
-            placeholder="Enter display name"
-            value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
-          />
-        </Form.Group>
-        <Form.Group controlId="formBasicEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            name="user_email"
-            placeholder="Enter email"
-            value={userEmail}
-            onChange={(e) => setUserEmail(e.target.value)}
-          />
-          <Form.Text className="text-muted">
-            We'll never share your email with anyone else.
-          </Form.Text>
-        </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Password</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-            placeholder="Password"
-            value={userPassword}
-            onChange={(e) => setUserPassword(e.target.value)}
-          />
-        </Form.Group>
+    const validateForm = () => {
+        let valid = true;
+        if(displayName === "" || userEmail === "" || userPassword === "" || userPasswordAgain === "") {
+            setAlertMessage("Please fill out all inputs.")
+            valid = false;
+        } else if (userPassword !== userPasswordAgain) {
+            setAlertMessage("The passwords do not match.")
+            valid = false;
+        }
+        return valid
+    }
 
-        <Form.Group controlId="formBasicPassword">
-          <Form.Label>Please re-enter your password</Form.Label>
-          <Form.Control
-            type="password"
-            name="re-password"
-            placeholder="Password"
-            value={userPasswordAgain}
-            onChange={(e) => setUserPasswordAgain(e.target.value)}
-          />
-        </Form.Group>
-        <Link to="/profile">
-          <Button variant="primary" type="submit" onClick={createUser}>
-            Create Account
-          </Button>
-        </Link>
-        <Alert show={show} variant="danger">
-          <Alert.Heading>Sorry the password does not match !!</Alert.Heading>
-        </Alert>
-        <Alert show={visible} variant="danger">
-          <Alert.Heading>
-            Password must be between 6 -15 characters long
-          </Alert.Heading>
-        </Alert>
-      </Form>
-    );}
-        //     <Form.Group controlId="formBasicPassword">
-        //         <Form.Label>Password</Form.Label>
-        //         <Form.Control 
-        //         type="password" 
-        //         name="password"
-        //         placeholder="Password" 
-        //         value = {userPassword} 
-        //         onChange = {(e) => setUserPassword(e.target.value)}/>
-        //     </Form.Group>
+    const postUser = () => {
+        Axios.post('/auth/register', { user_email : userEmail, password : userPassword, display_name : displayName })
+        .then( data => {
+            console.log(data);
+            if(data.data.error_message){
+                setAlertMessage(data.data.error_message)
+                setAlertVariant('danger')
+                setAlertShow(true)
+            } else if(data.data.success_message){
+                setAlertMessage(data.data.success_message)
+                setAlertVariant('success')
+                setAlertShow(true)
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2000);
+            }
+        })
+    }
 
-        //     <Form.Group controlId="formBasicPassword">
-        //         <Form.Label>Please re-enter your password</Form.Label>
-        //         <Form.Control 
-        //             type="password"
-        //             name="re-password"
-        //         placeholder="Password"
-        //         value={userPasswordAgain}
-        //         onChange = {(e) => setUserPasswordAgain(e.target.value)}
-        //         />
-        //     </Form.Group>
-
-        //     <Button variant="primary" type="submit" onClick={createUser}>
-        //         Create Account
-        //     </Button>
-        // </Form>
-
-// )}
+    return(
+        <div>
+            <AlertMessage show={alertShow} variant={alertVariant} message={alertMessage}/>
+            <Form onSubmit={handleSubmit}>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Display Name</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="display_name"
+                        placeholder="Enter display name"
+                        value={displayName}
+                        onChange={(e) => setDisplayName(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                    <Form.Label>Email address</Form.Label>
+                    <Form.Control
+                        type="email"
+                        name="user_email"
+                        placeholder="Enter email"
+                        value={userEmail}
+                        onChange={(e) => setUserEmail(e.target.value)}
+                    />
+                    <Form.Text className="alert-color">
+                    We'll never share your email with anyone else.
+                    </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control 
+                        type="password" 
+                        name="password"
+                        placeholder="Password" 
+                        value = {userPassword} 
+                        onChange = {(e) => setUserPassword(e.target.value)}
+                    />
+                </Form.Group>
+                <Form.Group controlId="formBasicPassword">
+                    <Form.Label>Confirm password</Form.Label>
+                    <Form.Control 
+                        type="password"
+                        name="re-password"
+                        placeholder="Password"
+                        value={userPasswordAgain}
+                        onChange = {(e) => setUserPasswordAgain(e.target.value)}
+                    />
+                </Form.Group>
+                <Button variant="dark" type="submit">
+                    Create Account
+                </Button>
+            </Form>
+        </div>
+    );
+}

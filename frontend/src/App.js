@@ -1,14 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import './App.css';
 import SignUpPage from './Containers/SignUpPage';
 import GlobalFeed from './Containers/GlobalFeed';
 import UserProfile from './Containers/UserProfile';
+import OtherUserProfile from './Containers/OtherUserProfile';
 import AccountSettings from './Containers/AccountSettings';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import './App.css';
 
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -28,17 +30,38 @@ function App() {
                       path='/profile'
                       exact 
                       component={UserProfile}
+                      
                   />
                   <Route 
-                      path='/user-settings'
+                      path='/settings'
                       exact 
                       component={AccountSettings}
 
                   />
-               </Switch>
-      </Router>
-    </div>
+                  {/* <Route
+                    path='/trip'
+                    exact
+                    component={AddTripForm}
+
+                  /> */}
+                   <Route
+                    path='/other/:id'
+                    exact
+                    component={OtherUserProfile}
+
+                  />
+          </Switch>
+        </Router>
+      </div>
   );
 }
 
 export default App;
+
+// "jest": {
+//   "transformIgnorePatterns": [
+//     "node_modules[/\\\\](?!@amcharts[/\\\\]amcharts4)",
+//     "node_modules[/\\\\](?!bootstrap)",
+//     "node_modules[/\\\\](?!jwt-decode)"
+//   ]
+// }
