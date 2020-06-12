@@ -34,10 +34,10 @@ function AccountSettings() {
             <div className="update-password-form">
               <UpdatePassword />
             </div>
+            <br></br>
             <div className="delete-user-button">
               <Button variant="danger" onClick={deleteUser}>Delete Account</Button>
             </div>
-            
         </div>
       </div>
     );

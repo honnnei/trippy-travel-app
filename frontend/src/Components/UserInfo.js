@@ -83,12 +83,13 @@ function UserInfo() {
       </div>
       <div className="user-info-bio-container">
         <p id="biop">{userData ? userData.bio : "Hi, I've just joined Trippy!"}</p>
+        <Button id="edit_profile-button" variant="dark" onClick={handleShow} className="edit-profile-button"><PencilSquare /></Button>
       </div>
       <div className="user-info-country-counter">
 
       
 
-      <Button id="edit_profile-button" onClick={handleShow} className="edit-profile-button"><PencilSquare /></Button>
+      
       </div>
         <div className="modal">
           <Modal show={show} onHide={handleClose}>

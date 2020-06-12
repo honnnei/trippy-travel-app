@@ -41,7 +41,7 @@ function UserProfile() {
   }
 
   return (
-    <div className="user-profile-page-container">
+    <div className="user-profile-page-container" >
       <NavbarComponent />
         <Container>
           <Row>
@@ -51,7 +51,7 @@ function UserProfile() {
             <Col className="timeline-gallery-map-container" md={8}>
               <div>
                 <Nav justify variant="tabs" defaultActiveKey="timeline">
-                  <Nav.Item>
+                  <Nav.Item >
                     <Nav.Link id="toggleTimeline" eventKey="timeline" onClick={toggleTimeline}> Timeline </Nav.Link>
                   </Nav.Item>
                   <Nav.Item>

@@ -3,6 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import AlertMessage from './Alert'
 import jwt_decode from 'jwt-decode';
+import '../css/AccountSettings.css'
 
 function UpdateEmail() {
   const [userData, setUserData] = useState([]);
@@ -67,8 +68,8 @@ function UpdateEmail() {
     }, [userData]);
 
   return (
-    <div className="user-profile">
-        <Form onSubmit={handleSubmit}>
+    <div className="update-email">
+        <Form className="update-email-form1" onSubmit={handleSubmit}>
 
               <Form.Group controlId="formBasicEmail">
                   <Form.Label>Current Email Address</Form.Label>
@@ -92,7 +93,7 @@ function UpdateEmail() {
               </Form.Group>
               
 
-              <Button variant="primary" type="submit">
+              <Button variant="dark" type="submit">
                   Update Email Address
               </Button>
           </Form>

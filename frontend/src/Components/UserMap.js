@@ -33,15 +33,15 @@ function UserMap() {
     // Configure series
     let polygonTemplate = polygonSeries.mapPolygons.template;
     polygonTemplate.tooltipText = "{name}";
-    polygonTemplate.fill = am4core.color("#666666");
-    polygonTemplate.stroke = am4core.color("#333333");
+    polygonTemplate.fill = am4core.color("#15CABD");
+    polygonTemplate.stroke = am4core.color("#138D9D");
     polygonTemplate.propertyFields.fill = "color";
     // Create hover state and set alternative fill color
     let hs = polygonTemplate.states.create("hover");
-    hs.properties.fill = am4core.color("#888888");
+    hs.properties.fill = am4core.color("#138D9D");
     // Create active state
     let activeState = polygonTemplate.states.create("active");
-    activeState.properties.fill = am4core.color("#7EA2D6")
+    activeState.properties.fill = am4core.color("#FBAA7C")
 
     polygonTemplate.events.on("ready", function(ev) {
         if (countryArray) {
@@ -73,7 +73,7 @@ function UserMap() {
       <div className="user-map">
         <p>Countries Visited: {count}</p>
         {userTripData ? 
-         <div id="chartdiv" style={{backgroundColor: "grey", height: "600px", width: "100%"}} />
+         <div id="chartdiv" style={{backgroundColor: "#138D9D", height: "400px", width: "100%"}} />
          :
          <p> Loading...</p>
         }

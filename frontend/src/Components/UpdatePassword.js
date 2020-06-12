@@ -3,6 +3,8 @@ import { Form, Button } from 'react-bootstrap';
 import Axios from 'axios';
 import AlertMessage from './Alert'
 import jwt_decode from 'jwt-decode';
+import '../css/AccountSettings.css'
+
 
 
 function UpdatePassword() {
@@ -71,8 +73,8 @@ function UpdatePassword() {
 
 
     return (
-      <div className="user-profile">
-          <Form onSubmit={handleSubmit}>
+      <div className="update-password">
+          <Form className="update-password-form1" onSubmit={handleSubmit}>
 
                 <Form.Group controlId="formBasicPassword">
                     <Form.Label>Enter Current Password</Form.Label>
@@ -96,7 +98,7 @@ function UpdatePassword() {
                 </Form.Group>
 
                 <Form.Group controlId="formBasicPassword">
-                    <Form.Label>Confirm New password</Form.Label>
+                    <Form.Label>Confirm New Password</Form.Label>
                     <Form.Control 
                         type="password"
                         name="re-password"
@@ -106,7 +108,7 @@ function UpdatePassword() {
                 </Form.Group>
                
 
-                <Button variant="primary" type="submit">
+                <Button variant="dark" type="submit">
                     Update Password
                 </Button>
             </Form>

@@ -3,6 +3,7 @@
 .sign-up-page-container {
   min-height: 100vh;
   min-width: 100vw;
+  font-family: 'MuseoModerno', cursive;
   }
 
 .sign-up-page-inner-container {

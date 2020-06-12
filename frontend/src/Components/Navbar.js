@@ -32,7 +32,7 @@ const NavbarComponent = () => {
                 <Nav className="mr-auto"></Nav>
                 <Nav>
                     {localStorage.usertoken ?
-                    <Nav>
+                    <Nav id="trippy-logo-text">
                         <Nav.Link href="/profile"> Profile </Nav.Link>
                         <Nav.Link href="/settings"> Settings </Nav.Link>
                         <Nav.Link href="/" onClick={logout}> Log Out </Nav.Link>
