@@ -13,7 +13,6 @@ marshmallow-sqlalchemy = "*"
 flask-cors = "*"
 flask-bcrypt = "*"
 flask-jwt-extended = "*"
-werkzeug-utils = "*"
 werkzeug = "*"
 
 [requires]

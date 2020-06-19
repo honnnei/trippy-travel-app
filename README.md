@@ -58,13 +58,31 @@ Built using Flask, React, SQLite3.
 - Sqlite3
 
 ## Testing
+
 ### Frontend - 55% coverage
 - Enzyme 
 - Jest 
 
+#### How to run tests and get coverage?
+- pull the repo
+- checkout into test-branch
+- install all the dependencies (see above - installation)
+- go into frontend/src/
+- npm test -- --coverage --watchAll=false - runs all the tests and displays coverage
+
 ### Backend - 60% coverage
 - Unittest
 - Nose 2
+
+#### How to run tests and get coverage?
+- to into either branch
+- install dependencies
+- go into frontend/api/tests 
+- run nose2
+
+
+
+
 
 ## Challenges
 - Authentication for signing up and logging in 
