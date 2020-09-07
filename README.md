@@ -42,6 +42,35 @@ Built using Flask, React, SQLite3.
 - I want to be able to look at other people's profiles.
 - I would like to permanently delete my profile 
 
+### Pages
+
+#### Login Page
+![Login Page](./readme_images/login_page.png)
+
+#### Sign Up Page
+![Sign Up Page](./readme_images/signup_page.png)
+
+#### Bare Profile
+![Profile Page](./readme_images/profile.png)
+
+#### Editing Profile
+![Editing Profile](./readme_images/editing_profile.png)
+
+#### Adding a Trip
+![Adding a Trip](./readme_images/trip1.png)
+
+#### Map of User's Trips
+![Map of trips](./readme_images/map.png)
+
+#### Profile Settings
+![Settings](./readme_images/settings.png)
+
+#### Global Feed
+![SGlobal Feed](./readme_images/global_feed.png)
+
+
+
+
 
 
 ### Technology
