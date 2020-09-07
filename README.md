@@ -56,8 +56,12 @@ Built using Flask, React, SQLite3.
 #### Editing Profile
 ![Editing Profile](./readme_images/editing_profile.png)
 
+#### User Profile
+![Filled User Profile](./readme_images/trip1.png)
+
+
 #### Adding a Trip
-![Adding a Trip](./readme_images/trip1.png)
+![Adding a Trip](./readme_images/adding_trip.png)
 
 #### Map of User's Trips
 ![Map of trips](./readme_images/map.png)
